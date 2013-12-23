@@ -1,0 +1,21 @@
+{
+  "name": "elauqsap-spa",
+  "keywords": "elauqsap, spa, information security, blog",
+  "description": "elauqsap info sec spa",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "sqlite3": "~2.x.x",
+    "bcrypt": "~0.7.7",
+    "underscore": "~1.5.2",
+    "hbs": "~2.4.0",
+    "express": "~3.x.x"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "subdomain": "elauqsap-spa"
+}

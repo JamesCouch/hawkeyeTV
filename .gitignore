@@ -1,0 +1,11 @@
+db/*.db
+/log/*
+
+/db/*.db
+
+.DS_Store
+
+**.swp
+
+node_modules/*
+/node_modules/*
