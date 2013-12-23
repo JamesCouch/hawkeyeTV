@@ -20,6 +20,7 @@ define([
         events: {
             'click #home-tab'                       : 'display',
             'click #resolver-tab'                   : 'display',
+            'click #rss-tab'                        : 'display',
             'click #presign-btn'                    : 'toggle',
             'click #login-btn'                      : 'onLoginAttempt',
             'click #signup-btn'                     : 'onSignupAttempt',
@@ -28,7 +29,7 @@ define([
         },
 
         display: function(e){
-            var pages = new Array("#home-tab","#resolver-tab","#about-tab");
+            var pages = new Array("#home-tab","#resolver-tab","#about-tab","#rss-tab");
             for (var i in pages) {
                 $(pages[i] + "-1").addClass('hide');
                 $(pages[i]).removeClass('active');
@@ -36,7 +37,6 @@ define([
             e.preventDefault();
             var id = "#" + $(e.currentTarget).attr("id");
             $(id).addClass('active');
-            console.log(id);
             $(id + "-1").removeClass('hide');
         },
 

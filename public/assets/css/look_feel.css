@@ -20,9 +20,12 @@ html, body {
 }
 
 #footer {
-	position: relative;
-	margin-top: -60px; /* negative value of footer height */
-	height: 60px;
+   	position: fixed;
+   	bottom:0;
+   	left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
 	clear:both;
 	font-size: 12px;
 	padding-left: 30px;
@@ -68,6 +71,13 @@ table, tr, tbody, td {
     margin-right:auto;
 }
 
+#resolver-div{
+	background-color: #E3E6E8;
+	width: 350px ;
+    margin-left: auto;
+    margin-right:auto;
+}
+
 #signup-btn{
 	border-radius: 10px;
 	background-color: #2c3e50;
@@ -96,7 +106,12 @@ table, tr, tbody, td {
 .nav-pills > li.active > a:hover {
     color: #18bc9c;
     background-color: #202d3b;  
-}  
+}
+
+.nav-pills > li > a:hover {
+    color: #202d3b;
+    background-color: #18bc9c;  
+}
 
 #logged-in-nav {
 	border-color: #202d3b;
@@ -119,6 +134,7 @@ table, tr, tbody, td {
 	background-color: #202d3b;
 	border-color: #202d3b;
 	height: 2px;
+	width: 80%;
 }
 
 .alert {
