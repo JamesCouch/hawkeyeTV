@@ -22,6 +22,7 @@ define([
             'click #resolver-tab'                   : 'display',
             'click #rss-tab'                        : 'display',
             'click #presign-btn'                    : 'toggle',
+            'click #scan-btn'                       : 'onResolverScan',
             'click #login-btn'                      : 'onLoginAttempt',
             'click #signup-btn'                     : 'onSignupAttempt',
             'keyup #login-password-input'           : 'onPasswordKeyup',
@@ -115,6 +116,15 @@ define([
             } else {
                 // Invalid clientside validations thru parsley
                 if(DEBUG) console.log("Did not pass clientside validation");
+
+            }
+        },
+
+        onResolverScan: function(evt){
+            if(evt) evt.preventDefault();
+            if(this.$("#resolver-form").parsley('validate')){
+            } else {
+                if(DEBUG) console.log("Did not validate IP Address");
 
             }
         },

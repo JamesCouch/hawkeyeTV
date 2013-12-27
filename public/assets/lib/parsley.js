@@ -33,6 +33,7 @@
           , dateIso:    "This value should be a valid date (YYYY-MM-DD)."
           , alphanum:   "This value should be alphanumeric."
           , phone:      "This value should be a valid phone number."
+          , inet:       "This value should be a valid IP Address."
         }
       , notnull:        "This value should not be null."
       , notblank:       "This value should not be blank."
@@ -116,6 +117,9 @@
             break;
           case 'phone':
             regExp = /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/;
+            break;
+          case 'inet':
+            regExp = /^(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))$/;
             break;
           default:
             return false;

@@ -36,19 +36,19 @@
 		<div id="resolver-div" class="col-md-4-offset-3 well well-lg">
     		<div class="height:50px;">
     			<h4>Network Info</h4>
-        		<ul id="signup-errors" class="parsley-error-list"></ul>
+        		<ul id="resolver-errors" class="parsley-error-list"></ul>
     		</div>
     		<form id="resolver-form" class="form" data-validate="parsley">
         		<fieldset>
             		<div class="control-group">
                 		<div class="controls">
-                   			<input class="input-medium" id="network-input" placeholder="Network" name="network" value="" data-required="true" data-notblank="true">
+                   			<input class="input-medium" id="network-input" placeholder="Network" name="network" value="" data-required="true" data-notblank="true" data-type="inet">
                    			 <span class="help-block"></span>
                 		</div>
             		</div>
             		<div class="control-group">
                 		<div class="controls">
-                    		<input class="input-medium" id="subnet-input" placeholder="Subnet" name="" value="" data-required="true" data-notblank="true" data-rangelength="[22,32]">
+                    		<input class="input-medium" id="subnet-input" placeholder="Subnet" name="" value="" data-required="true" data-notblank="true" data-min="22" data-max="32">
                     	<span class="help-block"></span>
                 	</div>
            			</div>
