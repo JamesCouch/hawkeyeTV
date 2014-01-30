@@ -13,6 +13,6 @@
     "mocha": "~1.13.0",
     "chai": "~1.8.0",
     "sinon": "~1.7.3",
-	"requirejs-text": "2.0.10"
+	  "requirejs-text": "~2.0.10"
   }
 }
