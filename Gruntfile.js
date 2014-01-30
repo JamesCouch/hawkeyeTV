@@ -189,8 +189,19 @@ module.exports = function(grunt) {
       options: {
         coverage_dir: "test/coverage/PhantomJS 1.9.2 (Linux)/"
       }
+    },
+
+    open: {
+      app: {
+         path: "http://localhost:8000"
+      }
     }
+
+
   });
+
+
+
 
   // Grunt contribution tasks.
   grunt.loadNpmTasks("grunt-contrib-clean");
@@ -198,6 +209,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-cssmin");
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-contrib-compress");
+  grunt.loadNpmTasks("grunt-open");
 
   // Third-party tasks.
   grunt.loadNpmTasks("grunt-karma");
@@ -219,4 +231,18 @@ module.exports = function(grunt) {
     "styles",
     "cssmin",
   ]);
+
+  grunt.registerTask("app", [
+    "clean",
+    "jshint",
+    "processhtml",
+    "copy",
+    "requirejs",
+    "styles",
+    "cssmin",
+    "open:app",
+    "server",
+  ]);
+
+
 };
