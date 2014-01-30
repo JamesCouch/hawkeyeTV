@@ -16,8 +16,18 @@ define([ 'jquery','underscore', 'text!templates/main.html', 'backbone'], functio
       },
 
       events: {
-            "click #logout-link"            : "onLogoutClick",
-            "click #remove-account-link"    : "onRemoveAccountClick"
+            "click #selection-box"            : "onSelectionClick"
+      },
+
+
+      onSelectionClick: function (e) {
+
+        var selection = $(event.target).attr('class');
+        console.log("selection click: ", selection);
+
+        this.trigger('renderSelection',selection);
+
+
       },
       
       render: function () {
