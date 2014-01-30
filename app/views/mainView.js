@@ -7,7 +7,12 @@ define([ 'jquery','underscore', 'text!templates/main.html', 'backbone'], functio
     template: _.template(MainTpl),
 
       initialize: function(options) {
-      	_.bindAll(this);
+        _.bindAll(this);
+
+
+
+
+
       },
 
       events: {
