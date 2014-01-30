@@ -15,7 +15,7 @@ require.config({
     "jquery": "../vendor/bower/jquery/jquery",
     "backbone": "../vendor/bower/backbone/backbone",
 
-    "text": "vendor/bower/requirejs-text/text"
+    "text": "../vendor/bower/requirejs-text/text"
   },
 
   shim: {

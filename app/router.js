@@ -26,11 +26,11 @@ define(
       },
 
       initialize: function(options) {
+        this.$body = $("body");
 
-        
+        this.mainView = new MainView();
 
-
-
+        this.$body.prepend(this.mainView.render().$el);
 
 
       }
