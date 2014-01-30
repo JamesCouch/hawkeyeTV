@@ -9,10 +9,6 @@ define([ 'jquery','underscore', 'text!templates/main.html', 'backbone'], functio
       initialize: function(options) {
         _.bindAll(this);
 
-
-
-
-
       },
 
       events: {

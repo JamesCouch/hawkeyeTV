@@ -1,7 +1,7 @@
 body,html{
 padding: 0;
 margin: 0;
-background-color: #5B5656;
+background-color: #555252;
 }
 p{
 	margin: 0;
@@ -10,15 +10,30 @@ p{
 
 
 #selection-box {
-	padding: 20px;
 	border-style: solid;
 	border-width: 5px;
-	border-color: gold;
-
+	border-radius:10px;
+	height:150px;
+	width:150px;
+}
+#selection-box:hover {
+	border-color: #EDC513;
 }
 
 #feed {
+}
 
+#chrome,#yt,#music,#settings {
+	padding-left: 5px;
+	padding-top: 5px;
+	width:140px; /* you can use % */
+    height: auto;
+}
+#music {
+	padding-left: 10px;
+}
 
-
+#app-block {
+	border-collapse:separate;
+	border-spacing:10px 50px;
 }
