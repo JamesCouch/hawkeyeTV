@@ -12,13 +12,13 @@ define([ 'jquery','underscore', 'text!templates/main.html', 'backbone'], functio
       },
 
       events: {
-            "click #selection-box"            : "onSelectionClick"
+            "click #selection-box"     : "onSelectionClick"
       },
 
 
       onSelectionClick: function (e) {
 
-        var selection = $(event.target).attr('class');
+        var selection = $(event.target).parent().attr('class');
         console.log("selection click: ", selection);
 
         this.trigger('renderSelection',selection);

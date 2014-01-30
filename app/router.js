@@ -98,7 +98,7 @@ define(
             if(view == this.mainView){
               this.headerView.$el.hide();
             }
-            else{ this.headerView.$el.show()}
+            else{ this.headerView.$el.show(); }
             view.$el.show();
           }
 
