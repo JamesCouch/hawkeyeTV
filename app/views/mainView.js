@@ -8,12 +8,6 @@ define([ 'jquery','underscore', 'text!templates/main.html', 'backbone', 'views/T
 
       initialize: function(options) {
         _.bindAll(this);
-
-        this.timeView = new TimeView();
-
-        this.timeClass = $('#time');
-
-        this.timeClass(this.timeView.render().$el);
       },
 
       events: {
@@ -33,6 +27,8 @@ define([ 'jquery','underscore', 'text!templates/main.html', 'backbone', 'views/T
       
       render: function () {
         this.$el.html(this.template());
+        this.timeView = new TimeView();
+        this.timeView.setElement(this.$('#time')).render();
         return this;
       },
     });

@@ -8,7 +8,6 @@ define(
     'views/YoutubeView',
     'views/GoogleView',
     'views/HeaderView',
-    'views/TimeView',
     'exports',
     'module',],
 
