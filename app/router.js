@@ -8,6 +8,7 @@ define(
     'views/YoutubeView',
     'views/GoogleView',
     'views/HeaderView',
+    'views/SettingsView',
     'exports',
     'module',],
 
@@ -19,6 +20,7 @@ define(
     YoutubeView,
     GoogleView,
     HeaderView,
+    SettingsView,
     exports,
     module) {
 
@@ -56,6 +58,14 @@ define(
         this.$body.prepend(this.googleView.render().$el);
         this.views.push(this.googleView);
 
+
+        this.settingsView = new SettingsView();
+        this.settingsView.$el.hide();
+        this.$body.prepend(this.settingsView.render().$el);
+        this.views.push(this.settingsView);
+
+
+
         this.$body.prepend(this.mainView.render().$el);
 
       },
@@ -68,6 +78,12 @@ define(
         if(chosenSelection == "google-search"){
           this.showOnly(this.googleView);
         }
+
+        if(chosenSelection == "settings"){
+          this.showOnly(this.settingsView);
+        }
+
+
       },
 
       onGoBack: function() {
