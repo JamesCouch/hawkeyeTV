@@ -58,13 +58,10 @@ define(
         this.$body.prepend(this.googleView.render().$el);
         this.views.push(this.googleView);
 
-
         this.settingsView = new SettingsView();
         this.settingsView.$el.hide();
         this.$body.prepend(this.settingsView.render().$el);
         this.views.push(this.settingsView);
-
-
 
         this.$body.prepend(this.mainView.render().$el);
 
