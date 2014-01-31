@@ -8,6 +8,7 @@ define(
     'views/YoutubeView',
     'views/GoogleView',
     'views/HeaderView',
+    'views/TimeView',
     'exports',
     'module',],
 
@@ -46,7 +47,6 @@ define(
         this.headerView.$el.hide();
         this.$header.prepend(this.headerView.render().$el);
 
-
         this.youtubeView = new YoutubeView();
         this.youtubeView.$el.hide();
         this.$body.prepend(this.youtubeView.render().$el);
@@ -56,9 +56,6 @@ define(
         this.googleView.$el.hide();
         this.$body.prepend(this.googleView.render().$el);
         this.views.push(this.googleView);
-
-
-
 
         this.$body.prepend(this.mainView.render().$el);
 
@@ -72,21 +69,13 @@ define(
         if(chosenSelection == "google-search"){
           this.showOnly(this.googleView);
         }
-
-
       },
 
       onGoBack: function() {
-
         this.showOnly(this.mainView);
-
-
       },
 
       showOnly: function(view){
-
-
-
         if (view != this.currentView) {
           _.each(this.views, function (view) { view.$el.hide(); } );
 
@@ -94,27 +83,15 @@ define(
             view.show();
           }
           else {
-
             if(view == this.mainView){
               this.headerView.$el.hide();
             }
             else{ this.headerView.$el.show(); }
             view.$el.show();
           }
-
           this.currentView = view;
           document.body.scrollTop = document.documentElement.scrollTop = 0;
         }
-
-
-
-
       }
-
-
     });
-
-
-
 });
-   

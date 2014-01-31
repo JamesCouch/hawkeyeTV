@@ -1,5 +1,5 @@
 
-define([ 'jquery','underscore', 'text!templates/main.html', 'backbone'], function($, _, MainTpl,Backbone) {
+define([ 'jquery','underscore', 'text!templates/main.html', 'backbone', 'views/TimeView'], function($, _, MainTpl,Backbone, TimeView) {
     'use strict';
 
     var MainView = Backbone.View.extend({
@@ -9,6 +9,11 @@ define([ 'jquery','underscore', 'text!templates/main.html', 'backbone'], functio
       initialize: function(options) {
         _.bindAll(this);
 
+        this.timeView = new TimeView();
+
+        this.timeClass = $('#time');
+
+        this.timeClass(this.timeView.render().$el);
       },
 
       events: {
@@ -28,9 +33,8 @@ define([ 'jquery','underscore', 'text!templates/main.html', 'backbone'], functio
       
       render: function () {
         this.$el.html(this.template());
-            return this;
-        },
-
+        return this;
+      },
     });
 
     return MainView;

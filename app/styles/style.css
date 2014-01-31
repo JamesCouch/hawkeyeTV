@@ -8,7 +8,6 @@ p{
 	padding: 0;
 }
 
-
 #selection-box {
 	border-style: solid;
 	border-width: 5px;
@@ -16,6 +15,7 @@ p{
 	height:150px;
 	width:150px;
 }
+
 #selection-box:hover {
 	border-color: #EDC513;
 }
@@ -29,6 +29,7 @@ p{
 	width:140px; /* you can use % */
     height: auto;
 }
+
 #music {
 	padding-left: 10px;
 }
