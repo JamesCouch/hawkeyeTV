@@ -22,7 +22,6 @@ define([ 'jquery','underscore', 'text!templates/main.html', 'backbone', 'views/T
 
         this.trigger('renderSelection',selection);
 
-
       },
       
       render: function () {

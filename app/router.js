@@ -36,7 +36,7 @@ define(
       initialize: function(options) {
 
         this.views = [];
-        this.$body = $("appBody");
+        this.$body = $("body");
         this.$header = $("header");
 
         this.mainView = new MainView();
