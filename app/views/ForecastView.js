@@ -28,8 +28,8 @@ define([ 'jquery','underscore', 'text!templates/forecast.html', 'models/Forecast
           }
         });
         setTimeout( function () {
-          _this.render();
-        }, 60000);
+          _this.getWeather();
+        }, 900000);
       },
 
       setWeather: function() {
