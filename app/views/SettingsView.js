@@ -9,14 +9,17 @@ define([ 'jquery','underscore', 'text!templates/settings.html', 'backbone'], fun
       initialize: function(options) {
         _.bindAll(this);
 
+        this.model = options.model;
         
+        this.zipCode = this.model;
 
+
+        console.log(this.zipCode.get("userName"));
 
       },
 
       events: {
-            "click #logout-link"            : "onLogoutClick",
-            "click #remove-account-link"    : "onRemoveAccountClick"
+            "click #logout-link"            : "onLogoutClick"
       },
       
       render: function () {

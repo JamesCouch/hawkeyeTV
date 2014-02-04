@@ -9,6 +9,7 @@ define(
     'views/GoogleView',
     'views/HeaderView',
     'views/SettingsView',
+    'models/SettingsModel',
     'exports',
     'module',],
 
@@ -21,6 +22,7 @@ define(
     GoogleView,
     HeaderView,
     SettingsView,
+    SettingsModel,
     exports,
     module) {
 
@@ -34,10 +36,25 @@ define(
       },
 
       initialize: function(options) {
-
         this.views = [];
         this.$body = $("appBody");
         this.$header = $("header");
+
+        //Initialize Models
+        this.settings = new SettingsModel();
+        this.fetchingSettings = this.settings.fetch();
+  
+        $.when(this.fetchingSettings).done(_.bind(function() {
+
+          this.settingsView = new SettingsView({model: this.settings});
+          this.settingsView.$el.hide();
+          this.$body.prepend(this.settingsView.render().$el);
+          this.views.push(this.settingsView);
+
+        },this));
+
+        //Initialize Views
+
 
         this.mainView = new MainView();
         this.mainView.on('renderSelection',this.onRenderSelection,this);
@@ -59,10 +76,7 @@ define(
         this.views.push(this.googleView);
 
 
-        this.settingsView = new SettingsView();
-        this.settingsView.$el.hide();
-        this.$body.prepend(this.settingsView.render().$el);
-        this.views.push(this.settingsView);
+
 
 
 
