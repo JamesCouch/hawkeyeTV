@@ -1,14 +1,69 @@
-body,html{
-padding: 0;
-margin: 0;
-background-color: #555252;
+body{
+background: #4d4d4d;
+background-image: url("/app/img/ZenBG-1.png"), url("/app/img/ZenBG-2.png");
 }
 p{
 	margin: 0;
 	padding: 0;
 }
 
+#logo {
+	padding-left: 20px;
+}
+
+#logo-txt {
+	font-family: Audiowide;
+	color: #000000;
+	font-size: 46px;
+	font-weight: bold;
+	font-style: italic;
+	letter-spacing: 6.4pt;
+	line-height: 0.10;
+	padding: 15px;
+	padding-left: 20px;
+	text-shadow: 2px 0px 0px #BABABA;
+}
+
+.time-block{
+	width: 450px;
+	position: absolute;
+	left: 25px;
+	border-color: #BABABA;
+	border-bottom: 2px solid;
+}
+
+.forecast-block {
+	font-family: Audiowide;
+	height: 200px;
+	width: 400px;
+	position: absolute;
+	right: 25px;
+}
+
+#time {
+	font-size: 50px;
+	line-height: .9;
+	font-family: Audiowide;
+	color: rgba(0, 0, 0, 0.4);
+    float: left;
+}
+
+#main { 
+    width: 350px;
+    margin: 0 auto;
+}
+
+#daytime  {
+	position: absolute;
+	right: 30px;
+}
+
+#date {
+	margin-left: 90px;
+}
+
 #selection-box {
+	background-color: rgba(204, 204, 204, 0.1);
 	border-style: solid;
 	border-width: 5px;
 	border-radius:10px;
@@ -17,7 +72,7 @@ p{
 }
 
 #selection-box:hover {
-	border-color: #EDC513;
+	border-color: #BABABA;
 }
 
 #feed {
@@ -37,4 +92,13 @@ p{
 #app-block {
 	border-collapse:separate;
 	border-spacing:10px 50px;
+}
+
+#block {
+	position: absolute;
+	margin-top: 120px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
 }

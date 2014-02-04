@@ -28,7 +28,8 @@ define([ 'jquery','underscore', 'text!templates/time.html', 'backbone'], functio
         this.hours = ( this.hours === 0 ) ? 12 : this.hours;
         this.minutes = ( this.minutes < 10 ? "0" : "" ) + this.minutes;
         this.seconds = ( this.seconds < 10 ? "0" : "" ) + this.seconds;
-        this.$('#time').html(this.hours + ":" + this.minutes + ":" + this.seconds + " " + this.daytime);
+        this.$('#time').html(this.hours + ":" + this.minutes + ":" + this.seconds);
+        this.$('#daytime').html(this.daytime);
         this.$('#date').html(this.month + "/" + this.day + "/" + this.year);
         var _this = this;
         setTimeout( function () {

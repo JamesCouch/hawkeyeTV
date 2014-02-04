@@ -37,7 +37,7 @@ define(
 
       initialize: function(options) {
         this.views = [];
-        this.$body = $("appBody");
+        this.$body = $("body");
         this.$header = $("header");
 
         //Initialize Models
@@ -76,11 +76,7 @@ define(
         this.views.push(this.googleView);
 
 
-
-
-
-
-        this.$body.prepend(this.mainView.render().$el);
+         this.$body.prepend(this.mainView.render().$el);
 
       },
 
