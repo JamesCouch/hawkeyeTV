@@ -2,73 +2,99 @@
  * @desc        backbone router for pushState page routing
  */
 
-define([
-    "app",
+define(
+  [
+    'app',
+    'jquery',
+    'underscore',
+    'backbone',
+    
+    'views/MainView',
+    'views/YoutubeView',
+    'views/GoogleView',
+    'views/HeaderView',
+    'views/SettingsView',
 
-    "models/SessionModel",
-    "models/UserModel",
-
-    "views/HeaderView",
-    "views/LoginPageView",
-
-    "utils"
-], function(app, SessionModel, UserModel, HeaderView, LoginPageView){
+], function(app, $, _, Backbone, MainView, YoutubeView, GoogleView, HeaderView, SettingsView){
 
     var WebRouter = Backbone.Router.extend({
 
-        initialize: function(){
-            _.bindAll(this);
-        },
+      routes: {
+        "":     "index"
+      },
 
-        routes: {
-            ""      : "index",
-        },
+      initialize: function(options) {
 
-        show: function(view, options){
+        this.views = [];
+        this.$body = $("body");
+        this.$header = $("header");
 
-            // Every page view in the router should need a header.
-            // Instead of creating a base parent view, just assign the view to this
-            // so we can create it if it doesn't yet exist
-            if(!this.headerView){
-                this.headerView = new HeaderView({});
-                this.headerView.setElement( $(".header") ).render();
-            }
+        this.mainView = new MainView();
+        this.mainView.on('renderSelection',this.onRenderSelection,this);
+        this.views.push(this.mainView);
 
-            // Close and unbind any existing page view
-            if(this.currentView) this.currentView.close();
+        this.headerView = new HeaderView();
+        this.headerView.on('goBack', this.onGoBack,this);
+        this.headerView.$el.hide();
+        this.$header.prepend(this.headerView.render().$el);
 
-            // Establish the requested view into scope
-            this.currentView = view;
+        this.youtubeView = new YoutubeView();
+        this.youtubeView.$el.hide();
+        this.$body.prepend(this.youtubeView.render().$el);
+        this.views.push(this.youtubeView);
 
-            // Need to be authenticated before rendering view.
-            // For cases like a user's settings page where we need to double check against the server.
-            if (typeof options !== 'undefined' && options.requiresAuth){        
-                var self = this;
-                app.session.checkAuth({
-                    success: function(res){
-                        // If auth successful, render inside the page wrapper
-                        $('#content').html( self.currentView.render().$el);
-                    }, error: function(res){
-                        self.navigate("/", { trigger: true, replace: true });
-                    }
-                });
+        this.googleView = new GoogleView();
+        this.googleView.$el.hide();
+        this.$body.prepend(this.googleView.render().$el);
+        this.views.push(this.googleView);
 
-            } else {
-                // Render inside the page wrapper
-                $('#content').html(this.currentView.render().$el);
-            }
+        this.settingsView = new SettingsView();
+        this.settingsView.$el.hide();
+        this.$body.prepend(this.settingsView.render().$el);
+        this.views.push(this.settingsView);
 
-        },
+        this.$body.prepend(this.mainView.render().$el);
 
-        index: function() {
+      },
 
-            // Fix for non-pushState routing (IE9 and below)
-            var hasPushState = !!(window.history && history.pushState);
-            if(!hasPushState) this.navigate(window.location.pathname.substring(1), {trigger: true, replace: true});
-            else {
-                this.show( new LoginPageView({}) );
-            }                
+      onRenderSelection: function(chosenSelection) {
+
+        if(chosenSelection == "youtube-search"){
+          this.showOnly(this.youtubeView);
         }
+        if(chosenSelection == "google-search"){
+          this.showOnly(this.googleView);
+        }
+
+        if(chosenSelection == "settings"){
+          this.showOnly(this.settingsView);
+        }
+
+
+      },
+
+      onGoBack: function() {
+        this.showOnly(this.mainView);
+      },
+
+      showOnly: function(view){
+        if (view != this.currentView) {
+          _.each(this.views, function (view) { view.$el.hide(); } );
+
+          if (view.show) {
+            view.show();
+          }
+          else {
+            if(view == this.mainView){
+              this.headerView.$el.hide();
+            }
+            else{ this.headerView.$el.show(); }
+            view.$el.show();
+          }
+          this.currentView = view;
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
+        }
+      }
     });
 
     return WebRouter;

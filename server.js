@@ -1,11 +1,3 @@
-/*
- * Node Express app server with API endpoints
- * --------------------------------------------
- * Creates a SQLite3 schema and users table for inserting, updating, and deleting
- * user records.  Passwords are salted and a combined salt+hash is stored in the db.
- * Also signs and unsigns cookies which it uses to persist the client's authentication. 
- * 
-*/
 
 var express = require('express'),
     http = require('http'),
@@ -20,11 +12,24 @@ var express = require('express'),
 
 // Initialize sqlite and create our db if it doesnt exist
 var sqlite3 = require("sqlite3").verbose();
-var db = new sqlite3.Database(__dirname+'/db/elauqsap-login.db');
+var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
 
+
+ var io = require('socket.io').listen(server);
+ io.set('log level', 1);
+
+ //Socket.io Server
+ io.sockets.on('connection', function (socket) {
+    console.log("Test");
+    socket.on("screen", function(data){
+        socket.type = "screen";
+        ss = socket;
+        console.log("Screen ready...");
+    });
+ });
 
 // Create our users table if it doesn't exist
-db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, username TEXT UNIQUE, password TEXT, auth_token TEXT UNIQUE)");
+//db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, username TEXT UNIQUE, password TEXT, auth_token TEXT UNIQUE)");
 
 
 // Allow node to be run with proxy passing
@@ -62,102 +67,11 @@ app.engine('html', require('hbs').__express);
 app.use(express.static(__dirname+'/public'));
 app.use(express.csrf());
 
-
 app.use( app.router );
-
 
 app.get("/", function(req, res){
     res.render('index', { csrfToken: req.csrfToken() });
 });
-
-// GET /api/auth
-// @desc: checks a user's auth status based on cookie
-app.get("/api/auth", function(req, res){
-    db.get("SELECT * FROM users WHERE id = ? AND auth_token = ?", [ req.signedCookies.user_id, req.signedCookies.auth_token ], function(err, user){
-        if(user){
-            res.json({ user: _.omit(user, ['password', 'auth_token']) });   
-        } else {  
-            res.json({ error: "Client has no valid login cookies."  });   
-        }
-    });
-});
-
-// POST /api/auth/login
-// @desc: logs in a user
-app.post("/api/auth/login", function(req, res){
-    db.get("SELECT * FROM users WHERE username = ?", [ req.body.username ], function(err, user){
-        if(user){
-
-            // Compare the POSTed password with the encrypted db password
-            if( bcrypt.compareSync( req.body.password, user.password)){
-                res.cookie('user_id', user.id, { signed: true, maxAge: config.cookieMaxAge  });
-                res.cookie('auth_token', user.auth_token, { signed: true, maxAge: config.cookieMaxAge  });
-
-                // Correct credentials, return the user object
-                res.json({ user: _.omit(user, ['password', 'auth_token']) });   
-
-            } else {
-                // Username did not match password given
-                res.json({ error: "Invalid username or password."  });   
-            }
-        } else {
-            // Could not find the username
-            res.json({ error: "Username does not exist."  });   
-        }
-    });
-});
-
-// POST /api/auth/signup
-// @desc: creates a user
-app.post("/api/auth/signup", function(req, res){
-    db.serialize(function(){
-        db.run("INSERT INTO users(username, name, password, auth_token) VALUES (?, ?, ?, ?)", 
-                [ req.body.username, req.body.name, bcrypt.hashSync(req.body.password, 8), bcrypt.genSaltSync(8) ], function(err, rows){
-            if(err){
-                res.json({ error: "Username has been taken.", field: "username" }); 
-            } else {
-
-                // Retrieve the inserted user data
-                db.get("SELECT * FROM users WHERE username = ?", [ req.body.username ], function(err, user){
-                    if(!user) {
-                        console.log(err, rows);
-                        res.json({ error: "Error while trying to register user." }); 
-                    } else {
-
-                        // Set the user cookies and return the cleansed user data
-                        res.cookie('user_id', user.id, { signed: true, maxAge: config.cookieMaxAge  });
-                        res.cookie('auth_token', user.auth_token, { signed: true, maxAge: config.cookieMaxAge  });
-                        res.json({ user: _.omit(user, ['password', 'auth_token']) });   
-                    }
-                });
-            }
-        });
-    });
-});
-
-
-// POST /api/auth/logout
-// @desc: logs out a user, clearing the signed cookies
-app.post("/api/auth/logout", function(req, res){
-    res.clearCookie('user_id');
-    res.clearCookie('auth_token');
-    res.json({ success: "User successfully logged out." });
-});
-
-// POST /api/auth/remove_account
-// @desc: deletes a user
-app.post("/api/auth/remove_account", function(req, res){
-    db.run("DELETE FROM users WHERE id = ? AND auth_token = ?", [ req.signedCookies.user_id, req.signedCookies.auth_token ], function(err, rows){
-        if(err){ 
-            res.json({ error: "Error while trying to delete user." }); 
-        } else {
-            res.clearCookie('user_id');
-            res.clearCookie('auth_token');
-            res.json({ success: "User successfully deleted." });
-        }
-    });
-});
-
 
 // Close the db connection on process exit 
 // (should already happen, but to be safe)

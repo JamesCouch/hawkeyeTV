@@ -1,53 +1,36 @@
-define([
-    "app",
-    "text!templates/header.html",
-    "utils",
-    "bootstrap"
-], function(app, HeaderTpl){
+
+define([ 'jquery','underscore', 'text!templates/header.html', 'backbone'], function($, _, HTpl,Backbone) {
+    'use strict';
 
     var HeaderView = Backbone.View.extend({
 
-        template: _.template(HeaderTpl),
+    template: _.template(HTpl),
 
-        initialize: function () {
-            _.bindAll(this);
+      initialize: function(options) {
+        _.bindAll(this);
 
-            // Listen for session logged_in state changes and re-render
-            app.session.on("change:logged_in", this.onLoginStatusChange);
-        },
         
-        events: {
-            "click #logout-link"            : "onLogoutClick",
-            "click #remove-account-link"    : "onRemoveAccountClick"
-        },
+
+
+      },
+
+      events: {
+            "click .backButton"            : "goBack"
+      },
       
-        onLoginStatusChange: function(evt){
-            this.render();
-            if(app.session.get("logged_in")) app.showAlert("Success:", " logged in as "+app.session.user.get("username"), "alert-success");
-            else app.showAlert("Logout successful,", " have a nice day!", "alert-success");
-        },
-
-        onLogoutClick: function(evt) {
-            evt.preventDefault();
-            app.session.logout({});  // No callbacks needed b/c of session event listening
-        },
-
-        onRemoveAccountClick: function(evt){
-            evt.preventDefault();
-            app.session.removeAccount({});
-        },
-
-
-        render: function () {
-            if(DEBUG) console.log("RENDER::", app.session.user.toJSON(), app.session.toJSON());
-            this.$el.html(this.template({ 
-                logged_in: app.session.get("logged_in"),
-                user: app.session.user.toJSON() 
-            }));
+      render: function () {
+        this.$el.html(this.template());
             return this;
         },
+
+
+        goBack: function() {
+
+          this.trigger('goBack');
+
+        }
 
     });
 
     return HeaderView;
-});
+  });

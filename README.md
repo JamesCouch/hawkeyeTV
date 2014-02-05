@@ -1,31 +1,5 @@
-ELAUQSAP
+hawkeyeTV
 ==============
-My first attempt at a Single-Page Web Application. I choose to use the boiler plate from Alex Ehrnschwender and modify it for my needs while I learn the basics.
-
-Features added:
-  * Current Blog Posting
-  * Open DNS Resolver Subnet Scanner
-  * RSS Info Sec Feed
-  * More to come...
-
-Features from the boiler plate:
-  * CSRF headers in authentication requests to prevent forgery
-  * Auth state persistence through signed cookies
-  * Global (singleton) session model whose state changes can be listened to 
-  * Client-side validations through ParsleyJS
-  * Salt/hashing of passwords for back-end storage
-
-
-
-Install & Run
---------------
-	git clone https://github.com/elauqsap/elauqsap-spa.git
-	cd elauqsap-spa
-	npm install
-	npm start
-	
-Visit [http://localhost:3000](http://localhost:3000)
-
 
 
 License
