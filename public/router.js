@@ -25,6 +25,15 @@ define(
 
       initialize: function(options) {
 
+
+        if(this.checkForMobile()){
+          this.state = "mobile";
+        }
+        else {
+          this.state = "tv";
+        }
+
+
         this.views = [];
         this.$body = $("body");
         this.$header = $("header");
@@ -53,7 +62,7 @@ define(
         this.$body.prepend(this.settingsView.render().$el);
         this.views.push(this.settingsView);
 
-        this.$body.prepend(this.mainView.render().$el);
+        this.$body.prepend(this.mainView.render(this.state).$el);
 
       },
 
@@ -94,7 +103,21 @@ define(
           this.currentView = view;
           document.body.scrollTop = document.documentElement.scrollTop = 0;
         }
+      },
+
+      checkForMobile: function() {
+
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+         return true;
+        }
+
+        else {
+          return false;
+        }
       }
+
+
+
     });
 
     return WebRouter;
