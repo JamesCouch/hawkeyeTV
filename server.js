@@ -20,11 +20,15 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
 
  //Socket.io Server
  io.sockets.on('connection', function (socket) {
-    console.log("Test");
+    
     socket.on("screen", function(data){
         socket.type = "screen";
         ss = socket;
         console.log("Screen ready...");
+    });
+    socket.on("remote", function(data){
+        socket.type = "remote";
+        console.log("Remote ready...");
     });
  });
 
