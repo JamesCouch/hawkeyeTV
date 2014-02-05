@@ -11,14 +11,16 @@ require.config({
         'backbone'            : 'assets/lib/backbone',
         'bootstrap'           : 'assets/vendor/bootstrap/js/bootstrap',
         'text'                : 'assets/lib/text',
-        'parsley'             : 'assets/lib/parsley'
+        'parsley'             : 'assets/lib/parsley',
+        'socket'              : '/socket.io/socket.io'
     },
 
     shim: {
         'underscore'          : { exports  : '_' },
         'backbone'            : { deps : ['underscore', 'jquery'], exports : 'Backbone' },
         'bootstrap'           : { deps : ['jquery'], exports : 'Bootstrap' },
-        'parsley'             : { deps: ['jquery'] }
+        'parsley'             : { deps: ['jquery'] },
+        'socket'              : { deps : ['underscore', 'jquery'], exports : 'socket' }
     }
 
 });

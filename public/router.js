@@ -8,6 +8,7 @@ define(
     'jquery',
     'underscore',
     'backbone',
+    'socket',
     
     'views/MainView',
     'views/YoutubeView',
@@ -15,7 +16,7 @@ define(
     'views/HeaderView',
     'views/SettingsView',
 
-], function(app, $, _, Backbone, MainView, YoutubeView, GoogleView, HeaderView, SettingsView){
+], function(app, $, _, Backbone, Socket, MainView, YoutubeView, GoogleView, HeaderView, SettingsView){
 
     var WebRouter = Backbone.Router.extend({
 
@@ -25,6 +26,8 @@ define(
 
       initialize: function(options) {
 
+        this.socket = io.connect('http://172.23.103.117:3000');
+        
         this.views = [];
         this.$body = $("body");
         this.$header = $("header");
