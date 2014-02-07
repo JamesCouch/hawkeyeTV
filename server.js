@@ -30,6 +30,15 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
         socket.type = "remote";
         console.log("Remote ready...");
     });
+
+    socket.on("control", function(data){
+        console.log("Data: ",data);
+        console.log("SS: ",ss.type);
+        ss.emit('controlling',{action:"chrome"});
+    });
+
+
+
  });
 
 // Create our users table if it doesn't exist

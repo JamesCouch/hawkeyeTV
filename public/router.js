@@ -26,24 +26,41 @@ define(
 
       initialize: function(options) {
 
-        this.socket = io.connect('http://172.23.103.117:3000');
+        var _this = this;
+        this.remoteSocket = io.connect('http://172.23.4.220:3000');
+        this.screenSocket = io.connect('http://127.0.0.1:3000');
 
-        if(this.checkForMobile()){
+        this.isMobile = this.checkForMobile();
+        var _this = this;
+        if(this.isMobile){
+          this.socket = this.remoteSocket;
+
           this.state = "mobile";
-          var _this = this;
-            _this.socket.on('connect', function(data){
-            _this.socket.emit('remote');
-          });
+          this.remoteSocket.emit('remote');
         }
         else {
+          this.socket = this.screenSocket;
           this.state = "tv";
+
+          this.socket.on('connect', function(data){
+            _this.socket.emit('screen');
+          });
+
         }
-        
+
+
+        this.socket.on('controlling', function(data){
+          console.log("controlled by socket");
+          _this.onRenderSelection("chrome");
+
+        });
+
+
         this.views = [];
         this.$body = $("body");
         this.$header = $("header");
 
-        this.mainView = new MainView();
+        this.mainView = new MainView({socket: this.socket, mobile: this.isMobile });
         this.mainView.on('renderSelection',this.onRenderSelection,this);
         this.views.push(this.mainView);
 

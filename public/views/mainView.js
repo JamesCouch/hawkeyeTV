@@ -1,5 +1,5 @@
 
-define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainMobile.html', 'backbone', 'views/TimeView', 'views/ForecastView'], function($, _, MainTpl,MobileMainTpl,Backbone, TimeView, ForecastView) {
+define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainMobile.html', 'backbone', 'views/TimeView', 'views/ForecastView','socket'], function($, _, MainTpl,MobileMainTpl,Backbone, TimeView, ForecastView,socket) {
     'use strict';
 
     var MainView = Backbone.View.extend({
@@ -9,7 +9,16 @@ define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainM
 
       initialize: function(options) {
         _.bindAll(this);
+
+
+        this.socket = options.socket;
+        this.isMobile = options.mobile;
+
+        var _this = this;
+
+
       },
+
 
       events: {
             "click #selection-box"     : "onSelectionClick",
@@ -19,10 +28,20 @@ define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainM
 
       onSelectionClick: function (e) {
 
-        var selection = $(event.target).attr('id');
-        console.log("selection click: ", selection);
+        console.log("selection clicked");
 
+
+       this.selection = $(event.target).attr('id');
+
+
+       this.socket.emit('control',{action: this.selection});
+
+
+        console.log("selection click: ", selection);
         this.trigger('renderSelection',selection);
+
+
+
 
       },
 

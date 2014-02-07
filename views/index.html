@@ -16,13 +16,7 @@
 </head>
 
 <body>
-		<script src="/socket.io/socket.io.js"></script>
-		<script>
-			var socket = io.connect('http://127.0.0.1:3000');
-			socket.on('connect', function(data){
-				socket.emit('screen');
-			});
-		</script>
+
 	<div id="wrap">
 		<div class="header"></div>
 		<div id="content" class="container">
