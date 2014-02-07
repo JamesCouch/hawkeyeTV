@@ -20,7 +20,7 @@ define([ 'jquery','underscore', 'text!templates/forecast.html', 'models/Forecast
         var _this = this;
         $.ajax({
           dataType: "json",
-          url: "https://maps.googleapis.com/maps/api/geocode/json?address=60013&sensor=true",
+          url: "https://maps.googleapis.com/maps/api/geocode/json?address=52242&sensor=true",
           data: "",
           success: function(val){
             _this.forecastModel.parse(val);
@@ -36,7 +36,7 @@ define([ 'jquery','underscore', 'text!templates/forecast.html', 'models/Forecast
         this.src = "http://forecast.io/embed/#lat="+ this.forecastModel.index.lat + "&lon=" + this.forecastModel.index.lon +"&name=" + this.forecastModel.index.name;
         this.$('#forecast_embed').attr('src', this.src);
       },
-
+      
     });
 
     return ForecastView;
