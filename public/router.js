@@ -73,10 +73,10 @@ define(
 
       onRenderSelection: function(chosenSelection) {
 
-        if(chosenSelection == "youtube-search"){
+        if(chosenSelection == "youtube"){
           this.showOnly(this.youtubeView);
         }
-        if(chosenSelection == "google-search"){
+        if(chosenSelection == "chrome"){
           this.showOnly(this.googleView);
         }
 
@@ -106,7 +106,7 @@ define(
             view.$el.show();
           }
           this.currentView = view;
-          document.body.scrollTop = document.documentElement.scrollTop = 0;
+          document.documentElement.scrollTop = document.documentElement.scrollTop = 0;
         }
       },
 

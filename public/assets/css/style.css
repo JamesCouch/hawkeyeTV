@@ -1,6 +1,10 @@
-body{
-background: #4d4d4d;
-background-image: url("/assets/img/ZenBG-1.png"), url("/assets/img/ZenBG-2.png");
+body { 
+
+  background-color: #ffffff;background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGNvdW50PScxMDAlJyBoZWlnaHQ9JzEwMCUnPgoJPGNpcmNsZSBjeD0nNTAlJyBjeT0nNTAlJyByPSc1JScgZmlsbC1vcGFjaXR5PScuMycgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9JzUwJScgcj0nMTAlJyBmaWxsLW9wYWNpdHk9Jy4zJyBmaWxsPScjZmRkMDE3JyAvPgoJPGNpcmNsZSBjeD0nNTAlJyBjeT0nNTAlJyByPScxNSUnIGZpbGwtb3BhY2l0eT0nLjMnIGZpbGw9JyNmZGQwMTcnIC8+Cgk8Y2lyY2xlIGN4PSc1MCUnIGN5PSc1MCUnIHI9JzIwJScgZmlsbC1vcGFjaXR5PScuMycgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9JzUwJScgcj0nMjUlJyBmaWxsLW9wYWNpdHk9Jy4zJyBmaWxsPScjZmRkMDE3JyAvPgoJPGNpcmNsZSBjeD0nNTAlJyBjeT0nNTAlJyByPSczMCUnIGZpbGwtb3BhY2l0eT0nLjMnIGZpbGw9JyNmZGQwMTcnIC8+Cgk8Y2lyY2xlIGN4PSc1MCUnIGN5PSc1MCUnIHI9JzM1JScgZmlsbC1vcGFjaXR5PScuMycgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9JzUwJScgcj0nNDAlJyBmaWxsLW9wYWNpdHk9Jy4zJyBmaWxsPScjZmRkMDE3JyAvPgoJPGNpcmNsZSBjeD0nNTAlJyBjeT0nNTAlJyByPSc0NSUnIGZpbGwtb3BhY2l0eT0nLjMnIGZpbGw9JyNmZGQwMTcnIC8+Cgk8Y2lyY2xlIGN4PSc1MCUnIGN5PSc1MCUnIHI9JzUwJScgZmlsbC1vcGFjaXR5PScuMycgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9Jy0xMCUnIHI9JzIwJScgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9Jy0xMCUnIHI9JzMwJScgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9Jy0xMCUnIHI9JzQwJScgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9Jy0xMCUnIHI9JzUwJScgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9Jy0xMCUnIHI9JzYwJScgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9Jy0xMCUnIHI9JzcwJScgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9Jy0xMCUnIHI9JzgwJScgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9Jy0xMCUnIHI9JzkwJScgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nI2ZkZDAxNycgLz4KCTxjaXJjbGUgY3g9JzUwJScgY3k9Jy0xMCUnIHI9JzEwMCUnIGZpbGwtb3BhY2l0eT0nLjInIGZpbGw9JyNmZGQwMTcnIC8+Cgk8Y2lyY2xlIGN4PScwJyBjeT0nMCcgcj0nMTAlJyBmaWxsLW9wYWNpdHk9Jy4yJyBmaWxsPScjNTc1NzU3JyAvPgoJPGNpcmNsZSBjeD0nMCcgY3k9JzAnIHI9JzIwJScgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nIzU3NTc1NycgLz4KCTxjaXJjbGUgY3g9JzAnIGN5PScwJyByPSczMCUnIGZpbGwtb3BhY2l0eT0nLjInIGZpbGw9JyM1NzU3NTcnIC8+Cgk8Y2lyY2xlIGN4PScwJyBjeT0nMCcgcj0nNDAlJyBmaWxsLW9wYWNpdHk9Jy4yJyBmaWxsPScjNTc1NzU3JyAvPgoJPGNpcmNsZSBjeD0nMCcgY3k9JzAnIHI9JzUwJScgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nIzU3NTc1NycgLz4KCTxjaXJjbGUgY3g9JzAnIGN5PScwJyByPSc2MCUnIGZpbGwtb3BhY2l0eT0nLjInIGZpbGw9JyM1NzU3NTcnIC8+Cgk8Y2lyY2xlIGN4PScwJyBjeT0nMCcgcj0nNzAlJyBmaWxsLW9wYWNpdHk9Jy4yJyBmaWxsPScjNTc1NzU3JyAvPgoJPGNpcmNsZSBjeD0nMTAwJScgY3k9JzAnIHI9JzEwJScgZmlsbC1vcGFjaXR5PScuMScgZmlsbD0nIzU3NTc1NycgLz4KCTxjaXJjbGUgY3g9JzEwMCUnIGN5PScwJyByPScyMCUnIGZpbGwtb3BhY2l0eT0nLjEnIGZpbGw9JyM1NzU3NTcnIC8+Cgk8Y2lyY2xlIGN4PScxMDAlJyBjeT0nMCcgcj0nMzAlJyBmaWxsLW9wYWNpdHk9Jy4xJyBmaWxsPScjNTc1NzU3JyAvPgoJPGNpcmNsZSBjeD0nMTAwJScgY3k9JzAnIHI9JzQwJScgZmlsbC1vcGFjaXR5PScuMScgZmlsbD0nIzU3NTc1NycgLz4KCTxjaXJjbGUgY3g9JzEwMCUnIGN5PScwJyByPSc1MCUnIGZpbGwtb3BhY2l0eT0nLjEnIGZpbGw9JyM1NzU3NTcnIC8+Cgk8Y2lyY2xlIGN4PScxMDAlJyBjeT0nMCcgcj0nNjAlJyBmaWxsLW9wYWNpdHk9Jy4xJyBmaWxsPScjNTc1NzU3JyAvPgoJPGNpcmNsZSBjeD0nMTAwJScgY3k9JzAnIHI9JzcwJScgZmlsbC1vcGFjaXR5PScuMScgZmlsbD0nIzU3NTc1NycgLz4KCTxjaXJjbGUgY3g9JzEwMCUnIGN5PScxMDAlJyByPScxMCUnIGZpbGwtb3BhY2l0eT0nLjEnIGZpbGw9JyM1NzU3NTcnIC8+Cgk8Y2lyY2xlIGN4PScxMDAlJyBjeT0nMTAwJScgcj0nMjAlJyBmaWxsLW9wYWNpdHk9Jy4xJyBmaWxsPScjNTc1NzU3JyAvPgoJPGNpcmNsZSBjeD0nMTAwJScgY3k9JzEwMCUnIHI9JzMwJScgZmlsbC1vcGFjaXR5PScuMScgZmlsbD0nIzU3NTc1NycgLz4KCTxjaXJjbGUgY3g9JzEwMCUnIGN5PScxMDAlJyByPSc0MCUnIGZpbGwtb3BhY2l0eT0nLjEnIGZpbGw9JyM1NzU3NTcnIC8+Cgk8Y2lyY2xlIGN4PScxMDAlJyBjeT0nMTAwJScgcj0nNTAlJyBmaWxsLW9wYWNpdHk9Jy4xJyBmaWxsPScjNTc1NzU3JyAvPgoJPGNpcmNsZSBjeD0nMTAwJScgY3k9JzEwMCUnIHI9JzYwJScgZmlsbC1vcGFjaXR5PScuMScgZmlsbD0nIzU3NTc1NycgLz4KCTxjaXJjbGUgY3g9JzEwMCUnIGN5PScxMDAlJyByPSc3MCUnIGZpbGwtb3BhY2l0eT0nLjEnIGZpbGw9JyM1NzU3NTcnIC8+Cgk8Y2lyY2xlIGN4PScwJScgY3k9JzEwMCUnIHI9JzEwJScgZmlsbC1vcGFjaXR5PScuMScgZmlsbD0nIzU3NTc1NycgLz4KCTxjaXJjbGUgY3g9JzAlJyBjeT0nMTAwJScgcj0nMjAlJyBmaWxsLW9wYWNpdHk9Jy4xJyBmaWxsPScjNTc1NzU3JyAvPgoJPGNpcmNsZSBjeD0nMCUnIGN5PScxMDAlJyByPSczMCUnIGZpbGwtb3BhY2l0eT0nLjEnIGZpbGw9JyM1NzU3NTcnIC8+Cgk8Y2lyY2xlIGN4PScwJScgY3k9JzEwMCUnIHI9JzQwJScgZmlsbC1vcGFjaXR5PScuMScgZmlsbD0nIzU3NTc1NycgLz4KCTxjaXJjbGUgY3g9JzAlJyBjeT0nMTAwJScgcj0nNTAlJyBmaWxsLW9wYWNpdHk9Jy4xJyBmaWxsPScjNTc1NzU3JyAvPgoJPGNpcmNsZSBjeD0nMCUnIGN5PScxMDAlJyByPSc2MCUnIGZpbGwtb3BhY2l0eT0nLjEnIGZpbGw9JyM1NzU3NTcnIC8+Cgk8Y2lyY2xlIGN4PScwJScgY3k9JzEwMCUnIHI9JzcwJScgZmlsbC1vcGFjaXR5PScuMScgZmlsbD0nIzU3NTc1NycgLz4KPC9zdmc+') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 p{
 	margin: 0;
@@ -27,17 +31,17 @@ p{
 .time-block{
 	width: 450px;
 	position: absolute;
-	left: 25px;
+	right: 25px;
+	margin-top: 15px;
 	border-color: #BABABA;
 	border-bottom: 2px solid;
 }
 
 .forecast-block {
-	font-family: Audiowide;
-	height: 200px;
-	width: 400px;
+	width: 1000px;
 	position: absolute;
-	right: 25px;
+	margin-top: 15px;
+	left: 25px;
 }
 
 #time {
@@ -63,22 +67,14 @@ p{
 }
 
 #selection-box {
-	background-color: rgba(204, 204, 204, 0.1);
-	border-style: solid;
-	border-width: 5px;
-	border-radius:10px;
 	height:150px;
 	width:150px;
-}
-
-#selection-box:hover {
-	border-color: #BABABA;
 }
 
 #feed {
 }
 
-#chrome,#yt,#music,#settings {
+#chrome,#youtube,#music,#settings {
 	padding-left: 5px;
 	padding-top: 5px;
 	width:140px; /* you can use % */
@@ -89,20 +85,26 @@ p{
 	padding-left: 10px;
 }
 
-#app-block {
-	border-collapse:separate;
-	border-spacing:10px 50px;
-}
-
-#block {
+.blocks {
 	position: absolute;
-	margin-top: 120px;
-    left:0;
-    right:0;
+	margin-top: 250px;
+    left: 25px;
+    right: 0;
     margin-left:auto;
     margin-right:auto;
 }
 
+.block {
+	margin-right: 15px;
+	float: left; width: 200px;
+}
+
+.selected{
+	border-color: #000000;
+	border-style: solid;
+	border-width: 5px;
+	border-radius:10px;
+}
 
 @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-device-width: 480px){
   /* some css here */
@@ -117,7 +119,7 @@ tr {
 }
 
 
-#chrome,#yt,#music,#settings {
+#chrome,#youtube,#music,#settings {
 	padding-left: 5px;
 	padding-top: 5px;
 	width:500px; /* you can use % */

@@ -12,17 +12,23 @@ define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainM
       },
 
       events: {
-            "click #selection-box"     : "onSelectionClick"
+            "click #selection-box"     : "onSelectionClick",
+            "mouseover img"  : "mouseovercard"
       },
 
 
       onSelectionClick: function (e) {
 
-        var selection = $(event.target).parent().attr('class');
+        var selection = $(event.target).attr('id');
         console.log("selection click: ", selection);
 
         this.trigger('renderSelection',selection);
 
+      },
+
+      mouseovercard: function(event) {
+        $('.block').removeClass('selected');
+        $(event.currentTarget).parent().toggleClass('selected');
       },
       
       render: function (state) {
