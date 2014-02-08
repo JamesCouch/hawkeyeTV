@@ -27,7 +27,7 @@ define(
       initialize: function(options) {
 
         var _this = this;
-        this.remoteSocket = io.connect('http://172.23.4.220:3000');
+        this.remoteSocket = io.connect('http://archetype.local:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
 
         this.isMobile = this.checkForMobile();
@@ -48,13 +48,9 @@ define(
 
         }
 
-
         this.socket.on('controlling', function(data){
-          console.log("controlled by socket");
-          _this.onRenderSelection("chrome");
-
+          _this.onRenderSelection(data);
         });
-
 
         this.views = [];
         this.$body = $("body");
@@ -131,17 +127,12 @@ define(
 
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
          return true;
-        }
-
-        else {
+        } else {
           return false;
         }
       }
 
-
-
     });
 
     return WebRouter;
-
 });

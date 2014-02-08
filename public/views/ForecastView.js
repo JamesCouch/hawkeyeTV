@@ -1,4 +1,4 @@
-define([ 'jquery','underscore', 'text!templates/forecast.html', 'models/ForecastModel', 'backbone'], function($, _, ForecastTpl, ForecastModel, Backbone) {
+define([ 'app','jquery','underscore', 'text!templates/forecast.html', 'models/ForecastModel', 'backbone'], function(app,$, _, ForecastTpl, ForecastModel, Backbone) {
     'use strict';
 
     var ForecastView = Backbone.View.extend({
@@ -11,8 +11,11 @@ define([ 'jquery','underscore', 'text!templates/forecast.html', 'models/Forecast
       },
 
       render: function () {
+        var _this = this;
         this.$el.html(this.template());
-        this.getWeather();
+        setTimeout( function () {
+          _this.getWeather();
+        }, 1);
         return this;
       },
 
@@ -20,7 +23,7 @@ define([ 'jquery','underscore', 'text!templates/forecast.html', 'models/Forecast
         var _this = this;
         $.ajax({
           dataType: "json",
-          url: "https://maps.googleapis.com/maps/api/geocode/json?address=52242&sensor=true",
+          url: "https://maps.googleapis.com/maps/api/geocode/json?address="+ app.settings.profile.details.zipcode +"&sensor=true",
           data: "",
           success: function(val){
             _this.forecastModel.parse(val);
