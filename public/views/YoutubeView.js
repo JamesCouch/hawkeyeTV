@@ -14,6 +14,15 @@ define([ 'jquery','underscore', 'text!templates/youtube.html', 'backbone'], func
 
       },
 
+      newSearch: function(data) {
+
+        console.log("new search: ", data);
+
+
+        $('.searchInput').text("Your youtube search is: " + data);
+
+      },
+
       events: {
             "click #logout-link"            : "onLogoutClick",
             "click #remove-account-link"    : "onRemoveAccountClick"

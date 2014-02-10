@@ -13,6 +13,10 @@ define([ 'jquery','underscore', 'text!templates/google.html', 'backbone'], funct
 
 
       },
+      newSearch: function(data) {
+        $('.searchInput').text("Your google search is: " + data);
+
+      },
 
       events: {
             "click #logout-link"            : "onLogoutClick",

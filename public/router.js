@@ -9,14 +9,16 @@ define(
     'underscore',
     'backbone',
     'socket',
+    'bootstrap',
     
     'views/MainView',
     'views/YoutubeView',
     'views/GoogleView',
     'views/HeaderView',
     'views/SettingsView',
+    'views/SearchBarView',
 
-], function(app, $, _, Backbone, Socket, MainView, YoutubeView, GoogleView, HeaderView, SettingsView){
+], function(app, $, _, Backbone, Socket, bootstrap, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView){
 
     var WebRouter = Backbone.Router.extend({
 
@@ -27,7 +29,7 @@ define(
       initialize: function(options) {
 
         var _this = this;
-        this.remoteSocket = io.connect('http://archetype.local:3000');
+        this.remoteSocket = io.connect('http://192.168.1.9:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
 
         this.isMobile = this.checkForMobile();
@@ -50,6 +52,29 @@ define(
 
         this.socket.on('controlling', function(data){
           _this.onRenderSelection(data);
+        });
+
+        this.socket.on('controlling-data', function(data){
+          $('#searchBar').val(data);
+
+        });
+
+        this.socket.on('search-bar-control', function(data){
+
+          if(data.action == "close"){
+            $('#myModal').modal('hide');
+          }
+          else if(data.action == "submit"){
+            $('#myModal').modal('hide');
+
+
+            var currentView = _this.getCurrentSearchView(data.view);
+            _this.showOnly(currentView);
+            currentView.newSearch(data.data);
+
+          }
+            
+
         });
 
         this.views = [];
@@ -75,6 +100,15 @@ define(
         this.$body.prepend(this.googleView.render().$el);
         this.views.push(this.googleView);
 
+        this.searchBarView = new SearchBarView({socket: this.socket});
+        this.searchBarView.on('onCloseSearchBar',this.closeSearchBar,this);
+        this.searchBarView.on('onSearchSubmit',this.submitSearchBar,this);
+        this.searchBarView.$el.hide();
+        this.$body.prepend(this.searchBarView.render().$el);
+        this.views.push(this.searchBarView);
+
+
+
         this.settingsView = new SettingsView();
         this.settingsView.$el.hide();
         this.$body.prepend(this.settingsView.render().$el);
@@ -82,21 +116,63 @@ define(
 
         this.$body.prepend(this.mainView.render(this.state).$el);
 
+
+        $('#searchBar').bind('input', function(e) {
+            var searchBarData = $('#searchBar').val();
+            _this.sendSearchBoxData(searchBarData);
+        });
+
       },
+
+      sendSearchBoxData: function(data) {
+
+        this.remoteSocket.emit('send-data',{key: data});
+
+      },
+
 
       onRenderSelection: function(chosenSelection) {
 
+
         if(chosenSelection == "youtube"){
-          this.showOnly(this.youtubeView);
+          this.currentSearchBarView = "youtube";
+          this.showSearchBar(chosenSelection);
         }
         if(chosenSelection == "chrome"){
-          this.showOnly(this.googleView);
+          this.currentSearchBarView = "google";
+          this.showSearchBar(chosenSelection);
         }
 
         if(chosenSelection == "settings"){
           this.showOnly(this.settingsView);
         }
 
+
+      },
+
+
+      showSearchBar: function(chosenSelection) {
+
+        this.searchBarView.changeHeader(chosenSelection);
+        this.searchBarView.$el.show();
+        $('#myModal').modal('show');
+
+      },
+
+      closeSearchBar: function(){
+
+        $('#myModal').modal('hide');
+        this.remoteSocket.emit('modal-control',{action: 'close'});
+
+
+      },
+
+      submitSearchBar: function(data) {
+        var data = $('#searchBar').val();
+        $('#myModal').modal('hide');
+        this.remoteSocket.emit('modal-control',{action: 'submit', data: data, view: this.currentSearchBarView});
+        var currentView = this.getCurrentSearchView(this.currentSearchBarView);
+        this.showOnly(currentView);
 
       },
 
@@ -130,6 +206,17 @@ define(
         } else {
           return false;
         }
+      },
+
+      getCurrentSearchView: function(view){
+
+        if(view == "youtube"){
+          return this.youtubeView;
+        }
+        else if(view == "google"){
+          return this.googleView;
+        }
+
       }
 
     });

@@ -12,7 +12,8 @@
     "underscore": "~1.5.2",
     "hbs": "~2.4.0",
     "express": "~3.x.x",
-	  "socket.io": "~0.9.x"
+    "socket.io": "~0.9.x",
+	  "twitter-bootstrap": "~2.1.1"
   },
   "engines": {
     "node": "0.10.x",

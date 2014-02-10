@@ -38,6 +38,17 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
             ss.emit('controlling', data.action);
         }
     });
+    socket.on("send-data", function(data) {
+            console.log("key send: ", data.key );
+            ss.emit('controlling-data', data.key);
+        
+    });
+
+    socket.on("modal-control", function(data) {
+            console.log("modal action: ",data.action);
+            console.log("modal data: ",data.data);
+            ss.emit('search-bar-control', data);
+    });
 
  });
 
