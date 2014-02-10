@@ -26,7 +26,6 @@ define([ 'jquery','underscore', 'text!templates/searchBar.html', 'backbone'], fu
 
       submitSearchData: function(){
 
-        var data = $('#searchBar').val();
 
         this.trigger('onSearchSubmit');
 

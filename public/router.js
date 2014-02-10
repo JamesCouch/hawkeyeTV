@@ -77,6 +77,8 @@ define(
 
         });
 
+
+
         this.views = [];
         this.$body = $("body");
         this.$header = $("header");
@@ -90,7 +92,7 @@ define(
         this.headerView.$el.hide();
         this.$header.prepend(this.headerView.render().$el);
 
-        this.youtubeView = new YoutubeView();
+        this.youtubeView = new YoutubeView({socket: this.socket});
         this.youtubeView.$el.hide();
         this.$body.prepend(this.youtubeView.render().$el);
         this.views.push(this.youtubeView);
@@ -172,6 +174,7 @@ define(
         $('#myModal').modal('hide');
         this.remoteSocket.emit('modal-control',{action: 'submit', data: data, view: this.currentSearchBarView});
         var currentView = this.getCurrentSearchView(this.currentSearchBarView);
+        currentView.newSearch(data);
         this.showOnly(currentView);
 
       },

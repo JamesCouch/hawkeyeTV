@@ -6,13 +6,17 @@ require.config({
     baseUrl: '/',
 
     paths: {
+        'util'                : 'assets/lib/util',
         'jquery'              : 'assets/lib/jquery',
         'underscore'          : 'assets/lib/underscore',         
         'backbone'            : 'assets/lib/backbone',
         'bootstrap'           : 'assets/vendor/bootstrap/js/bootstrap',
         'text'                : 'assets/lib/text',
         'parsley'             : 'assets/lib/parsley',
-        'socket'              : '/socket.io/socket.io'
+        'socket'              : 'socket.io/socket.io',
+        'Mustache'            : 'assets/lib/mustache',
+        'touchswipe'          : 'assets/lib/jquery.touchSwipe',
+        'scrollTo'          : 'assets/lib/jquery.scrollTo'
     },
 
     shim: {

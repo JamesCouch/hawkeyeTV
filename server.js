@@ -50,6 +50,12 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
             ss.emit('search-bar-control', data);
     });
 
+    socket.on("swipe", function(data) {
+            console.log("direction: ",data.direction);
+            console.log("distance: ",data.distance);
+            ss.emit('swipe-control', data);
+    });
+
  });
 
 // Create our profiles table if it doesn't exist

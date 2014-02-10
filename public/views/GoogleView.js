@@ -1,5 +1,5 @@
 
-define([ 'jquery','underscore', 'text!templates/google.html', 'backbone'], function($, _, GTpl,Backbone) {
+define([ 'jquery','underscore', 'text!templates/google.html', 'backbone','Mustache'], function($, _, GTpl,Backbone,Mustache) {
     'use strict';
 
     var GoogleView = Backbone.View.extend({
