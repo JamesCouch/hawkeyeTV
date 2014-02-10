@@ -37,7 +37,7 @@ define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainM
       },
       
       render: function (state) {
-        if (state == "tv"){
+        if (state == "screen"){
           this.$el.html(this.template());
           this.timeView = new TimeView();
           this.forecastView = new ForecastView();
