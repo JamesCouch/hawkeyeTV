@@ -29,7 +29,7 @@ define(
       initialize: function(options) {
 
         var _this = this;
-        this.remoteSocket = io.connect('http://192.168.1.9:3000');
+        this.remoteSocket = io.connect('http://archetype.local:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
 
         this.isMobile = this.checkForMobile();
@@ -47,7 +47,6 @@ define(
           this.socket.on('connect', function(data){
             _this.socket.emit('screen');
           });
-
         }
 
         this.socket.on('controlling', function(data){
@@ -56,28 +55,20 @@ define(
 
         this.socket.on('controlling-data', function(data){
           $('#searchBar').val(data);
-
         });
 
         this.socket.on('search-bar-control', function(data){
-
           if(data.action == "close"){
             $('#myModal').modal('hide');
           }
           else if(data.action == "submit"){
             $('#myModal').modal('hide');
 
-
             var currentView = _this.getCurrentSearchView(data.view);
             _this.showOnly(currentView);
             currentView.newSearch(data.data);
-
           }
-            
-
         });
-
-
 
         this.views = [];
         this.$body = $("body");
@@ -109,8 +100,6 @@ define(
         this.$body.prepend(this.searchBarView.render().$el);
         this.views.push(this.searchBarView);
 
-
-
         this.settingsView = new SettingsView();
         this.settingsView.$el.hide();
         this.$body.prepend(this.settingsView.render().$el);
@@ -118,24 +107,17 @@ define(
 
         this.$body.prepend(this.mainView.render(this.state).$el);
 
-
         $('#searchBar').bind('input', function(e) {
             var searchBarData = $('#searchBar').val();
             _this.sendSearchBoxData(searchBarData);
         });
-
       },
 
       sendSearchBoxData: function(data) {
-
         this.remoteSocket.emit('send-data',{key: data});
-
       },
 
-
       onRenderSelection: function(chosenSelection) {
-
-
         if(chosenSelection == "youtube"){
           this.currentSearchBarView = "youtube";
           this.showSearchBar(chosenSelection);
@@ -144,29 +126,20 @@ define(
           this.currentSearchBarView = "google";
           this.showSearchBar(chosenSelection);
         }
-
         if(chosenSelection == "settings"){
           this.showOnly(this.settingsView);
         }
-
-
       },
 
-
       showSearchBar: function(chosenSelection) {
-
         this.searchBarView.changeHeader(chosenSelection);
         this.searchBarView.$el.show();
         $('#myModal').modal('show');
-
       },
 
       closeSearchBar: function(){
-
         $('#myModal').modal('hide');
         this.remoteSocket.emit('modal-control',{action: 'close'});
-
-
       },
 
       submitSearchBar: function(data) {
@@ -176,7 +149,6 @@ define(
         var currentView = this.getCurrentSearchView(this.currentSearchBarView);
         currentView.newSearch(data);
         this.showOnly(currentView);
-
       },
 
       onGoBack: function() {
@@ -203,7 +175,6 @@ define(
       },
 
       checkForMobile: function() {
-
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
          return true;
         } else {
@@ -212,16 +183,13 @@ define(
       },
 
       getCurrentSearchView: function(view){
-
         if(view == "youtube"){
           return this.youtubeView;
         }
         else if(view == "google"){
           return this.googleView;
         }
-
       }
-
     });
 
     return WebRouter;
