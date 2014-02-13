@@ -29,7 +29,7 @@ define(
       initialize: function(options) {
 
         var _this = this;
-        this.remoteSocket = io.connect('http://192.168.1.9:3000');
+        this.remoteSocket = io.connect('http://172.23.72.244:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
 
         this.isMobile = this.checkForMobile();
@@ -92,7 +92,7 @@ define(
         this.headerView.$el.hide();
         this.$header.prepend(this.headerView.render().$el);
 
-        this.youtubeView = new YoutubeView({socket: this.socket});
+        this.youtubeView = new YoutubeView({socket: this.socket, mobile: this.isMobile});
         this.youtubeView.$el.hide();
         this.$body.prepend(this.youtubeView.render().$el);
         this.views.push(this.youtubeView);

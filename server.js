@@ -55,6 +55,15 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
             console.log("distance: ",data.distance);
             ss.emit('swipe-control', data);
     });
+    socket.on("play-youtube", function(data) {
+            console.log("Video ID: ",data.id);
+            ss.emit('youtube-control', data);
+    });
+
+    socket.on("toggle-youtube", function(data) {
+            ss.emit('youtube-toggle-control', data);
+    });
+
 
  });
 

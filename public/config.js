@@ -16,7 +16,8 @@ require.config({
         'socket'              : 'socket.io/socket.io',
         'Mustache'            : 'assets/lib/mustache',
         'touchswipe'          : 'assets/lib/jquery.touchSwipe',
-        'scrollTo'          : 'assets/lib/jquery.scrollTo'
+        'yt'                  : 'assets/lib/yt',
+        'scrollTo'            : 'assets/lib/jquery.scrollTo'
     },
 
     shim: {

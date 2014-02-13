@@ -116,6 +116,14 @@ p{
 	width: 700px;
 }
 
+img.tile-image {
+	/*margin-left: 60px;*/
+}
+
+ul.video {
+	margin-top: 50px;
+}
+
 
 @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-device-width: 480px){
   /* some css here */
@@ -129,7 +137,9 @@ p{
 	  background-size: cover;
 	}
 
-
+	img.tile-image {
+		width: 200px;
+	}
 
 	#mobile-logo {
 		font-family: 'Audiowide';
