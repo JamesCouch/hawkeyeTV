@@ -32,8 +32,6 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
 
         });
 
-
-
         this.socket.on('youtube-control', function(data){
 
            _this.$el.html(_this.templatePlay());

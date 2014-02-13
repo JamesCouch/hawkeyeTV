@@ -127,8 +127,21 @@ define(
           this.showSearchBar(chosenSelection);
         }
         if(chosenSelection == "settings"){
-          this.showOnly(this.settingsView);
+          // this.showOnly(this.settingsView);
+          this.showSettingsModal();
         }
+      },
+
+      showSettingsModal: function() {
+
+        this.settingsView.$el.show();
+        $('#settingsModal').modal('show');
+
+
+      },
+
+      closeSettingsModal: function() {
+
       },
 
       showSearchBar: function(chosenSelection) {
