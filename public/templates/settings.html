@@ -1,0 +1,37 @@
+<div id="signup-box" class="col-md-4 well well-lg text-center">
+    <div class="height:50px;">
+        <ul id="signup-errors" class="parsley-error-list"></ul>
+    </div>
+    <form id="signup-form" class="form" data-validate="parsley">
+        <fieldset>
+            <div class="control-group">
+                <div class="controls">
+                    <input class="input-medium" type="password" id="zipcode-input" 
+                    placeholder="5 digit zipcode" name="zipcode" 
+                    value="" data-required="true" data-notblank="true" data-rangelength="[5]">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input class="input-medium" type="password" id="signup-password-confirm-input" placeholder="Confirm Password" name="user_password" value="" 
+                    data-required="true" data-notblank="true" data-rangelength="[5,25]" 
+                    data-equalto="#signup-password-input">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="btn-group" data-toggle="buttons-radio">
+                       <button type="button" name="theme" class="btn btn-primary btn-sm">Default</button>
+                       <button type="button" name="theme" class="btn btn-primary btn-sm">CSS 1</button>
+                       <button type="button" name="theme" class="btn btn-primary btn-sm">CSS 2</button>
+                    </div>
+                </div>
+            </div>
+            <br>    
+            <a href="#" id="save-btn" class="btn btn-primary btn-sm" data-bypass>Save</a> 
+            <a href="#" id="close-btn" class="btn btn-primary btn-sm" data-bypass>Close</a>  
+        </fieldset>
+    </form>
+</div>

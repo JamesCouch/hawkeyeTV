@@ -96,8 +96,6 @@ define(
         if(chosenSelection == "settings"){
           this.showOnly(this.settingsView);
         }
-
-
       },
 
       onGoBack: function() {
