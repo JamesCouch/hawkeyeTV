@@ -1,5 +1,5 @@
 
-define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainMobile.html', 'backbone', 'views/TimeView', 'views/ForecastView','socket'], function($, _, MainTpl,MobileMainTpl,Backbone, TimeView, ForecastView,socket) {
+define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainMobile.html', 'backbone', 'views/TimeView', 'views/ForecastView','socket','views/twitterView'], function($, _, MainTpl,MobileMainTpl,Backbone, TimeView, ForecastView,socket,TwitterView) {
     'use strict';
 
     var MainView = Backbone.View.extend({
@@ -39,8 +39,10 @@ define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainM
       render: function (state) {
         if (state == "tv"){
           this.$el.html(this.template());
+          this.twitterView = new TwitterView();
           this.timeView = new TimeView();
           this.forecastView = new ForecastView();
+          this.twitterView.setElement(this.$('.tw-feed')).render();
           this.timeView.setElement(this.$('#time')).render();
           this.forecastView.setElement(this.$('#forecast')).render();
         }

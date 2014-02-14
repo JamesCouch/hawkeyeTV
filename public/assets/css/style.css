@@ -207,4 +207,11 @@ ul li{
 	display: inline;
 }
 
+.twitter-timeline {
+	position:absolute;
+	right:0px;
+	top: 230px;
+
+}
+
 
