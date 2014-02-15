@@ -19,16 +19,22 @@ define([
         },
 
         events: {
-            'click #save-btn'         : 'saveSettings'
+            'click #save-btn'         : 'saveSettings',
+            'click #theme'            : 'toggleActive',
+            'click #fb'               : 'toggleActive',
+            'click #close-btn'        : 'closeSettings'
         },
 
         saveSettings: function(evt){
             if(evt) evt.preventDefault();
-
             if(this.$("#settings-form").parsley('validate')){
-                app.session.login({
-                    username: this.$("#login-username-input").val(),
-                    password: this.$("#login-password-input").val()
+                app.settings.update({
+                    zipcode: this.$("#zipcode-input").val() || app.settings.profile.details.zipcode,
+                    theme: this.$('.btn.theme.active').text() || app.settings.profile.details.theme,
+                    facebook: this.$('.btn.fb.active').text() || app.settings.profile.details.facebook,
+                    twitter: this.$('#twitter-input').val() || app.settings.profile.details.twitter,
+                    news: this.$('#news-input').val() || app.settings.profile.details.news,
+                    id: 1
                 }, {
                     success: function(mod, res){
                         if(DEBUG) console.log(mod, res);
@@ -42,6 +48,22 @@ define([
                 // Invalid clientside validations thru parsley
                 if(DEBUG) console.log("Did not pass clientside validation");
             }
+        },
+
+        toggleActive: function(evt) {
+            if (evt.currentTarget.id == "theme") {
+                this.$(".btn.theme").removeClass('active');
+                this.$(evt.currentTarget).toggleClass('active');
+            }
+            else if (evt.currentTarget.id == "fb") {
+                console.log('IN');
+                this.$(".btn.fb").removeClass('active');
+                this.$(evt.currentTarget).toggleClass('active');
+            }
+        },
+
+        closeSettings: function() {
+
         },
 
         render: function () {

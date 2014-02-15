@@ -24,7 +24,7 @@ define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainM
         this.selection = $(event.target).attr('id');
         this.socket.emit('control',{action: this.selection});
         console.log("selection click: ", this.selection);
-        this.trigger('renderSelection', this.selection);
+        //this.trigger('renderSelection', this.selection);
       },
 
       mouseovercard: function(event) {

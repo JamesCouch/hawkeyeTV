@@ -27,7 +27,7 @@ define(
       initialize: function(options) {
 
         var _this = this;
-        this.remoteSocket = io.connect('http://172.23.103.117:3000');
+        this.remoteSocket = io.connect('http://archetype.local:3000');
         this.screenSocket = io.connect('http://archetype.local:3000');
 
         this.isMobile = this.checkForMobile();

@@ -42,7 +42,7 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
  });
 
 // Create our profiles table if it doesn't exist
-db.run("CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY, zipcode TEXT, facebook TEXT, twitter TEXT, news TEXT)");
+db.run("CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY, zipcode TEXT, theme TEXT, facebook TEXT, twitter TEXT, news TEXT)");
 
 // Allow node to be run with proxy passing
 app.enable('trust proxy');
@@ -89,7 +89,7 @@ db.serialize(function(){
         if(profile){
             console.log("DB has first record");  
         } else {  
-            db.run("INSERT INTO profiles (zipcode, facebook, twitter, news) VALUES (?,?,?,?)", [ "52242", "disabled", "disabled", "disabled"], function(err){ 
+            db.run("INSERT INTO profiles (zipcode, theme, facebook, twitter, news) VALUES (?,?,?,?,?)", [ "52242", "Default", "Disabled", "Disabled", "Disabled"], function(err){ 
                 if(err){
                     console.log(err);
                 }
@@ -110,7 +110,8 @@ app.post("/api/auth/open", function(req, res){
 
 app.post("/api/auth/update", function(req, res){
     db.serialize(function(){
-        db.run("UPDATE profiles SET zipcode = ?, facebook = ?, twitter = ?, news = ? WHERE id = ?", [ req.body.zipcode, req.body.facebook, req.body.twitter, req.body.news, req.body.id ], function(err){
+        console.log(req.body);
+        db.run("UPDATE profiles SET zipcode = ?, theme =?, facebook = ?, twitter = ?, news = ? WHERE id = ?", [ req.body.zipcode, req.body.theme, req.body.facebook, req.body.twitter, req.body.news, req.body.id ], function(err){
             if(err) {
                 console.log("Updating the user failed");
             } else {
