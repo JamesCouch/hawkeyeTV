@@ -1,42 +1,21 @@
 {
-  "author": {
-    "name": "Joyent",
-    "url": "http://www.joyent.com"
-  },
-  "name": "util",
-  "description": "Node.JS util module",
-  "keywords": [
-    "util"
-  ],
-  "version": "0.10.3",
-  "homepage": "https://github.com/defunctzombie/node-util",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/defunctzombie/node-util"
-  },
-  "main": "./util.js",
-  "scripts": {
-    "test": "node test/node/*.js && zuul test/browser/*.js"
+  "name": "twitter-js-client",
+  "description": "Twitter JS Client",
+  "version": "0.0.5",
+  "private": false,
+  "directories": {
+    "lib": "./lib"
   },
   "dependencies": {
-    "inherits": "2.0.1"
+    "qs": "*",
+    "oauth": "*"
   },
-  "license": "MIT",
-  "devDependencies": {
-    "zuul": "~1.0.9"
-  },
-  "browser": {
-    "./support/isBuffer.js": "./support/isBufferBrowser.js"
-  },
-  "readme": "# util\n\n[![Build Status](https://travis-ci.org/defunctzombie/node-util.png?branch=master)](https://travis-ci.org/defunctzombie/node-util)\n\nnode.js [util](http://nodejs.org/api/util.html) module as a module\n\n## install via [npm](npmjs.org)\n\n```shell\nnpm install util\n```\n\n## browser support\n\nThis module also works in modern browsers. If you need legacy browser support you will need to polyfill ES5 features.\n",
+  "readme": "## Description\nA twitter client written in Javascript\n\n## Usage\n\n    var twitter = new Twitter(config);\n\ttwitter.getUserTimeline();\n\ttwitter.getMentionsTimeline();\n\ttwitter.getHomeTimeline();\n\ttwitter.getReTweetsOfMe();\n\ttwitter.getTweet();",
   "readmeFilename": "README.md",
-  "bugs": {
-    "url": "https://github.com/defunctzombie/node-util/issues"
-  },
-  "_id": "util@0.10.3",
+  "_id": "twitter-js-client@0.0.5",
   "dist": {
-    "shasum": "7afb1afe50805246489e3db7fe0ed379336ac0f9"
+    "shasum": "3829822ce9a60529bd9267567069bad9da201b5a"
   },
-  "_from": "util@~*",
-  "_resolved": "https://registry.npmjs.org/util/-/util-0.10.3.tgz"
+  "_from": "twitter-js-client@~*",
+  "_resolved": "https://registry.npmjs.org/twitter-js-client/-/twitter-js-client-0.0.5.tgz"
 }

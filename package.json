@@ -15,7 +15,10 @@
     "socket.io": "~0.9.x",
     "twitter-bootstrap": "~2.1.1",
     "mu2": "~*",
-	  "util": "~*"
+    "util": "~*",
+    "passport": "~*",
+    "passport-twitter": "~*",
+	  "twitter-js-client": "~*"
   },
   "engines": {
     "node": "0.10.x",

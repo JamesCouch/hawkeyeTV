@@ -10,6 +10,7 @@ define(
     'backbone',
     'socket',
     'bootstrap',
+    'twitter',
     
     'views/MainView',
     'views/YoutubeView',
@@ -18,7 +19,7 @@ define(
     'views/SettingsView',
     'views/SearchBarView',
 
-], function(app, $, _, Backbone, Socket, bootstrap, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView){
+], function(app, $, _, Backbone, Socket, bootstrap,twitter, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView){
 
     var WebRouter = Backbone.Router.extend({
 
