@@ -28,7 +28,7 @@ define(
 
       initialize: function(options) {
 
-        this.remoteSocket = io.connect('http://172.23.72.244:3000');
+        this.remoteSocket = io.connect('http://192.168.1.7:3000');
 
         this.screenSocket = io.connect('http://127.0.0.1:3000');
 
@@ -78,32 +78,24 @@ define(
         this.mainView.on('renderSelection',this.onRenderSelection,this);
         this.views.push(this.mainView);
 
-        this.headerView = new HeaderView();
-        this.headerView.on('goBack', this.onGoBack,this);
-        this.headerView.$el.hide();
-        this.$header.prepend(this.headerView.render().$el);
+        // this.headerView = new HeaderView();
+        // this.headerView.on('goBack', this.onGoBack,this);
+        // this.headerView.$el.hide();
+        // this.$header.prepend(this.headerView.render().$el);
 
-        this.youtubeView = new YoutubeView({socket: this.socket, mobile: this.isMobile});
-        this.youtubeView.$el.hide();
-        this.$body.prepend(this.youtubeView.render().$el);
-        this.views.push(this.youtubeView);
 
-        this.googleView = new GoogleView();
-        this.googleView.$el.hide();
-        this.$body.prepend(this.googleView.render().$el);
-        this.views.push(this.googleView);
 
-        this.searchBarView = new SearchBarView({socket: this.socket});
-        this.searchBarView.on('onCloseSearchBar',this.closeSearchBar,this);
-        this.searchBarView.on('onSearchSubmit',this.submitSearchBar,this);
-        this.searchBarView.$el.hide();
-        this.$body.prepend(this.searchBarView.render().$el);
-        this.views.push(this.searchBarView);
+        // this.googleView = new GoogleView();
+        // this.googleView.$el.hide();
+        // this.$body.prepend(this.googleView.render().$el);
+        // this.views.push(this.googleView);
 
-        this.settingsView = new SettingsView();
-        this.settingsView.$el.hide();
-        this.$body.prepend(this.settingsView.render().$el);
-        this.views.push(this.settingsView);
+ 
+
+        // this.settingsView = new SettingsView();
+        // this.settingsView.$el.hide();
+        // this.$body.prepend(this.settingsView.render().$el);
+        // this.views.push(this.settingsView);
 
         this.$body.prepend(this.mainView.render(this.state).$el);
 
@@ -119,6 +111,17 @@ define(
 
       onRenderSelection: function(chosenSelection) {
         if(chosenSelection == "youtube"){
+           this.youtubeView = new YoutubeView({socket: this.socket, mobile: this.isMobile});
+           this.youtubeView.$el.hide();
+           this.$body.prepend(this.youtubeView.render().$el);
+           this.views.push(this.youtubeView);
+           this.searchBarView = new SearchBarView({socket: this.socket});
+           this.searchBarView.on('onCloseSearchBar',this.closeSearchBar,this);
+           this.searchBarView.on('onSearchSubmit',this.submitSearchBar,this);
+           this.searchBarView.$el.hide();
+           this.$body.prepend(this.searchBarView.render().$el);
+           this.views.push(this.searchBarView);
+
           this.currentSearchBarView = "youtube";
           this.showSearchBar(chosenSelection);
         }
@@ -179,7 +182,6 @@ define(
             if(view == this.mainView){
               this.headerView.$el.hide();
             }
-            else{ this.headerView.$el.show(); }
             view.$el.show();
           }
           this.currentView = view;
