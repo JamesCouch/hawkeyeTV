@@ -7,7 +7,7 @@ require.config({
 
     paths: {
         'util'                : 'assets/lib/util',
-        'jquery'              : 'assets/lib/jquery',
+        'jquery'              : 'assets/lib/jquery.min',
         'underscore'          : 'assets/lib/underscore',         
         'backbone'            : 'assets/lib/backbone',
         'bootstrap'           : 'assets/vendor/bootstrap/js/bootstrap',
