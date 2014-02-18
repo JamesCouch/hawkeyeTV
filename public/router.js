@@ -134,7 +134,8 @@ define(
           }
           else {
             var screenSelector = $('#chrome');
-            this.changeHover(screenSelector);
+            this.mainView.mouseovercard(screenSelector);
+            
 
           }
         
