@@ -52,18 +52,19 @@ define([
 
         toggleActive: function(evt) {
             if (evt.currentTarget.id == "theme") {
-                this.$(".btn.theme").removeClass('active');
+                console.log("theme");
+                this.$("#theme.btn.theme.active").removeClass('active');
                 this.$(evt.currentTarget).toggleClass('active');
             }
             else if (evt.currentTarget.id == "fb") {
-                console.log('IN');
-                this.$(".btn.fb").removeClass('active');
+                console.log("fb");
+                this.$("#fb.btn.fb.active").removeClass('active');
                 this.$(evt.currentTarget).toggleClass('active');
             }
         },
 
         closeSettings: function() {
-
+            this.$("#settingsModal").modal('hide');
         },
 
         render: function () {

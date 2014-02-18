@@ -12,6 +12,25 @@ var express = require('express'),
     app = express(),
     server = http.createServer(app).listen( process.env.PORT || config.port);
 
+
+
+   var passport = require('passport')
+     , TwitterStrategy = require('passport-twitter').Strategy;
+
+     passport.use(new TwitterStrategy({
+         consumerKey: 'hLYcPQ1m09bo29iTDDBeQ',
+         consumerSecret: 'vwyZeWxp8FKxzsWyIQsgWscHL9gO5Z9t5uDiAflCXk',
+         callbackURL: "twitter/callback"
+       },
+       function(token, tokenSecret, profile, done) {
+           console.log("token: ",token);
+           console.log("tokenSecret: ",tokenSecret);
+
+
+           done(null);
+       }
+     ));
+
 // Initialize sqlite and create our db if it doesnt exist
 var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
@@ -68,7 +87,7 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
  });
 
 // Create our profiles table if it doesn't exist
-db.run("CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY, zipcode TEXT, facebook TEXT, twitter TEXT, news TEXT, ip_addr TEXT)");
+db.run("CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY, zipcode TEXT, facebook TEXT, twitter TEXT, news TEXT, theme TEXT)");
 
 // Allow node to be run with proxy passing
 app.enable('trust proxy');
@@ -115,7 +134,8 @@ db.serialize(function(){
         if(profile){
             console.log("DB has first record");  
         } else {  
-            db.run("INSERT INTO profiles (zipcode, facebook, twitter, news, ip_addr) VALUES (?,?,?,?,?)", [ "52242", "disabled", "disabled", "disabled"], function(err){ 
+            db.run("INSERT INTO profiles (zipcode, facebook, twitter, news, theme) VALUES (?,?,?,?,?)", 
+                [ "52242", "Disabled", "Disabled", "Disabled", "Default"], function(err){ 
                 if(err){
                     console.log(err);
                 }
@@ -136,7 +156,8 @@ app.post("/api/auth/open", function(req, res){
 
 app.post("/api/auth/update", function(req, res){
     db.serialize(function(){
-        db.run("UPDATE profiles SET zipcode = ?, facebook = ?, twitter = ?, news = ?, ip_addr = ? WHERE id = ?", [ req.body.zipcode, req.body.facebook, req.body.twitter, req.body.news, req.body.id, app.ip_addr ], function(err){
+        db.run("UPDATE profiles SET zipcode = ?, facebook = ?, twitter = ?, news = ?, theme = ? WHERE id = ?", 
+            [ req.body.zipcode, req.body.facebook, req.body.twitter, req.body.news, req.body.theme, req.body.id ], function(err){
             if(err) {
                 console.log("Updating the user failed");
             } else {
@@ -151,6 +172,15 @@ app.post("/api/auth/update", function(req, res){
         });
     });
 });
+
+app.get('/auth/twitter', passport.authenticate('twitter'));
+
+
+app.get('/auth/twitter/callback', 
+  passport.authenticate('twitter', { successRedirect: '/',
+                                     failureRedirect: '/' }));
+
+
 
 // Close the db connection on process exit 
 // (should already happen, but to be safe)

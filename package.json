@@ -15,7 +15,7 @@
     "socket.io": "~0.9.x",
     "twitter-bootstrap": "~2.1.1",
     "mu2": "~*",
-	  "util": "~*"
+	"util": "~*"
   },
   "engines": {
     "node": "0.10.x",
