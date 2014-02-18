@@ -15,28 +15,13 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
         this.isMobile = options.mobile;
         var _this = this;
 
-        this.socket.on('swipe-control', function(data){
-          
-          if(data.direction == "up"){
-
-            var string = "+="+data.distance+"px";
-            console.log("scrolled: ", string);
-            $.scrollTo(string,800);
-
-          }
-
-          else if(data.direction == "down"){
-
-          }
-
-
-        });
-
         this.socket.on('youtube-control', function(data){
+
+          console.log("hey");
 
            _this.$el.html(_this.templatePlay());
 
-           _this.playVideo(data.id);
+           // _this.playVideo(data.id);
 
         });
 
@@ -53,8 +38,6 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
 
         });
 
-
-
       },
 
       events: {
@@ -64,58 +47,58 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
 
       playVideo: function(id) {
 
-              var width = $(window).width();
-              var height = $(window).height();
+      //         var width = $(window).width();
+      //         var height = $(window).height();
 
-              this.videoState = true;
+      //         this.videoState = true;
 
-              var _this = this;
+      //         var _this = this;
 
-              this.player = {
-                  loadPlayer: function() {
-                      new YT.Player('player', {
-                          videoId: id,
-                          width: width,
-                          height: height,
-                          playerVars: {
-                              playsinline: 1,
-                              autoplay: 0,
-                              controls: 0,
-                              rel: 0,
-                              showInfo: 0
-                          },
-                          events: {
-                            'onReady': onPlayerReady
-                            // 'onStateChange': onPlayerStateChange
-                          }
-                      });
-                  }
-              };
+      //         this.player = {
+      //             loadPlayer: function() {
+      //                 new YT.Player('player', {
+      //                     videoId: id,
+      //                     width: width,
+      //                     height: height,
+      //                     playerVars: {
+      //                         playsinline: 1,
+      //                         autoplay: 0,
+      //                         controls: 0,
+      //                         rel: 0,
+      //                         showInfo: 0
+      //                     },
+      //                     events: {
+      //                       'onReady': onPlayerReady
+      //                       // 'onStateChange': onPlayerStateChange
+      //                     }
+      //                 });
+      //             }
+      //         };
 
-              this.player.loadPlayer();
+      //         this.player.loadPlayer();
 
 
-        // 4. The API will call this function when the video player is ready.
-              function onPlayerReady(event) {
-                var obj = event.target;
-                event.target.playVideo();
-                 console.log(event.target);
-                 return event.object;
-              }
+      //   // 4. The API will call this function when the video player is ready.
+      //         function onPlayerReady(event) {
+      //           var obj = event.target;
+      //           event.target.playVideo();
+      //            console.log(event.target);
+      //            return event.object;
+      //         }
 
-              // 5. The API calls this function when the player's state changes.
-              //    The function indicates that when playing a video (state=1),
-              //    the player should play for six seconds and then stop.
-              // var done = false;
-              // function onPlayerStateChange(event) {
-              //   if (event.data == YT.PlayerState.PLAYING && !done) {
-              //     setTimeout(stopVideo, 6000);
-              //     done = true;
-              //   }
-              // }
-              // function stopVideo() {
-              //   player.stopVideo();
-              // }
+      //         // 5. The API calls this function when the player's state changes.
+      //         //    The function indicates that when playing a video (state=1),
+      //         //    the player should play for six seconds and then stop.
+      //         // var done = false;
+      //         // function onPlayerStateChange(event) {
+      //         //   if (event.data == YT.PlayerState.PLAYING && !done) {
+      //         //     setTimeout(stopVideo, 6000);
+      //         //     done = true;
+      //         //   }
+      //         // }
+      //         // function stopVideo() {
+      //         //   player.stopVideo();
+      //         // }
 
       },
 
@@ -195,17 +178,6 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
         });
 
      
-              $(".youtubeView").swipe( {
-                allowPageScroll:"auto",
-                swipe:function(event, direction, distance, duration, fingerCount) {
-
-                _this.socket.emit('swipe',{direction: direction, distance: distance});
-
-                },
-                threshold:0,
-                fingers:'all'
-              });
-
 
       },
 

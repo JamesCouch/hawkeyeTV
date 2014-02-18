@@ -33,6 +33,8 @@ define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainM
         } else {
           $('.block').removeClass('selected');
           $(event.currentTarget).parent().toggleClass('selected');
+          var parent = event.parent();
+          parent.addClass('selected');
         }
       },
       
