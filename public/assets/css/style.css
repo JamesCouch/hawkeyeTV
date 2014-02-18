@@ -46,12 +46,12 @@ p{
 }
 
 .forecast-block {
-	width: 500px;
-	height: 220px;
+	width: 600px;
+	height: 270px;
 	position: absolute;
-	margin-top: -25px;
+	margin-top: -35px;
 	right: 25px;
-	border-bottom: 2px solid;
+	/*border-bottom: 2px solid;*/
 }
 
 #time {

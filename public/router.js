@@ -30,24 +30,21 @@ define(
 
         this.remoteSocket = io.connect('http://archetype.local:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
-
         this.isMobile = this.checkForMobile();
         var _this = this;
+        
         if(this.isMobile){
           this.socket = this.remoteSocket;
-
           this.state = "mobile";
           this.remoteSocket.emit('remote');
         }
         else {
           this.socket = this.screenSocket;
           this.state = "tv";
-
           this.socket.on('connect', function(data){
             _this.socket.emit('screen');
           });
         }
-
 
         //Socket listeners for the screen
         //may move these to their respective views
@@ -64,10 +61,7 @@ define(
 
         //handles recieving youtube player commands
         this.socket.on('youtube-control', function(data){
-
-
         });
-
 
         this.views = [];
         this.$body = $("body");
@@ -76,6 +70,11 @@ define(
         this.mainView = new MainView({socket: this.socket, mobile: this.isMobile });
         this.mainView.on('renderSelection',this.onRenderSelection,this);
         this.views.push(this.mainView);
+
+        this.settingsView = new SettingsView();
+        this.settingsView.$el.hide();
+        this.$body.prepend(this.settingsView.render().$el);
+        this.views.push(this.settingsView);
 
         this.$body.prepend(this.mainView.render(this.state).$el);
 
@@ -134,26 +133,18 @@ define(
           else {
             var screenSelector = $('#chrome');
             this.mainView.mouseovercard(screenSelector);
-            
-
           }
         
         }
         if(chosenSelection == "settings"){
           this.showSettingsModal();
         }
-
-        
-
-
       },
 
       showSettingsModal: function() {
 
         this.settingsView.$el.show();
         $('#settingsModal').modal('show');
-
-
       },
 
       closeSettingsModal: function() {
@@ -180,7 +171,7 @@ define(
           var currentView = this.getCurrentSearchView(this.currentSearchBarView);
           currentView.newSearch(data);
           this.showOnly(currentView);
-      }
+        }
       },
 
       onGoBack: function() {
@@ -213,7 +204,6 @@ define(
           return false;
         }
       },
-
 
       getCurrentSearchView: function(view){
         if(view == "youtube"){

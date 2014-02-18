@@ -1,18 +1,56 @@
-<!-- Modal -->
-<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Settings Configuration</h4>
-      </div>
-      <div class="modal-body">
-        Settings:
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal">Close</button>
-        <button type="button" class="btn btn-primary" id="changeMe" >Save</button>
-      </div>
+<!--
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="settings-title">Settings</h4>
+            </div>
+        <div class="modal-body"> -->
+        <div class="height:50px;">
+            <ul id="settings-errors" class="parsley-error-list"></ul>
+        </div>
+        <form id="settings-form" class="form" data-validate="parsley">
+            <fieldset>
+                <div class="control-group">
+                    <div class="controls">
+                        <input class="input-medium" id="zipcode-input" 
+                        placeholder="5 digit zipcode" name="zipcode" 
+                        value="" data-required="true" data-notblank="true" data-rangelength="[5,5]">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="control-group">Theme
+                    <div class="controls">
+                        <div class="btn-group" id="theme-input" data-toggle="buttons-radio">
+                           <button type="button" id="theme" class="btn theme btn-primary btn-sm">Default</button>
+                           <button type="button" id="theme" class="btn theme btn-primary btn-sm">Slate</button>
+                           <button type="button" id="theme"  class="btn theme btn-primary btn-sm">Raspbian</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">Facebook Feed
+                    <div class="controls">
+                        <div class="btn-group" id="facebook-input" data-toggle="buttons-radio">
+                           <button type="button" id="fb" class="btn fb btn-primary btn-sm">Enabled</button>
+                           <button type="button" id="fb" class="btn fb btn-primary btn-sm">Disabled</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">Twitter Feed
+                    <div class="controls">
+                        <div class="btn-group" id="twitter-input" data-toggle="buttons-radio">
+                           <button type="button" id="tw" class="btn tw btn-primary btn-sm">Enabled</button>
+                           <button type="button" id="tw" class="btn tw btn-primary btn-sm">Disabled</button>
+                        </div>
+                    </div>
+                </div>
+                <br>    
+                <a href="#" id="save-btn" class="btn btn-primary btn-sm" data-bypass>Save</a> 
+                <a href="#" id="close-btn" class="btn btn-primary btn-sm" data-bypass>Close</a>  
+            </fieldset>
+        </form>
+<!--         </div>
+        </div>
     </div>
   </div>
-</div>
+</div> -->

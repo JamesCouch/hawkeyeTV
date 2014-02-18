@@ -11,10 +11,10 @@ define([
             this.details = { 
                 id: "0", 
                 zipcode: "52242", 
-                facebook: "disabled", 
-                twitter: "disabled",
-                news: "disabled",
-                ip_addr: "192.168.1.10"
+                theme: "Default",
+                facebook: "Disabled", 
+                twitter: "Disabled",
+                news: "Disabled",
             };    
         },
 
@@ -30,4 +30,3 @@ define([
     
     return ProfileModel;
 });
-

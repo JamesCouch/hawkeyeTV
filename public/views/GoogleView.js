@@ -8,10 +8,6 @@ define([ 'jquery','underscore', 'text!templates/google.html', 'backbone','Mustac
 
       initialize: function(options) {
         _.bindAll(this);
-
-        
-
-
       },
       newSearch: function(data) {
         $('.searchInput').text("Your google search is: " + data);

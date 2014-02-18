@@ -8,34 +8,24 @@ define([ 'jquery','underscore', 'text!templates/searchBar.html', 'backbone'], fu
 
       initialize: function(options) {
         _.bindAll(this);
-
-
-
       },
 
       events: {
             "click #closeModal"            : "closeSearchBar",
-            "click #submitSearchData"            : "submitSearchData"
+            "click #submitSearchData"      : "submitSearchData"
       },
 
       closeSearchBar: function() {
-
         this.trigger('onCloseSearchBar');
-
       },
 
       submitSearchData: function(){
-
-
         this.trigger('onSearchSubmit');
-
       },
       
       render: function () {
-
-
         this.$el.html(this.template());
-            return this;
+        return this;
       },
 
       changeHeader: function(header) {
@@ -47,9 +37,8 @@ define([ 'jquery','underscore', 'text!templates/searchBar.html', 'backbone'], fu
           $('.modal-title').text("Google Search");
 
         }
-
       }
-
+      
     });
 
     return SearchBarView;
