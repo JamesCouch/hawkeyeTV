@@ -3,6 +3,7 @@ var express = require('express'),
     http = require('http'),
 
     config = require("./config"),
+    oauth = require("oauth"),
     bcrypt = require("bcrypt"),
     sqlite = require("sqlite3"),
     _ = require("underscore"),
@@ -11,6 +12,25 @@ var express = require('express'),
 
     app = express(),
     server = http.createServer(app).listen( process.env.PORT || config.port);
+
+
+
+   var passport = require('passport')
+     , TwitterStrategy = require('passport-twitter').Strategy;
+
+     passport.use(new TwitterStrategy({
+         consumerKey: 'hLYcPQ1m09bo29iTDDBeQ',
+         consumerSecret: 'vwyZeWxp8FKxzsWyIQsgWscHL9gO5Z9t5uDiAflCXk',
+         callbackURL: "twitter/callback"
+       },
+       function(token, tokenSecret, profile, done) {
+           console.log("token: ",token);
+           console.log("tokenSecret: ",tokenSecret);
+
+
+           done(null);
+       }
+     ));
 
 // Initialize sqlite and create our db if it doesnt exist
 var sqlite3 = require("sqlite3").verbose();
@@ -151,6 +171,15 @@ app.post("/api/auth/update", function(req, res){
         });
     });
 });
+
+app.get('/auth/twitter', passport.authenticate('twitter'));
+
+
+app.get('/auth/twitter/callback', 
+  passport.authenticate('twitter', { successRedirect: '/',
+                                     failureRedirect: '/' }));
+
+
 
 // Close the db connection on process exit 
 // (should already happen, but to be safe)

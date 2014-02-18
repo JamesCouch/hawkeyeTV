@@ -17,8 +17,9 @@ define(
     'views/HeaderView',
     'views/SettingsView',
     'views/SearchBarView',
+    'views/TwitterView',
 
-], function(app, $, _, Backbone, Socket, bootstrap, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView){
+], function(app, $, _, Backbone, Socket, bootstrap, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView,TwitterView){
 
     var WebRouter = Backbone.Router.extend({
 
@@ -77,7 +78,15 @@ define(
         this.mainView.on('renderSelection',this.onRenderSelection,this);
         this.views.push(this.mainView);
 
+
         this.$body.prepend(this.mainView.render(this.state).$el);
+
+        if(!this.isMobile){
+          this.$twitter = $('.tw-feed');
+          this.twitterView = new TwitterView();
+          this.twitterView.$el.show();
+          this.$twitter.append(this.twitterView.render().$el);
+        }
 
         $('#searchBar').bind('input', function(e) {
             var searchBarData = $('#searchBar').val();
