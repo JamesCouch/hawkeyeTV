@@ -38,7 +38,7 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
  var io = require('socket.io').listen(server);
  var views = ['chrome','youtube','settings'];
  io.set('log level', 1);
-
+ var ss;
  //Socket.io Server
  io.sockets.on('connection', function (socket) {
     
@@ -57,11 +57,11 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
             ss.emit('controlling', data.action);
         }
     });
-    socket.on("send-data", function(data) {
-            console.log("key send: ", data.key );
-            ss.emit('controlling-data', data.key);
+    // socket.on("send-data", function(data) {
+    //         console.log("key send: ", data.key );
+    //         ss.emit('controlling-data', data.key);
         
-    });
+    // });
 
     socket.on("modal-control", function(data) {
             console.log("modal action: ",data.action);
@@ -155,6 +155,7 @@ app.post("/api/auth/open", function(req, res){
 });
 
 app.post("/api/auth/update", function(req, res){
+    console.log(req.body);
     db.serialize(function(){
         db.run("UPDATE profiles SET zipcode = ?, facebook = ?, twitter = ?, news = ?, theme = ? WHERE id = ?", 
             [ req.body.zipcode, req.body.facebook, req.body.twitter, req.body.news, req.body.theme, req.body.id ], function(err){

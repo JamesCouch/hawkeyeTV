@@ -20,30 +20,32 @@ define([
 
         events: {
             'click #save-btn'         : 'saveSettings',
-            'click #theme'            : 'toggleActive',
-            'click #fb'               : 'toggleActive',
-            'click #close-btn'        : 'closeSettings'
+            'click #close-btn'        : 'closeSettings',
+            'click #th-btn'           : 'toggleActive',
+            'click #fb-btn'           : 'toggleActive',
+            'click #tw-btn'           : 'toggleActive',
+            'click #nw-btn'           : 'toggleActive'
         },
 
-        saveSettings: function(evt){
+        saveSettings: function(evt){   
             if(evt) evt.preventDefault();
             if(this.$("#settings-form").parsley('validate')){
                 app.settings.update({
                     zipcode: this.$("#zipcode-input").val() || app.settings.profile.details.zipcode,
-                    theme: this.$('.btn.theme.active').text() || app.settings.profile.details.theme,
-                    facebook: this.$('.btn.fb.active').text() || app.settings.profile.details.facebook,
-                    twitter: this.$('#twitter-input').val() || app.settings.profile.details.twitter,
-                    news: this.$('#news-input').val() || app.settings.profile.details.news,
+                    theme: this.$('#th').val() || app.settings.profile.details.theme,
+                    facebook: this.$('#fb').val() || app.settings.profile.details.facebook,
+                    twitter: this.$('#tw').val() || app.settings.profile.details.twitter,
+                    news: this.$('#nw').val() || app.settings.profile.details.news,
                     id: 1
                 }, {
                     success: function(mod, res){
                         if(DEBUG) console.log(mod, res);
-
                     },
                     error: function(mod, res){
                         if(DEBUG) console.log("ERROR", mod, res);
                     }
                 });
+                this.closeSettings();
             } else {
                 // Invalid clientside validations thru parsley
                 if(DEBUG) console.log("Did not pass clientside validation");
@@ -51,14 +53,20 @@ define([
         },
 
         toggleActive: function(evt) {
-            if (evt.currentTarget.id == "theme") {
-                console.log("theme");
-                this.$("#theme.btn.theme.active").removeClass('active');
+            if (evt.currentTarget.id == "th-btn") {
+                this.$("#th-btn.btn.th.active").removeClass('active');
                 this.$(evt.currentTarget).toggleClass('active');
             }
-            else if (evt.currentTarget.id == "fb") {
-                console.log("fb");
-                this.$("#fb.btn.fb.active").removeClass('active');
+            else if (evt.currentTarget.id == "fb-btn") {
+                this.$("#fb-btn.btn.fb.active").removeClass('active');
+                this.$(evt.currentTarget).toggleClass('active');
+            }
+            else if (evt.currentTarget.id == "tw-btn") {
+                this.$("#tw-btn.btn.tw.active").removeClass('active');
+                this.$(evt.currentTarget).toggleClass('active');
+            }
+            else if (evt.currentTarget.id == "nw-btn") {
+                this.$("#nw-btn.btn.nw.active").removeClass('active');
                 this.$(evt.currentTarget).toggleClass('active');
             }
         },

@@ -145,7 +145,12 @@ define(
         
         }
         if(chosenSelection == "settings"){
-          this.showSettingsModal();
+          if(!this.isMobile){
+            var screenSelector = $('#settings');
+            this.mainView.mouseovercard(screenSelector);
+          } else {
+            this.showSettingsModal();
+          }
         }
       },
 

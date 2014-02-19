@@ -11,10 +11,10 @@ define([
             this.details = { 
                 id: "0", 
                 zipcode: "52242", 
-                theme: "Default",
-                facebook: "Disabled", 
-                twitter: "Disabled",
-                news: "Disabled",
+                theme: "default",
+                facebook: "disabled", 
+                twitter: "disabled",
+                news: "disabled",
             };    
         },
 
