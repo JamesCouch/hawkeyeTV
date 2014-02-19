@@ -12,24 +12,20 @@ var express = require('express'),
     app = express(),
     server = http.createServer(app).listen( process.env.PORT || config.port);
 
+    var passport = require('passport')
+        , TwitterStrategy = require('passport-twitter').Strategy;
 
-
-   var passport = require('passport')
-     , TwitterStrategy = require('passport-twitter').Strategy;
-
-     passport.use(new TwitterStrategy({
-         consumerKey: 'hLYcPQ1m09bo29iTDDBeQ',
-         consumerSecret: 'vwyZeWxp8FKxzsWyIQsgWscHL9gO5Z9t5uDiAflCXk',
-         callbackURL: "twitter/callback"
-       },
-       function(token, tokenSecret, profile, done) {
-           console.log("token: ",token);
-           console.log("tokenSecret: ",tokenSecret);
-
-
-           done(null);
-       }
-     ));
+        passport.use(new TwitterStrategy({
+            consumerKey: 'hLYcPQ1m09bo29iTDDBeQ',
+            consumerSecret: 'vwyZeWxp8FKxzsWyIQsgWscHL9gO5Z9t5uDiAflCXk',
+            callbackURL: "twitter/callback"
+        },
+        function(token, tokenSecret, profile, done) {
+            console.log("token: ",token);
+            console.log("tokenSecret: ",tokenSecret);
+            done(null);
+        }
+    ));
 
 // Initialize sqlite and create our db if it doesnt exist
 var sqlite3 = require("sqlite3").verbose();
@@ -37,9 +33,10 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
 
  var io = require('socket.io').listen(server);
  var views = ['chrome','youtube','settings'];
- io.set('log level', 1);
  var ss;
+
  //Socket.io Server
+ io.set('log level', 1);
  io.sockets.on('connection', function (socket) {
     
     socket.on("screen", function(data) {
@@ -47,40 +44,42 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
         ss = socket;
         console.log("Screen ready...");
     });
+
     socket.on("remote", function(data) {
         socket.type = "remote";
         console.log("Remote ready...");
     });
+
     socket.on("control", function(data) {
         if (views.indexOf(data.action) > -1) {
             console.log("Render: ", data.action );
             ss.emit('controlling', data.action);
         }
     });
-    // socket.on("send-data", function(data) {
-    //         console.log("key send: ", data.key );
-    //         ss.emit('controlling-data', data.key);
-        
-    // });
+
+    socket.on("refresh", function(data) {
+        ss.emit('refresh-control', data);
+    });
 
     socket.on("modal-control", function(data) {
-            console.log("modal action: ",data.action);
-            console.log("modal data: ",data.data);
-            ss.emit('search-bar-control', data);
+        console.log("modal action: ",data.action);
+        console.log("modal data: ",data.data);
+        ss.emit('search-bar-control', data);
     });
 
     socket.on("swipe", function(data) {
-            console.log("direction: ",data.direction);
-            console.log("distance: ",data.distance);
-            ss.emit('swipe-control', data);
+        console.log("direction: ",data.direction);
+        console.log("distance: ",data.distance);
+        ss.emit('swipe-control', data);
     });
+
     socket.on("play-youtube", function(data) {
-            console.log("Video ID: ",data.id);
-            ss.emit('youtube-control', data);
+        console.log("Video ID: ",data.id);
+        ss.emit('youtube-control', data);
     });
 
     socket.on("toggle-youtube", function(data) {
-            ss.emit('youtube-toggle-control', data);
+        ss.emit('youtube-toggle-control', data);
     });
 
 
@@ -155,7 +154,6 @@ app.post("/api/auth/open", function(req, res){
 });
 
 app.post("/api/auth/update", function(req, res){
-    console.log(req.body);
     db.serialize(function(){
         db.run("UPDATE profiles SET zipcode = ?, facebook = ?, twitter = ?, news = ?, theme = ? WHERE id = ?", 
             [ req.body.zipcode, req.body.facebook, req.body.twitter, req.body.news, req.body.theme, req.body.id ], function(err){

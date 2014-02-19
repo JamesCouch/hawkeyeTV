@@ -46,6 +46,7 @@ define([
                     }
                 });
                 this.closeSettings();
+                this.trigger('refresh');
             } else {
                 // Invalid clientside validations thru parsley
                 if(DEBUG) console.log("Did not pass clientside validation");

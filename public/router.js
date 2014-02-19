@@ -73,6 +73,7 @@ define(
         this.views.push(this.mainView);
 
         this.settingsView = new SettingsView();
+        this.settingsView.on('refresh',this.refresh,this);
         this.settingsView.$el.hide();
         this.$body.prepend(this.settingsView.render().$el);
         this.views.push(this.settingsView);
@@ -94,6 +95,10 @@ define(
 
       sendSearchBoxData: function(data) {
         this.remoteSocket.emit('send-data',{key: data});
+      },
+
+      refresh: function() {
+        this.remoteSocket.emit("refresh", "test");
       },
 
       onRenderSelection: function(chosenSelection) {
@@ -159,10 +164,6 @@ define(
           this.settingsView.$el.show();
           $('#settingsModal').modal('show');
         }
-      },
-
-      closeSettingsModal: function() {
-
       },
 
       showSearchBar: function(chosenSelection) {

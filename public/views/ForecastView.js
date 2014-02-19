@@ -15,7 +15,7 @@ define([ 'app','jquery','underscore', 'text!templates/forecast.html', 'models/Fo
         this.$el.html(this.template());
         setTimeout( function () {
           _this.getWeather();
-        }, 1);
+        }, 1000);
         return this;
       },
 

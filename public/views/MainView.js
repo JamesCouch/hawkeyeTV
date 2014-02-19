@@ -1,5 +1,5 @@
 
-define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainMobile.html', 'backbone', 'views/TimeView', 'views/ForecastView','socket'], function($, _, MainTpl,MobileMainTpl,Backbone, TimeView, ForecastView,socket) {
+define([ 'app', 'jquery','underscore', 'text!templates/main.html','text!templates/mainMobile.html', 'backbone', 'views/TimeView', 'views/ForecastView','socket'], function(app,$, _, MainTpl,MobileMainTpl,Backbone, TimeView, ForecastView,socket) {
     'use strict';
 
     var MainView = Backbone.View.extend({
@@ -13,6 +13,12 @@ define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainM
         this.socket = options.socket;
         this.isMobile = options.mobile;
         var _this = this;
+
+        this.socket.on('refresh-control', function(data){
+          app.settings.openProfile({id: "1"});
+          _this.render("tv");
+        });
+
       },
 
       events: {
@@ -28,13 +34,10 @@ define([ 'jquery','underscore', 'text!templates/main.html','text!templates/mainM
       },
 
       mouseovercard: function(event) {
-        if (this.isMobile){
-
-        } else {
+        if (!this.isMobile){
           $('.block').removeClass('selected');
           $(event.currentTarget).parent().toggleClass('selected');
-          var parent = event.parent();
-          parent.addClass('selected');
+          $(event).parent().addClass('selected');
         }
       },
       
