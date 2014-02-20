@@ -37,20 +37,20 @@ p{
 }
 
 .time-block{
-	width: 450px;
+/*	width: 450px;
 	position: absolute;
 	left: 25px;
 	margin-top: 15px;
 	border-color: #BABABA;
-	border-bottom: 2px solid;
+	border-bottom: 2px solid;*/
 }
 
 .forecast-block {
 	width: 600px;
 	height: 270px;
-	position: absolute;
+/*	position: absolute;
 	margin-top: -35px;
-	right: 25px;
+	right: 25px;*/
 	/*border-bottom: 2px solid;*/
 }
 
@@ -68,8 +68,8 @@ p{
 }
 
 #daytime  {
-	position: absolute;
-	right: 50px;
+/*	position: absolute;
+	right: 50px;*/
 }
 
 #date {
