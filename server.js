@@ -12,28 +12,31 @@ var express = require('express'),
     app = express(),
     server = http.createServer(app).listen( process.env.PORT || config.port);
 
-    var passport = require('passport')
-        , TwitterStrategy = require('passport-twitter').Strategy;
-
-        passport.use(new TwitterStrategy({
-            consumerKey: 'hLYcPQ1m09bo29iTDDBeQ',
-            consumerSecret: 'vwyZeWxp8FKxzsWyIQsgWscHL9gO5Z9t5uDiAflCXk',
-            callbackURL: "twitter/callback"
-        },
-        function(token, tokenSecret, profile, done) {
-            console.log("token: ",token);
-            console.log("tokenSecret: ",tokenSecret);
-            done(null);
-        }
-    ));
-
-// Initialize sqlite and create our db if it doesnt exist
+    // Initialize sqlite and create our db if it doesnt exist
 var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
 
- var io = require('socket.io').listen(server);
- var views = ['chrome','youtube','settings'];
- var ss;
+var io = require('socket.io').listen(server);
+var views = ['chrome','youtube','settings'];
+var ss;
+
+var passport = require('passport')
+    , TwitterStrategy = require('passport-twitter').Strategy;
+
+    passport.use(new TwitterStrategy({
+        consumerKey: 'hLYcPQ1m09bo29iTDDBeQ',
+        consumerSecret: 'vwyZeWxp8FKxzsWyIQsgWscHL9gO5Z9t5uDiAflCXk',
+        callbackURL: "twitter/callback"
+    },
+    function(token, tokenSecret, profile, done) {
+        db.run("UPDATE profiles SET tToken = ?, tSecret =? WHERE id = ?", [ token, tokenSecret, "1" ], function(err){
+            if(err) {
+                console.log("Failed to load oauth token in the database");
+            } 
+        });
+        done(null);
+    }
+));
 
  //Socket.io Server
  io.set('log level', 1);
@@ -86,7 +89,7 @@ var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
  });
 
 // Create our profiles table if it doesn't exist
-db.run("CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY, zipcode TEXT, facebook TEXT, twitter TEXT, news TEXT, theme TEXT)");
+db.run("CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY, zipcode TEXT, facebook TEXT, twitter TEXT, news TEXT, theme TEXT, tToken TEXT, tSecret TEXT)");
 
 // Allow node to be run with proxy passing
 app.enable('trust proxy');
