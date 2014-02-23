@@ -12,8 +12,6 @@ define([
                 id: "0", 
                 zipcode: "52242", 
                 theme: "default",
-                facebook: "disabled", 
-                twitter: "disabled",
                 news: "disabled",
             };    
         },

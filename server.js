@@ -21,7 +21,8 @@ var views = ['chrome','youtube','settings'];
 var ss;
 
 var passport = require('passport')
-    , TwitterStrategy = require('passport-twitter').Strategy;
+    , TwitterStrategy = require('passport-twitter').Strategy
+    , FacebookStrategy = require('passport-facebook').Strategy;
 
     passport.use(new TwitterStrategy({
         consumerKey: 'hLYcPQ1m09bo29iTDDBeQ',
@@ -29,9 +30,25 @@ var passport = require('passport')
         callbackURL: "twitter/callback"
     },
     function(token, tokenSecret, profile, done) {
-        db.run("UPDATE profiles SET tToken = ?, tSecret =? WHERE id = ?", [ token, tokenSecret, "1" ], function(err){
+        db.run("UPDATE profiles SET tw_token = ?, tw_secret =? WHERE id = ?", [ token, tokenSecret, "1" ], function(err){
             if(err) {
-                console.log("Failed to load oauth token in the database");
+                console.log("Failed to load TW oauth token in the database");
+            } 
+        });
+        done(null);
+    }
+));
+
+passport.use(new FacebookStrategy({
+    clientID: '586126158139160',
+    clientSecret: '3dbf359ef5d004110e857fe507df148d',
+    callbackURL: "/auth/facebook/callback"
+},
+    function(accessToken, refreshToken, profile, done) {
+        console.log("Facebook Token: ", accessToken);
+        db.run("UPDATE profiles SET fb_token = ?, fb_refresh =? WHERE id = ?", [ accessToken, refreshToken, "1" ], function(err){
+            if(err) {
+                console.log("Failed to load FB oauth token in the database");
             } 
         });
         done(null);
@@ -89,7 +106,7 @@ var passport = require('passport')
  });
 
 // Create our profiles table if it doesn't exist
-db.run("CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY, zipcode TEXT, facebook TEXT, twitter TEXT, news TEXT, theme TEXT, tToken TEXT, tSecret TEXT)");
+db.run("CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY, zipcode TEXT, news TEXT, theme TEXT, tw_token TEXT, tw_secret TEXT, fb_token TEXT, fb_refresh TEXT )");
 
 // Allow node to be run with proxy passing
 app.enable('trust proxy');
@@ -136,8 +153,8 @@ db.serialize(function(){
         if(profile){
             console.log("DB has first record");  
         } else {  
-            db.run("INSERT INTO profiles (zipcode, facebook, twitter, news, theme) VALUES (?,?,?,?,?)", 
-                [ "52242", "Disabled", "Disabled", "Disabled", "Default"], function(err){ 
+            db.run("INSERT INTO profiles (zipcode, news, theme) VALUES (?,?,?)", 
+                [ "52242", "disabled", "default"], function(err){ 
                 if(err){
                     console.log(err);
                 }
@@ -158,8 +175,8 @@ app.post("/api/auth/open", function(req, res){
 
 app.post("/api/auth/update", function(req, res){
     db.serialize(function(){
-        db.run("UPDATE profiles SET zipcode = ?, facebook = ?, twitter = ?, news = ?, theme = ? WHERE id = ?", 
-            [ req.body.zipcode, req.body.facebook, req.body.twitter, req.body.news, req.body.theme, req.body.id ], function(err){
+        db.run("UPDATE profiles SET zipcode = ?, news = ?, theme = ? WHERE id = ?", 
+            [ req.body.zipcode, req.body.news, req.body.theme, req.body.id ], function(err){
             if(err) {
                 console.log("Updating the user failed");
             } else {
@@ -177,11 +194,15 @@ app.post("/api/auth/update", function(req, res){
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
 
-
 app.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { successRedirect: '/',
                                      failureRedirect: '/' }));
 
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback', 
+  passport.authenticate('facebook', { successRedirect: '/',
+                                     failureRedirect: '/' }));
 
 
 // Close the db connection on process exit 
