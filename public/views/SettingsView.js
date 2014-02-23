@@ -22,8 +22,6 @@ define([
             'click #save-btn'         : 'saveSettings',
             'click #close-btn'        : 'closeSettings',
             'click #th-btn'           : 'toggleActive',
-            'click #fb-btn'           : 'toggleActive',
-            'click #tw-btn'           : 'toggleActive',
             'click #nw-btn'           : 'toggleActive'
         },
 
@@ -33,8 +31,6 @@ define([
                 app.settings.update({
                     zipcode: this.$("#zipcode-input").val() || app.settings.profile.details.zipcode,
                     theme: this.$('#th').val() || app.settings.profile.details.theme,
-                    facebook: this.$('#fb').val() || app.settings.profile.details.facebook,
-                    twitter: this.$('#tw').val() || app.settings.profile.details.twitter,
                     news: this.$('#nw').val() || app.settings.profile.details.news,
                     id: 1
                 }, {
@@ -56,14 +52,6 @@ define([
         toggleActive: function(evt) {
             if (evt.currentTarget.id == "th-btn") {
                 this.$("#th-btn.btn.th.active").removeClass('active');
-                this.$(evt.currentTarget).toggleClass('active');
-            }
-            else if (evt.currentTarget.id == "fb-btn") {
-                this.$("#fb-btn.btn.fb.active").removeClass('active');
-                this.$(evt.currentTarget).toggleClass('active');
-            }
-            else if (evt.currentTarget.id == "tw-btn") {
-                this.$("#tw-btn.btn.tw.active").removeClass('active');
                 this.$(evt.currentTarget).toggleClass('active');
             }
             else if (evt.currentTarget.id == "nw-btn") {
