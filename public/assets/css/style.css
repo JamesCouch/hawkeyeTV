@@ -37,21 +37,20 @@ p{
 }
 
 .time-block{
-/*	width: 450px;
+	width: 450px;
 	position: absolute;
 	left: 25px;
 	margin-top: 15px;
 	border-color: #BABABA;
-	border-bottom: 2px solid;*/
+	border-bottom: 2px solid;
 }
 
 .forecast-block {
 	width: 600px;
 	height: 270px;
-/*	position: absolute;
+	position: absolute;
 	margin-top: -35px;
-	right: 25px;*/
-	/*border-bottom: 2px solid;*/
+	right: 25px;
 }
 
 #time {
@@ -59,21 +58,16 @@ p{
 	line-height: .9;
 	font-family: 'Audiowide';
 	color: rgba(0, 0, 0, 0.4);
-    float: left;
 }
 
-#main { 
-    width: 350px;
-    margin: 0 auto;
-}
-
-#daytime  {
-/*	position: absolute;
-	right: 50px;*/
+#main {
+	position: relative;
+	left: 5%;
 }
 
 #date {
-	margin-left: 90px;
+	position: relative;
+	left: 10%;
 }
 
 #selection-box {
