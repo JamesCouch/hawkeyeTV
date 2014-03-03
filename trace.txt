@@ -1,0 +1,882 @@
+libspotify trace from 12.1.51.g86c92b43 Release Darwin-x86_64 
+
+< sp_session_create() = 0
+> sp_session_login(0x100811960 '3lauqsap' '<hidden>' 1) on 0x7fff78710310
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> sp_session_playlistcontainer(0x100811960) on 0x7fff78710310
+< sp_session_playlistcontainer() = 0x100810360
+> sp_playlistcontainer_add_callbacks(0x100810360 0x103228a38 0x100a30ce8) on 0x7fff78710310
+< sp_playlistcontainer_add_callbacks() = 
+< sp_session_process_events() = 1
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 997
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 997
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 986
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 985
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 66
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 823
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 823
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 752
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 752
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> pchPlaylistWillBeAdded(0x10082b520 2 0x10082e5b0 0) on 0x7fff78710310
+< pchPlaylistWillBeAdded() = 
+> pchPlaylistAdded(0x10082b520 2 0x10082e5b0 0) on 0x7fff78710310
+< pchPlaylistAdded() = 
+> pchPlaylistWillBeAdded(0x10082b520 2 0x100830b50 1) on 0x7fff78710310
+< pchPlaylistWillBeAdded() = 
+> pchPlaylistAdded(0x10082b520 2 0x100830b50 1) on 0x7fff78710310
+< pchPlaylistAdded() = 
+> pchPlaylistWillBeAdded(0x10082b520 2 0x100830ca0 2) on 0x7fff78710310
+< pchPlaylistWillBeAdded() = 
+> pchPlaylistAdded(0x10082b520 2 0x100830ca0 2) on 0x7fff78710310
+< pchPlaylistAdded() = 
+> pchPlaylistWillBeAdded(0x10082b520 2 0x100830eb0 3) on 0x7fff78710310
+< pchPlaylistWillBeAdded() = 
+> pchPlaylistAdded(0x10082b520 2 0x100830eb0 3) on 0x7fff78710310
+< pchPlaylistAdded() = 
+> pchPlaylistWillBeAdded(0x10082b520 2 0x10082e6c0 4) on 0x7fff78710310
+< pchPlaylistWillBeAdded() = 
+> pchPlaylistAdded(0x10082b520 2 0x10082e6c0 4) on 0x7fff78710310
+< pchPlaylistAdded() = 
+> pchPlaylistWillBeAdded(0x10082b520 2 0x100831110 5) on 0x7fff78710310
+< pchPlaylistWillBeAdded() = 
+> pchPlaylistAdded(0x10082b520 2 0x100831110 5) on 0x7fff78710310
+< pchPlaylistAdded() = 
+> pchPlaylistWillBeAdded(0x10082b520 2 0x100831220 6) on 0x7fff78710310
+< pchPlaylistWillBeAdded() = 
+> pchPlaylistAdded(0x10082b520 2 0x100831220 6) on 0x7fff78710310
+< pchPlaylistAdded() = 
+> pchPlaylistWillBeAdded(0x10082b520 2 0x1008314c0 7) on 0x7fff78710310
+< pchPlaylistWillBeAdded() = 
+> pchPlaylistAdded(0x10082b520 2 0x1008314c0 7) on 0x7fff78710310
+< pchPlaylistAdded() = 
+> pchPlaylistWillBeAdded(0x10082b520 2 0x100831630 8) on 0x7fff78710310
+< pchPlaylistWillBeAdded() = 
+> pchPlaylistAdded(0x10082b520 2 0x100831630 8) on 0x7fff78710310
+< pchPlaylistAdded() = 
+> pchPlaylistWillBeAdded(0x10082b520 2 0x10082e6c0 9) on 0x7fff78710310
+< pchPlaylistWillBeAdded() = 
+> pchPlaylistAdded(0x10082b520 2 0x10082e6c0 9) on 0x7fff78710310
+< pchPlaylistAdded() = 
+> pchLoaded(0x10082b520) on 0x7fff78710310
+> sp_playlistcontainer_num_playlists(0x100810360) on 0x7fff78710310
+< sp_playlistcontainer_num_playlists() = 10
+> sp_playlistcontainer_playlist(0x100810360 0) on 0x7fff78710310
+< sp_playlistcontainer_playlist() = 0x10082e5b0
+> sp_playlist_add_ref(0x10082e5b0) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x10082e5b0 0x103228b98 0x100831078) on 0x7fff78710310
+> sp_playlistcontainer_playlist(0x100810360 1) on 0x7fff78710310
+< sp_playlistcontainer_playlist() = 0x100830b50
+> sp_playlist_add_ref(0x100830b50) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x100830b50 0x103228b98 0x100831a98) on 0x7fff78710310
+> sp_playlistcontainer_playlist(0x100810360 2) on 0x7fff78710310
+< sp_playlistcontainer_playlist() = 0x100830ca0
+> sp_playlist_add_ref(0x100830ca0) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x100830ca0 0x103228b98 0x10082e9c8) on 0x7fff78710310
+> sp_playlistcontainer_playlist(0x100810360 3) on 0x7fff78710310
+< sp_playlistcontainer_playlist() = 0x100830eb0
+> sp_playlist_add_ref(0x100830eb0) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x100830eb0 0x103228b98 0x10082ea78) on 0x7fff78710310
+> sp_playlistcontainer_playlist(0x100810360 4) on 0x7fff78710310
+< sp_playlistcontainer_playlist() = 0x10082e6c0
+> sp_playlist_add_ref(0x10082e6c0) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x10082e6c0 0x103228b98 0x10082eb28) on 0x7fff78710310
+> sp_playlistcontainer_playlist(0x100810360 5) on 0x7fff78710310
+< sp_playlistcontainer_playlist() = 0x100831110
+> sp_playlist_add_ref(0x100831110) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x100831110 0x103228b98 0x10082ebd8) on 0x7fff78710310
+> sp_playlistcontainer_playlist(0x100810360 6) on 0x7fff78710310
+< sp_playlistcontainer_playlist() = 0x100831220
+> sp_playlist_add_ref(0x100831220) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x100831220 0x103228b98 0x10082ec08) on 0x7fff78710310
+> sp_playlistcontainer_playlist(0x100810360 7) on 0x7fff78710310
+< sp_playlistcontainer_playlist() = 0x1008314c0
+> sp_playlist_add_ref(0x1008314c0) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x1008314c0 0x103228b98 0x10082ec38) on 0x7fff78710310
+> sp_playlistcontainer_playlist(0x100810360 8) on 0x7fff78710310
+< sp_playlistcontainer_playlist() = 0x100831630
+> sp_playlist_add_ref(0x100831630) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x100831630 0x103228b98 0x100831ce8) on 0x7fff78710310
+> sp_playlistcontainer_playlist(0x100810360 9) on 0x7fff78710310
+< sp_playlistcontainer_playlist() = 0x10082e6c0
+> sp_playlist_add_ref(0x10082e6c0) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x10082e6c0 0x103228b98 0x10082f2f8) on 0x7fff78710310
+> sp_session_starred_create(0x100811960) on 0x7fff78710310
+< sp_session_starred_create() = 0x10082ba50
+> sp_playlist_add_ref(0x10082ba50) on 0x7fff78710310
+> sp_playlist_add_callbacks(0x10082ba50 0x103228b98 0x100831e78) on 0x7fff78710310
+> sp_session_remembered_user(0x100811960 0x7fff5fbf4e20 256) on 0x7fff78710310
+< sp_session_remembered_user() = 8
+< pchLoaded() = 
+< sp_session_process_events() = 587
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phModeChanged(0x100831630 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phModeChanged(0x1008314c0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phModeChanged(0x100830b50 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phModeChanged(0x10082e5b0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phModeChanged(0x100830eb0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phModeChanged(0x100831110 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phModeChanged(0x100831220 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phModeChanged(0x100830ca0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+< sp_session_process_events() = 585
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 585
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 100
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 100
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phModeChanged(0x10082ba50 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+< sp_session_process_events() = 52
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 52
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 435
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phModeChanged(0x1008314c0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x1008314c0 0) on 0x7fff78710310
+< phSetUpdate() = 
+> phRenamed(0x1008314c0 2 via 0x10320d1a2) on 0x7fff78710310
+< phRenamed() = 
+> phTracksAdded(0x1008314c0 2 0 (null) 140733193388032 via 0x10320d20e) on 0x7fff78710310
+< phTracksAdded() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x1008314c0 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phModeChanged(0x1008314c0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x1008314c0 1) on 0x7fff78710310
+< phSetUpdate() = 
+< sp_session_process_events() = 333
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 332
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phModeChanged(0x100830b50 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100830b50 0) on 0x7fff78710310
+< phSetUpdate() = 
+> phRenamed(0x100830b50 2 via 0x10320d1a2) on 0x7fff78710310
+< phRenamed() = 
+> phTracksAdded(0x100830b50 2 0 (null) 4294967296 via 0x10320d20e) on 0x7fff78710310
+< phTracksAdded() = 
+> phAttributeSet(0x100830b50 2 created 1393729147:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729154:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729162:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729202:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729206:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729211:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729224:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729232:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729049:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729054:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729061:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729070:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729078:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393729111:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727801:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727808:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727815:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727854:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727864:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727895:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727899:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727903:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727907:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727917:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727932:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727959:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727987:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393727996:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728005:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728013:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728024:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728042:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728051:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728058:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728119:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728164:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393732177:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393732128:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393732133:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393732140:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393732147:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393732204:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728288:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728291:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728294:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728304:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728315:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728320:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728324:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728326:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728342:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728349:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728363:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728848:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728855:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728886:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728405:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728429:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728444:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728451:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728488:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728495:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728499:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728507:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728514:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728633:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728665:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728674:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728683:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728692:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728703:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728745:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830b50 2 created 1393728751:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phModeChanged(0x100830b50 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100830b50 1) on 0x7fff78710310
+< phSetUpdate() = 
+< sp_session_process_events() = 306
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 304
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phModeChanged(0x100830eb0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100830eb0 0) on 0x7fff78710310
+< phSetUpdate() = 
+> phRenamed(0x100830eb0 2 via 0x10320d1a2) on 0x7fff78710310
+< phRenamed() = 
+> phTracksAdded(0x100830eb0 2 0 (null) 4294967296 via 0x10320d20e) on 0x7fff78710310
+< phTracksAdded() = 
+> phAttributeSet(0x100830eb0 2 created 1392755990:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1392755996:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1392756003:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1392756008:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1392756012:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1392756017:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731424:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731431:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731435:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731577:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731581:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731586:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731593:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731630:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731639:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731643:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731666:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731671:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731677:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731730:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100830eb0 2 created 1393731737:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phModeChanged(0x100830eb0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100830eb0 1) on 0x7fff78710310
+< phSetUpdate() = 
+< sp_session_process_events() = 277
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 276
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phModeChanged(0x100831110 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100831110 0) on 0x7fff78710310
+< phSetUpdate() = 
+> phRenamed(0x100831110 2 via 0x10320d1a2) on 0x7fff78710310
+< phRenamed() = 
+> phTracksAdded(0x100831110 2 0 (null) 140733193388032 via 0x10320d20e) on 0x7fff78710310
+< phTracksAdded() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831110 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phModeChanged(0x100831110 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100831110 1) on 0x7fff78710310
+< phSetUpdate() = 
+< sp_session_process_events() = 275
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 275
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phModeChanged(0x100831220 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100831220 0) on 0x7fff78710310
+< phSetUpdate() = 
+> phRenamed(0x100831220 2 via 0x10320d1a2) on 0x7fff78710310
+< phRenamed() = 
+> phTracksAdded(0x100831220 2 0 (null) 140733193388032 via 0x10320d20e) on 0x7fff78710310
+< phTracksAdded() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831220 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phModeChanged(0x100831220 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100831220 1) on 0x7fff78710310
+< phSetUpdate() = 
+< sp_session_process_events() = 259
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phModeChanged(0x100831630 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100831630 0) on 0x7fff78710310
+< phSetUpdate() = 
+> phRenamed(0x100831630 2 via 0x10320d1a2) on 0x7fff78710310
+< phRenamed() = 
+> phTracksAdded(0x100831630 2 0 (null) 140733193388032 via 0x10320d20e) on 0x7fff78710310
+< phTracksAdded() = 
+> phAttributeSet(0x100831630 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831630 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831630 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831630 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831630 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x100831630 2 created 1387559984:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phModeChanged(0x100831630 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100831630 1) on 0x7fff78710310
+< phSetUpdate() = 
+> phModeChanged(0x100830ca0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100830ca0 0) on 0x7fff78710310
+< phSetUpdate() = 
+> phRenamed(0x100830ca0 2 via 0x10320d1a2) on 0x7fff78710310
+< phRenamed() = 
+> phTracksAdded(0x100830ca0 2 0 (null) 140733193388032 via 0x10320d20e) on 0x7fff78710310
+< phTracksAdded() = 
+> phModeChanged(0x100830ca0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x100830ca0 1) on 0x7fff78710310
+< phSetUpdate() = 
+< sp_session_process_events() = 258
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 258
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phModeChanged(0x10082e5b0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x10082e5b0 0) on 0x7fff78710310
+< phSetUpdate() = 
+> phRenamed(0x10082e5b0 2 via 0x10320d1a2) on 0x7fff78710310
+< phRenamed() = 
+> phTracksAdded(0x10082e5b0 2 0 (null) 4294967296 via 0x10320d20e) on 0x7fff78710310
+< phTracksAdded() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729333:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729380:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729384:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729392:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729395:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729415:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729526:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729531:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729558:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729570:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729576:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729586:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729612:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729629:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729638:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729711:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729718:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729735:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729748:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729752:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729768:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729773:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729781:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729789:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729805:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729833:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729850:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729860:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729865:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729870:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729873:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729876:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729916:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729919:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729951:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729966:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729978:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729981:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729983:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729988:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729990:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729995:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393729998:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730018:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730039:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730047:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730128:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730135:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730141:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730146:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730153:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730177:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730265:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730280:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730292:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730323:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730337:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730370:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730386:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730463:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730480:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730542:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730574:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730754:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730762:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730774:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730787:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393730792:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731061:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731070:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731090:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731093:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731100:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731110:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731115:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731131:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731248:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731276:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731293:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731304:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393731311:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phAttributeSet(0x10082e5b0 2 created 1393732238:3lauqsap) on 0x7fff78710310
+< phAttributeSet() = 
+> phModeChanged(0x10082e5b0 6 via 0x10320d208) on 0x7fff78710310
+< phModeChanged() = 
+> phSetUpdate(0x10082e5b0 1) on 0x7fff78710310
+< phSetUpdate() = 
+< sp_session_process_events() = 222
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 220
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 207
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phTrackInfoUpdated(0x100830b50 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+< sp_session_process_events() = 207
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 207
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 84
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phTrackInfoUpdated(0x100830b50 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+> phTrackInfoUpdated(0x10082e5b0 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+> phTrackInfoUpdated(0x100830eb0 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+< sp_session_process_events() = 80
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 80
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 9
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phTrackInfoUpdated(0x100830b50 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+> phTrackInfoUpdated(0x10082e5b0 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+> phTrackInfoUpdated(0x100830eb0 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+< sp_session_process_events() = 3
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 3
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 247
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 164
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 164
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 4050
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 4049
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 4048
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 4048
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 3950
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 3949
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 3949
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 1
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+> phTrackInfoUpdated(0x1008314c0 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+> phTrackInfoUpdated(0x10082e5b0 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+> phTrackInfoUpdated(0x100831110 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+> phTrackInfoUpdated(0x100831220 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+< sp_session_process_events() = 3478
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 3478
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 3195
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phTrackInfoUpdated(0x100831630 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+> phTrackInfoUpdated(0x100831110 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+> phTrackInfoUpdated(0x100831220 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+< sp_session_process_events() = 3195
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 3195
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 2592
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+> phTrackInfoUpdated(0x100831630 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+> phTrackInfoUpdated(0x100830b50 6 via 0x0) on 0x7fff78710310
+< phTrackInfoUpdated() = 
+< sp_session_process_events() = 2592
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 2592
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 100
+> sp_session_process_events(0x100811960 0x7fff5fbf607c) on 0x7fff78710310
+< sp_session_process_events() = 100
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 852
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 21579
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 3
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 3420
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 1
+> sp_session_process_events(0x100811960 0x7fff5fbfe59c) on 0x7fff78710310
+< sp_session_process_events() = 31456

@@ -29,9 +29,10 @@ define(
 
       initialize: function(options) {
 
-        this.remoteSocket = io.connect('http://192.168.1.110:3000');
+        this.remoteSocket = io.connect('http://173.28.211.34:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
         this.isMobile = this.checkForMobile();
+        var selector;
         var _this = this;
         
         if(this.isMobile){
@@ -112,7 +113,6 @@ define(
             this.searchBarView.$el.hide();
             this.$body.prepend(this.searchBarView.render().$el);
             this.views.push(this.searchBarView);
-
         }
           
           //attempt to render the views as needed to increase speed
@@ -127,7 +127,7 @@ define(
               this.showSearchBar(chosenSelection);
           }
           else {
-            var screenSelector = $('#youtube');
+            screenSelector = $('#youtube');
             this.mainView.mouseovercard(screenSelector);
 
           }
@@ -144,17 +144,41 @@ define(
               this.showSearchBar(chosenSelection);
           }
           else {
-            var screenSelector = $('#chrome');
+            screenSelector = $('#chrome');
             this.mainView.mouseovercard(screenSelector);
           }
         
         }
         if(chosenSelection == "settings"){
           if(!this.isMobile){
-            var screenSelector = $('#settings');
+            screenSelector = $('#settings');
             this.mainView.mouseovercard(screenSelector);
           } else {
             this.showSettingsModal();
+          }
+        }
+        if(chosenSelection == "music"){
+          if(!this.isMobile){
+            screenSelector = $('#music');
+            this.mainView.mouseovercard(screenSelector);
+          } else {
+
+          }
+        }
+        if(chosenSelection == "facebook"){
+          if(!this.isMobile){
+            screenSelector = $('#facebook');
+            this.mainView.mouseovercard(screenSelector);
+          } else {
+
+          }
+        }
+        if(chosenSelection == "twitter"){
+          if(!this.isMobile){
+            screenSelector = $('#twitter');
+            this.mainView.mouseovercard(screenSelector);
+          } else {
+
           }
         }
       },

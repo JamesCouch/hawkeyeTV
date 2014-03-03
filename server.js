@@ -1,7 +1,12 @@
 
 var express = require('express'),
     http = require('http'),
-
+    Lame = require('lame'),
+    Speaker = require('speaker'),
+    Stream = require('stream'),
+    stream = new Stream(),
+    spotify = require('spotify-web'),
+    search_spotify = require('spotify'),
     config = require("./config"),
     bcrypt = require("bcrypt"),
     sqlite = require("sqlite3"),
@@ -16,8 +21,40 @@ var express = require('express'),
 var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
 
+search_spotify.search({ type: 'track', query: 'under pressure' }, function(err, data) {
+    if ( err ) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+    uri = data.tracks[0].href;
+    console.log(data.tracks[0].href);
+});
+
+
+    spotify.login("3lauqsap", "Spotify.pdagosti!", function (err, spotify) {
+      if (err) throw err;
+      // first get a "Track" instance from the track URI
+      spotify.get(uri, function (err, track) {
+        if (err) throw err;
+        console.log('Playing: %s - %s', track.artist[0].name, track.name);
+
+        // play() returns a readable stream of MP3 audio data
+        stream = track.play();
+        stream.on('readable', function() {
+            console.log('GOT STREAM');
+        });
+        stream
+          .pipe(new Lame.Decoder())
+          .pipe(new Speaker())
+          .on('finish', function () {
+            spotify.disconnect();
+          });
+          stream.pause();
+      });
+    });
+
 var io = require('socket.io').listen(server);
-var views = ['chrome','youtube','settings'];
+var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter'];
 var ss;
 
 var passport = require('passport')
@@ -122,12 +159,10 @@ app.configure('production', function(){
     app.use(express.errorHandler());
 });
 
-
 // Compression (gzip)
 app.use( express.compress() );
 app.use( express.methodOverride() );
 app.use( express.bodyParser() );            // Needed to parse POST data sent as JSON payload
-
 
 // Cookie config
 app.use( express.cookieParser( config.cookieSecret ) );           // populates req.signedCookies
@@ -138,7 +173,6 @@ app.use( express.cookieSession( config.sessionSecret ) );         // populates r
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views' );
 app.engine('html', require('hbs').__express);
-
 
 app.use(express.static(__dirname+'/public'));
 
@@ -189,6 +223,29 @@ app.post("/api/auth/update", function(req, res){
                 });
             }
         });
+    });
+});
+
+app.post("/api/auth/search", function(){
+
+});
+
+app.post("/api/auth/play", function(){
+    spotify.login("3lauqsap", "Spotify.pdagosti!", function (err, spotify) {
+      if (err) throw err;
+      // first get a "Track" instance from the track URI
+      spotify.get(uri, function (err, track) {
+        if (err) throw err;
+        console.log('Playing: %s - %s', track.artist[0].name, track.name);
+
+        // play() returns a readable stream of MP3 audio data
+        track.play()
+          .pipe(new lame.Decoder())
+          .pipe(new Speaker())
+          .on('finish', function () {
+            spotify.disconnect();
+          });
+      });
     });
 });
 
