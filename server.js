@@ -20,6 +20,17 @@ var io = require('socket.io').listen(server);
 var views = ['chrome','youtube','settings'];
 var ss;
 
+
+var Twit = require('twit')
+
+var T = new Twit({
+    consumer_key:         'hLYcPQ1m09bo29iTDDBeQ'
+  , consumer_secret:      'vwyZeWxp8FKxzsWyIQsgWscHL9gO5Z9t5uDiAflCXk'
+  , access_token:         '84897293-RJWQgldHWvS5AsYdG76KA30XgjqFhwUjryiVzxWG7'
+  , access_token_secret:  'h3CpbH6nQFw1bZJjjExSDEG3xNIm0RwqgZAuWuRqc8GEN'
+})
+
+
 var passport = require('passport')
     , TwitterStrategy = require('passport-twitter').Strategy;
 
@@ -29,6 +40,10 @@ var passport = require('passport')
         callbackURL: "twitter/callback"
     },
     function(token, tokenSecret, profile, done) {
+
+
+
+
         db.run("UPDATE profiles SET tToken = ?, tSecret =? WHERE id = ?", [ token, tokenSecret, "1" ], function(err){
             if(err) {
                 console.log("Failed to load oauth token in the database");
@@ -85,6 +100,22 @@ var passport = require('passport')
         ss.emit('youtube-toggle-control', data);
     });
 
+    socket.on("get-twitter-feed", function(data) {
+
+        if( typeof T === 'undefined'){
+        }
+        else {
+             // twitter.getUserTimeline({ screen_name: 'jam_cooch', count: '10'}, error, success);
+             T.get('statuses/home_timeline', { screen_name: 'jam_cooch' },  function (err, reply) {
+                    console.log("reply is: ", err);
+                    ss.emit('sent-twitter-feed', reply);
+                    
+             })
+
+            }
+
+    });
+
 
  });
 
@@ -128,6 +159,7 @@ app.use(express.static(__dirname+'/public'));
 app.use( app.router );
 
 app.get("/", function(req, res){
+
     res.render('index');
 });
 
@@ -181,8 +213,6 @@ app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { successRedirect: '/',
                                      failureRedirect: '/' }));
-
-
 
 // Close the db connection on process exit 
 // (should already happen, but to be safe)

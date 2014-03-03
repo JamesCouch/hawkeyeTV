@@ -29,7 +29,7 @@ define(
 
       initialize: function(options) {
 
-        this.remoteSocket = io.connect('http://172.23.103.117:3000');
+        this.remoteSocket = io.connect('http://172.23.95.129:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
         this.isMobile = this.checkForMobile();
         var _this = this;
@@ -82,7 +82,7 @@ define(
 
         if(!this.isMobile){
           this.$twitter = $('.tw-feed');
-          this.twitterView = new TwitterView();
+          this.twitterView = new TwitterView({socket: this.socket});
           this.twitterView.$el.show();
           this.$twitter.append(this.twitterView.render().$el);
         }

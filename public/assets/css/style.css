@@ -211,3 +211,40 @@ ul li{
 }
 
 
+#twitter-list {
+	width: 500px;
+	position: fixed;
+	right: 20px;
+	top: 200px;
+}
+
+.tweet-name{
+	display: inline-block;
+} 
+
+.tweet-alias, .tweet-time, .tweet-retweet, .tweet-favorite {
+	display: inline-block;
+	padding-right: 6px;
+	padding-left: 6px;
+}
+
+.tweet-retweet-image, .tweet-retweet-text, .tweet-favorite-image, .tweet-favorite-text {
+	display: inline-block;
+}
+
+.tweet-retweet, .tweet-favorite, .tweet-time {
+	float: right;
+}
+
+.twitter-photo {
+	position: relative;
+}
+
+.tweet-tweet {
+	float: right;
+	width: 85%;
+}
+
+.tweet-group {
+	padding-bottom: 5px;
+}
