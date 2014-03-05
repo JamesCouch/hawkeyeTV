@@ -29,7 +29,7 @@ define(
 
       initialize: function(options) {
 
-        this.remoteSocket = io.connect('http://173.28.211.34:3000');
+        this.remoteSocket = io.connect('http://172.23.70.176:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
         this.isMobile = this.checkForMobile();
         var selector;
@@ -176,6 +176,22 @@ define(
         if(chosenSelection == "twitter"){
           if(!this.isMobile){
             screenSelector = $('#twitter');
+            this.mainView.mouseovercard(screenSelector);
+          } else {
+
+          }
+        }
+        if(chosenSelection == "news"){
+          if(!this.isMobile){
+            screenSelector = $('#news');
+            this.mainView.mouseovercard(screenSelector);
+          } else {
+
+          }
+        }
+        if(chosenSelection == "home"){
+          if(!this.isMobile){
+            screenSelector = $('#home');
             this.mainView.mouseovercard(screenSelector);
           } else {
 

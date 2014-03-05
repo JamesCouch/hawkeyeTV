@@ -23,6 +23,12 @@ p{
 	padding-left: 20px;
 }
 
+#apps {
+ 	position: absolute;
+  	left: -200px;
+	margin-top: 300px;
+}
+
 #logo-txt {
 	font-family: 'Audiowide';
 	color: #000000;
@@ -41,8 +47,6 @@ p{
 	position: absolute;
 	left: 25px;
 	margin-top: 15px;
-/*	border-color: #BABABA;
-	border-bottom: 2px solid;*/
 }
 
 .forecast-block {
@@ -65,17 +69,7 @@ p{
 	width:150px;
 }
 
-#chrome,#settings,#twitter,#facebook {
-	width: 140px; /* you can use % */
-    height: auto;
-}
-
-#music {
-	width: 140px; /* you can use % */
-    height: auto;
-}
-
-#youtube {
+#chrome,#settings,#twitter,#facebook, #music, #youtube, #news, #home {
 	width: 140px; /* you can use % */
     height: auto;
 }
@@ -139,13 +133,19 @@ ul.video {
 		vertical-align: middle;
 		line-height: 50px;
 		height: 50px;
+		width: 100%;
 		font-size: 200%;
 		color: #FDD017;
 		border-color: #000000;
 		background: #000000;
 	}
 
-	#chrome,#youtube,#music,#settings,#facebook,#twitter {
+	#app-table {
+		position: absolute;
+  		left: 6%;
+	}
+
+	#chrome,#youtube,#music,#settings,#facebook,#twitter, #news, #home {
 		width: 120px; /* you can use % */
 	    height: 120px;
 	    border-color: #000000;

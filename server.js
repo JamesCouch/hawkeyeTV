@@ -49,12 +49,11 @@ search_spotify.search({ type: 'track', query: 'under pressure' }, function(err, 
           .on('finish', function () {
             spotify.disconnect();
           });
-          stream.pause();
       });
     });
 
 var io = require('socket.io').listen(server);
-var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter'];
+var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
 var ss;
 
 var passport = require('passport')
