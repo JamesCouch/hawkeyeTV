@@ -1,5 +1,5 @@
 
-define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone'], function($, _, TwTpl,Backbone) {
+define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone','socket'], function($, _, TwTpl,Backbone,socket) {
     'use strict';
 
     var TwitterView = Backbone.View.extend({
@@ -9,32 +9,17 @@ define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone'], func
       initialize: function(options) {
         _.bindAll(this);
 
-          
-        var error = function (err, response, body) {
-            console.log('ERROR [%s]', err);
-        };
-        var success = function (data) {
-            console.log('Data [%s]', data);
-        };
+          this.socket = options.socket;
 
-        var config = {
-            "consumerKey": "{hLYcPQ1m09bo29iTDDBeQ}",
-            "consumerSecret": "{vwyZeWxp8FKxzsWyIQsgWscHL9gO5Z9t5uDiAflCXk}",
-            "accessToken": "{84897293-RJWQgldHWvS5AsYdG76KA30XgjqFhwUjryiVzxWG7}",
-            "accessTokenSecret": "{h3CpbH6nQFw1bZJjjExSDEG3xNIm0RwqgZAuWuRqc8GEN}",
-            "callBackUrl": "{twitter/callback}"
-        }
+          var _this = this;
 
+          this.socket.on('sent-twitter-feed', function(data){
 
-        // var twitter = new Twitter();
-        // twitter.getUserTimeline({ screen_name: 'BoyCook', count: '10'}, error, success);
-        // twitter.getMentionsTimeline({ count: '10'}, error, success);
-        // twitter.getHomeTimeline({ count: '10'}, error, success);
-        // twitter.getReTweetsOfMe({ count: '10'}, error, success);
-        // twitter.getTweet({ id: '1111111111'}, error, success);
+            _this.renderTwitterFeed(data);
 
+          });
 
-
+          this.socket.emit('get-twitter-feed');
 
 
       },
@@ -47,6 +32,112 @@ define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone'], func
       render: function () {
         this.$el.html(this.template());
             return this;
+        },
+
+
+
+        renderTwitterFeed: function(data) {
+
+
+            console.log("response from server: ",data);
+
+            var current_time = new Date();
+            current_time = Date.parse(current_time);
+            console.log(current_time);
+
+            var list = document.getElementById('twitter-list');
+
+
+            for(var i=0;i<4;i++){
+
+              var entry = document.createElement('li');
+              entry.className = "list-group-item";
+
+              var tweetGroup = document.createElement('div');
+              tweetGroup.className = "tweet-group";
+
+              var header = document.createElement('div');
+              header.className = "tweet-header"
+
+              var name = document.createElement('p');
+              name.className = "tweet-name";
+              name.appendChild(document.createTextNode(data[i].user.name));
+
+              var alias = document.createElement('p');
+              alias.className = "tweet-alias";
+              alias.appendChild(document.createTextNode("@" + data[i].user.screen_name));
+
+              var time = document.createElement('p');
+              time.className = "tweet-time";
+              var tweetTime = data[i].created_at;
+              var d = Date.parse(tweetTime);
+              var timeDiff = current_time - d;
+
+              timeDiff /= 1000;
+              var seconds = Math.round(timeDiff % 60);
+              timeDiff = Math.floor(timeDiff / 60);
+              var minutes = Math.round(timeDiff % 60);
+              timeDiff = Math.floor(timeDiff / 60);
+              var hours = Math.round(timeDiff % 24);
+
+              time.appendChild(document.createTextNode(hours + "h"));
+
+              var retweetCount = document.createElement('div');
+              retweetCount.className = "tweet-retweet";
+
+              var retweetImage = document.createElement('img');
+              retweetImage.className = "tweet-retweet-image"
+              retweetImage.src = "/assets/img/retweet.png"
+              retweetImage.height = "21";
+              retweetImage.width = "21";
+
+              var retweetText = document.createElement('p');
+              retweetText.className = "tweet-retweet-text";
+              retweetText.appendChild(document.createTextNode(data[i].retweet_count));
+
+              retweetCount.appendChild(retweetImage);
+              retweetCount.appendChild(retweetText);
+
+              var favoriteCount = document.createElement('div');
+              favoriteCount.className = "tweet-favorite";
+
+              var favoriteImage = document.createElement('img');
+              favoriteImage.className = "tweet-favorite-image";
+              favoriteImage.src = "assets/img/favorite.png";
+              favoriteImage.height = "21";
+              favoriteImage.width = "21";
+
+              var favoriteText = document.createElement('p');
+              favoriteText.className = "tweet-favorite-text";
+              favoriteText.appendChild(document.createTextNode(data[i].favorite_count))
+
+              favoriteCount.appendChild(favoriteImage);
+              favoriteCount.appendChild(favoriteText);
+
+              header.appendChild(name);
+              header.appendChild(alias);
+              header.appendChild(time);
+              header.appendChild(retweetCount);
+              header.appendChild(favoriteCount);
+
+              var tweet = document.createElement('p');
+              tweet.className = "tweet-tweet";
+              tweet.appendChild(document.createTextNode(data[i].text));
+
+              tweetGroup.appendChild(header);
+              tweetGroup.appendChild(tweet);
+
+              var photo = document.createElement('img');
+              photo.className = "twitter-photo"
+              photo.src = data[i].user.profile_image_url;
+
+              entry.appendChild(tweetGroup);
+              entry.appendChild(photo);
+              list.appendChild(entry);
+            }
+
+
+
         },
 
     });
