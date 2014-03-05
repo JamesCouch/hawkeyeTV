@@ -18,3 +18,5 @@ settings/*
 
 spotify_appkey.key
 trace.txt
+
+config.js

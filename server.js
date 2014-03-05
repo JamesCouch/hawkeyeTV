@@ -21,7 +21,7 @@ var express = require('express'),
 var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
 
-search_spotify.search({ type: 'track', query: 'under pressure' }, function(err, data) {
+search_spotify.search({ type: 'track', query: 'selfie' }, function(err, data) {
     if ( err ) {
         console.log('Error occurred: ' + err);
         return;
@@ -31,7 +31,7 @@ search_spotify.search({ type: 'track', query: 'under pressure' }, function(err, 
 });
 
 
-    spotify.login("3lauqsap", "Spotify.pdagosti!", function (err, spotify) {
+    spotify.login( config.spotify_name, config.spotify_pass, function (err, spotify) {
       if (err) throw err;
       // first get a "Track" instance from the track URI
       spotify.get(uri, function (err, track) {
