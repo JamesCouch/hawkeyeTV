@@ -22,37 +22,49 @@ var express = require('express'),
     // Initialize sqlite and create our db if it doesnt exist
 var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
+var uri;
 
-search_spotify.search({ type: 'track', query: 'selfie' }, function(err, data) {
-    if ( err ) {
-        console.log('Error occurred: ' + err);
-        return;
-    }
-    uri = data.tracks[0].href;
-    console.log(data.tracks[0].href);
-});
+// search_spotify.search({ type: 'track', query: 'under pressure' }, function(err, data) {
+//     if ( err ) {
+//         console.log('Error occurred: ' + err);
+//         return;
+//     }
+//     uri = data.tracks[0].href;
+//     console.log(data.tracks[0].href);
+// });
 
+//     var lame = new Lame.Decoder();
+//     var spkr = new Speaker();
 
-    spotify.login( config.spotify_name, config.spotify_pass, function (err, spotify) {
-      if (err) throw err;
-      // first get a "Track" instance from the track URI
-      spotify.get(uri, function (err, track) {
-        if (err) throw err;
-        console.log('Playing: %s - %s', track.artist[0].name, track.name);
+//     spotify.login( config.spotify_name, config.spotify_pass, function (err, spotify) {
+//       if (err) throw err;
+//       // first get a "Track" instance from the track URI
+//       spotify.get(uri, function (err, track) {
+//         if (err) throw err;
+//         console.log('Playing: %s - %s', track.artist[0].name, track.name);
 
-        // play() returns a readable stream of MP3 audio data
-        stream = track.play();
-        stream.on('readable', function() {
-            console.log('GOT STREAM');
-        });
-        stream
-          .pipe(new Lame.Decoder())
-          .pipe(new Speaker())
-          .on('finish', function () {
-            spotify.disconnect();
-          });
-      });
-    });
+//         // play() returns a readable stream of MP3 audio data
+//         stream = track.play();
+//         stream
+//           .pipe(lame)
+//           .pipe(spkr)
+//           .on('finish', function () {
+//             spotify.disconnect();
+//           });
+//         setTimeout(function (){
+//             console.log("**************** BEFORE UNPIPE ******************");
+//             stream.unpipe(lame.unpipe(spkr.end()));
+//             console.log("**************** AFTER UNPIPE ******************");
+//             stream.pause();
+//         }, 9000);
+//         setTimeout(function (){
+//             console.log("**************** REPIPE ******************");
+//             stream.pipe(lame).pipe(new Speaker()).on('finish', function () {
+//                 spotify.disconnect();
+//             });
+//       }, 18000);
+//       });
+//     });
 
 var io = require('socket.io').listen(server);
 var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
@@ -140,21 +152,19 @@ passport.use(new FacebookStrategy({
         ss.emit('youtube-toggle-control', data);
     });
 
-    socket.on("play-youtube", function(data){
+    socket.on("play-youtube", function(data) {
+        console.log(data.id);
+        var id = data.id,
+        url = "http://www.youtube.com/watch?v="+id;
 
-    var id = data.id,
-         url = "http://www.youtube.com/watch?v="+id;
-
-    var runShell = new run_shell('youtube-dl',['-o','%(id)s.%(ext)s','-f','/18/22',url],
-        function (me, buffer) {
-            me.stdout += buffer.toString();
-            socket.emit("loading",{output: me.stdout});
-            console.log(me.stdout);
-         },
-        function () {
-            omx.start(id+'.mp4');
-        });
-
+        exec('youtube ' + url,
+            function (error, stdout, stderr) {
+                console.log('stdout: ' + stdout);
+                console.log('stderr: ' + stderr);
+                if (error !== null) {
+                    console.log('exec error: ' + error);
+                }
+            });
     });
 
  });
