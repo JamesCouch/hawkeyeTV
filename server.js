@@ -11,6 +11,8 @@ var express = require('express'),
     bcrypt = require("bcrypt"),
     sqlite = require("sqlite3"),
     _ = require("underscore"),
+    spawn = require('child_process').spawn,
+    omx = require('omxcontrol'),
     exec = require('child_process').exec,
 
 
@@ -138,6 +140,22 @@ passport.use(new FacebookStrategy({
         ss.emit('youtube-toggle-control', data);
     });
 
+    socket.on("play-youtube", function(data){
+
+    var id = data.id,
+         url = "http://www.youtube.com/watch?v="+id;
+
+    var runShell = new run_shell('youtube-dl',['-o','%(id)s.%(ext)s','-f','/18/22',url],
+        function (me, buffer) {
+            me.stdout += buffer.toString();
+            socket.emit("loading",{output: me.stdout});
+            console.log(me.stdout);
+         },
+        function () {
+            omx.start(id+'.mp4');
+        });
+
+    });
 
  });
 

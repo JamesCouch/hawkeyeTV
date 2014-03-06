@@ -18,7 +18,8 @@
 	"util": "~*",
 	"passport": "~*",
 	"passport-twitter": "~*",
-	"passport-facebook": "~*"
+	"passport-facebook": "~*",
+  "omxcontrol":"*"
   },
   "engines": {
     "node": "0.10.x",
