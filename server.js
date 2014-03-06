@@ -7,7 +7,7 @@ var express = require('express'),
     stream = new Stream(),
     spotify = require('spotify-web'),
     search_spotify = require('spotify'),
-    config = require("./config"),
+    // config = require("./config"),
     bcrypt = require("bcrypt"),
     sqlite = require("sqlite3"),
     _ = require("underscore"),
@@ -15,7 +15,7 @@ var express = require('express'),
 
 
     app = express(),
-    server = http.createServer(app).listen( process.env.PORT || config.port);
+    server = http.createServer(app).listen( process.env.PORT || 3000 );
 
     // Initialize sqlite and create our db if it doesnt exist
 var sqlite3 = require("sqlite3").verbose();
@@ -145,6 +145,28 @@ passport.use(new FacebookStrategy({
         ss.emit('youtube-toggle-control', data);
     });
 
+    socket.on("get-twitter-feed", function(data) {
+        db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
+
+            console.log("tw-token");
+            console.log(user.tw_token);
+
+            var token = user.tw_token;
+            var secret = user.tw_secret;
+
+            if(token === null){
+                 ss.emit('twitter-login');
+
+            }
+            else{
+
+
+
+             }
+
+        });
+    });
+
     socket.on("on-click-twitter", function(data) {
 
         console.log("clicked!");
@@ -179,11 +201,8 @@ passport.use(new FacebookStrategy({
 
                 T.get('statuses/home_timeline', { screen_name: 'jam_cooch' },  function (err, reply) {
                        console.log("reply is: ", err);
-                       // ss.emit('sent-twitter-feed', reply);
+                        ss.emit('sent-twitter-feed', reply);
                 });
-
-                ss.emit('render-twitter');
-
 
              }
 
@@ -219,8 +238,9 @@ app.use( express.methodOverride() );
 app.use( express.bodyParser() );            // Needed to parse POST data sent as JSON payload
 
 // Cookie config
-app.use( express.cookieParser( config.cookieSecret ) );           // populates req.signedCookies
-app.use( express.cookieSession( config.sessionSecret ) );         // populates req.session, needed for CSRF
+// 
+//app.use( express.cookieParser( config.cookieSecret ) );           // populates req.signedCookies
+// app.use( express.cookieSession( config.sessionSecret ) );         // populates req.session, needed for CSRF
 
 // We need serverside view templating to initially set the CSRF token in the <head> metadata
 // Otherwise, the html could just be served statically from the public directory

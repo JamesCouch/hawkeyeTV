@@ -29,7 +29,7 @@ define(
 
       initialize: function(options) {
 
-        this.remoteSocket = io.connect('http://172.23.70.176:3000');
+        this.remoteSocket = io.connect('http://192.168.2.11:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
         this.isMobile = this.checkForMobile();
         var selector;
@@ -46,6 +46,9 @@ define(
           this.socket.on('connect', function(data){
             _this.socket.emit('screen');
           });
+
+
+
         }
 
         //Socket listeners for the screen
@@ -74,13 +77,11 @@ define(
         this.socket.on('render-twitter', function(data){
           console.log("twitter render");
           
-          this.$twitter = $('.tw-feed');
-          this.twitterView = new TwitterView({socket: this.socket});
-          this.twitterView.$el.show();
-          this.$twitter.append(this.twitterView.render().$el);
+          _this.twitterView.getTwitterFeed();
 
 
         });
+
 
         this.views = [];
         this.$body = $("body");
@@ -99,8 +100,12 @@ define(
         this.$body.prepend(this.mainView.render(this.state).$el);
 
         if(!this.isMobile){
-
+          this.$twitter = $('.tw-feed');
+          this.twitterView = new TwitterView({socket: this.socket});
+          this.twitterView.$el.show();
+          this.$twitter.append(this.twitterView.render().$el);
         }
+
 
         $('#searchBar').bind('input', function(e) {
             var searchBarData = $('#searchBar').val();

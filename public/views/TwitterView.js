@@ -19,7 +19,6 @@ define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone','socke
 
           });
 
-          this.socket.emit('get-twitter-feed');
 
 
       },
@@ -30,8 +29,14 @@ define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone','socke
       },
       
       render: function () {
+        console.log("render twitter");
         this.$el.html(this.template());
             return this;
+        },
+
+        getTwitterFeed: function() {
+          this.socket.emit('get-twitter-feed');
+
         },
 
 
