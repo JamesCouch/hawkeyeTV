@@ -53,7 +53,7 @@ define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone','socke
             var list = document.getElementById('twitter-list');
 
 
-            for(var i=0;i<4;i++){
+            for(var i=0;i<10;i++){
 
               var entry = document.createElement('li');
               entry.className = "list-group-item";
