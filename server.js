@@ -33,7 +33,11 @@ var express = require('express'),
 
     app = express(),
     server = http.createServer(app).listen( process.env.PORT || config.port );
-var uri;
+
+    var io = require('socket.io').listen(server);
+    var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
+    var ss;
+    var uri;
 
     spotify.login( config.spotify_name, config.spotify_pass, function (err, spotify) {
       if (err) throw err;
@@ -64,10 +68,6 @@ var uri;
       }, 9000);
       });
     });
-
-var io = require('socket.io').listen(server);
-var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
-var ss;
 
 var passport = require('passport')
     , TwitterStrategy = require('passport-twitter').Strategy
@@ -153,9 +153,7 @@ passport.use(new FacebookStrategy({
     });
 
     socket.on("play-youtube", function(data) {
-        console.log(data.id);
-        var id = data.id,
-        url = "http://www.youtube.com/watch?v="+id;
+        var url = "http://www.youtube.com/watch?v=" + data.id;
 
         exec('youtube ' + url,
             function (error, stdout, stderr) {
@@ -186,12 +184,16 @@ passport.use(new FacebookStrategy({
                     access_token_secret:  user.tw_secret
                 });
                 T.get('statuses/home_timeline', function (err, reply) {
-                       console.log("reply is: ", reply);
+                    if (err) {
+                        console.log(err);
+                    } else {
                         ss.emit('sent-twitter-feed', reply);
+                    }
                 });
              }
         });
     });
+
  });
 
 // Create our profiles table if it doesn't exist
@@ -280,18 +282,19 @@ app.post("/api/auth/update", function(req, res){
 });
 
 app.post("/api/auth/search", function(req, res){
-    search_spotify.search({ type: 'track', query: 'under pressure' }, function(err, data) {
-    if ( err ) {
-        console.log('Error occurred: ' + err);
-        return;
-    }
-        uri = data.tracks[0].href;
-        console.log(data.tracks[0].href);
+    search_spotify.search({ type: 'track', query: res.body.query }, function(err, data) {
+        if ( err ) {
+            console.log('Error occurred: ' + err);
+            return;
+        } else {
+            res.json({ first: data.tracks[0], second: data.tracks[1], thrid: data.tracks[2],
+            fourth: data.tracks[3], fifth: data.tracks[4] });
+        }
     });
 });
 
 app.post("/api/auth/play", function(){
-    spotify.login("3lauqsap", "Spotify.pdagosti!", function (err, spotify) {
+    spotify.login(config.spotify_name, config.spotify_pass, function (err, spotify) {
       if (err) throw err;
       // first get a "Track" instance from the track URI
       spotify.get(uri, function (err, track) {
