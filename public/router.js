@@ -29,7 +29,7 @@ define(
 
       initialize: function(options) {
 
-        this.remoteSocket = io.connect('http://192.168.2.3:3000');
+        this.remoteSocket = io.connect('http://192.168.1.102:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
         this.isMobile = this.checkForMobile();
         var selector;
@@ -65,6 +65,18 @@ define(
         this.socket.on('youtube-control', function(data){
         });
 
+        this.socket.on('twitter-login', function(data){
+          console.log("login!");
+          alert("Please log in with the settings page");
+        });
+
+        this.socket.on('render-twitter', function(data){
+          console.log("twitter render");
+          
+          _this.twitterView.getTwitterFeed();
+        });
+
+
         this.views = [];
         this.$body = $("body");
         this.$header = $("header");
@@ -83,7 +95,7 @@ define(
 
         if(!this.isMobile){
           this.$twitter = $('.tw-feed');
-          this.twitterView = new TwitterView();
+          this.twitterView = new TwitterView({socket: this.socket});
           this.twitterView.$el.show();
           this.$twitter.append(this.twitterView.render().$el);
         }
@@ -175,8 +187,15 @@ define(
         }
         if(chosenSelection == "twitter"){
           if(!this.isMobile){
+
+
+            console.log("WWEOO");
+            this.socket.emit('on-click-twitter');
+
             screenSelector = $('#twitter');
             this.mainView.mouseovercard(screenSelector);
+
+
           } else {
 
           }

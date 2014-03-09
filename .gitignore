@@ -20,3 +20,5 @@ spotify_appkey.key
 trace.txt
 
 config.js
+
+npm-debug.log

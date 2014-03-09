@@ -1,70 +1,69 @@
 
 var express = require('express'),
     http = require('http'),
+    bcrypt = require("bcrypt"),
+    
+    // Setup the audio stream decoder, system audio speaker,
+    // and the passthrough stream for the audio passed from spotify
     Lame = require('lame'),
+    lame = new Lame.Decoder(),
     Speaker = require('speaker'),
+    spkr = new Speaker(),
     Stream = require('stream'),
     stream = new Stream(),
+    
+    // Initialize the spotify search engine and the spotify-web
+    // interface that will pull track info and streams
     spotify = require('spotify-web'),
     search_spotify = require('spotify'),
+    
+    // Load the config file with app settings
     config = require("./config"),
-    bcrypt = require("bcrypt"),
+
+     // Initialize sqlite and create our db if it doesnt exist
     sqlite = require("sqlite3"),
+    sqlite3 = require("sqlite3").verbose(),
+    db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db'),
+
+    // Other libs
     _ = require("underscore"),
-    spawn = require('child_process').spawn,
     omx = require('omxcontrol'),
     exec = require('child_process').exec,
-
+    Twit = require('twit'),    
 
     app = express(),
-    server = http.createServer(app).listen( process.env.PORT || config.port);
-
-    // Initialize sqlite and create our db if it doesnt exist
-var sqlite3 = require("sqlite3").verbose();
-var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
+    server = http.createServer(app).listen( process.env.PORT || config.port );
 var uri;
 
-// search_spotify.search({ type: 'track', query: 'under pressure' }, function(err, data) {
-//     if ( err ) {
-//         console.log('Error occurred: ' + err);
-//         return;
-//     }
-//     uri = data.tracks[0].href;
-//     console.log(data.tracks[0].href);
-// });
+    spotify.login( config.spotify_name, config.spotify_pass, function (err, spotify) {
+      if (err) throw err;
+      // first get a "Track" instance from the track URI
+      spotify.get(uri, function (err, track) {
+        if (err) throw err;
+        console.log('Playing: %s - %s', track.artist[0].name, track.name);
 
-//     var lame = new Lame.Decoder();
-//     var spkr = new Speaker();
-
-//     spotify.login( config.spotify_name, config.spotify_pass, function (err, spotify) {
-//       if (err) throw err;
-//       // first get a "Track" instance from the track URI
-//       spotify.get(uri, function (err, track) {
-//         if (err) throw err;
-//         console.log('Playing: %s - %s', track.artist[0].name, track.name);
-
-//         // play() returns a readable stream of MP3 audio data
-//         stream = track.play();
-//         stream
-//           .pipe(lame)
-//           .pipe(spkr)
-//           .on('finish', function () {
-//             spotify.disconnect();
-//           });
-//         setTimeout(function (){
-//             console.log("**************** BEFORE UNPIPE ******************");
-//             stream.unpipe(lame.unpipe(spkr.end()));
-//             console.log("**************** AFTER UNPIPE ******************");
-//             stream.pause();
-//         }, 9000);
-//         setTimeout(function (){
-//             console.log("**************** REPIPE ******************");
-//             stream.pipe(lame).pipe(new Speaker()).on('finish', function () {
-//                 spotify.disconnect();
-//             });
-//       }, 18000);
-//       });
-//     });
+        // play() returns a readable stream of MP3 audio data
+        stream = track.play();
+        stream
+          .pipe(lame)
+          .pipe(spkr)
+          .on('finish', function () {
+            spotify.disconnect();
+          });
+        setTimeout(function (){
+            stream.unpipe(lame.unpipe(spkr.end()));
+            console.log("**************** AFTER UNPIPE ******************");
+            stream.pause();
+        }, 5000);
+        setTimeout(function (){
+            console.log("**************** REPIPE ******************");
+            spkr = new Speaker();
+            stream.pipe(lame).pipe(spkr).on('finish', function () {
+                spotify.disconnect();
+            });
+      }, 9000);
+      });
+    });
 
 var io = require('socket.io').listen(server);
 var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
@@ -75,11 +74,12 @@ var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy;
 
     passport.use(new TwitterStrategy({
-        consumerKey: 'hLYcPQ1m09bo29iTDDBeQ',
-        consumerSecret: 'vwyZeWxp8FKxzsWyIQsgWscHL9gO5Z9t5uDiAflCXk',
+        consumerKey: config.tw_consumerKey,
+        consumerSecret: config.tw_consumerSecret,
         callbackURL: "twitter/callback"
     },
     function(token, tokenSecret, profile, done) {
+
         db.run("UPDATE profiles SET tw_token = ?, tw_secret =? WHERE id = ?", [ token, tokenSecret, "1" ], function(err){
             if(err) {
                 console.log("Failed to load TW oauth token in the database");
@@ -90,8 +90,8 @@ var passport = require('passport')
 ));
 
 passport.use(new FacebookStrategy({
-    clientID: '586126158139160',
-    clientSecret: '3dbf359ef5d004110e857fe507df148d',
+    clientID: config.fb_clientID,
+    clientSecret: config.fb_clientSecret,
     callbackURL: "/auth/facebook/callback"
 },
     function(accessToken, refreshToken, profile, done) {
@@ -167,6 +167,31 @@ passport.use(new FacebookStrategy({
             });
     });
 
+    socket.on("on-click-twitter", function(data) {
+
+        // we need to check if they have a token and token secret
+        //if they do have those,  we create an object out of it. We should do this on server start
+        //When the user clicks on the twitter button, and there is no object, we redirect them to login
+        //if there is an object, we send them data. 
+
+        db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
+            if(user.tw_token === null){
+                 ss.emit('twitter-login');
+            }
+            else{
+                var T = new Twit({
+                    consumer_key:         config.tw_consumerKey,
+                    consumer_secret:      config.tw_consumerSecret,
+                    access_token:         user.tw_token,
+                    access_token_secret:  user.tw_secret
+                });
+                T.get('statuses/home_timeline', function (err, reply) {
+                       console.log("reply is: ", reply);
+                        ss.emit('sent-twitter-feed', reply);
+                });
+             }
+        });
+    });
  });
 
 // Create our profiles table if it doesn't exist
@@ -192,8 +217,9 @@ app.use( express.methodOverride() );
 app.use( express.bodyParser() );            // Needed to parse POST data sent as JSON payload
 
 // Cookie config
+// 
 app.use( express.cookieParser( config.cookieSecret ) );           // populates req.signedCookies
-app.use( express.cookieSession( config.sessionSecret ) );         // populates req.session, needed for CSRF
+ app.use( express.cookieSession( config.sessionSecret ) );         // populates req.session, needed for CSRF
 
 // We need serverside view templating to initially set the CSRF token in the <head> metadata
 // Otherwise, the html could just be served statically from the public directory
@@ -253,8 +279,15 @@ app.post("/api/auth/update", function(req, res){
     });
 });
 
-app.post("/api/auth/search", function(){
-
+app.post("/api/auth/search", function(req, res){
+    search_spotify.search({ type: 'track', query: 'under pressure' }, function(err, data) {
+    if ( err ) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+        uri = data.tracks[0].href;
+        console.log(data.tracks[0].href);
+    });
 });
 
 app.post("/api/auth/play", function(){
@@ -263,9 +296,6 @@ app.post("/api/auth/play", function(){
       // first get a "Track" instance from the track URI
       spotify.get(uri, function (err, track) {
         if (err) throw err;
-        console.log('Playing: %s - %s', track.artist[0].name, track.name);
-
-        // play() returns a readable stream of MP3 audio data
         track.play()
           .pipe(new lame.Decoder())
           .pipe(new Speaker())
