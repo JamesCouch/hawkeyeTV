@@ -18,8 +18,9 @@ define(
     'views/SettingsView',
     'views/SearchBarView',
     'views/TwitterView',
+    'views/FacebookView',
 
-], function(app, $, _, Backbone, Socket, bootstrap, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView,TwitterView){
+], function(app, $, _, Backbone, Socket, bootstrap, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView,TwitterView,FacebookView){
 
     var WebRouter = Backbone.Router.extend({
 
@@ -29,7 +30,7 @@ define(
 
       initialize: function(options) {
 
-        this.remoteSocket = io.connect('http://192.168.2.11:3000');
+        this.remoteSocket = io.connect('http://192.168.2.2:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
         this.isMobile = this.checkForMobile();
         var selector;
@@ -73,29 +74,49 @@ define(
           console.log("login!");
           alert("Please log in with the settings page");
         });
+        this.socket.on('facebook-login', function(data){
+          console.log("login!");
+          alert("Please log in with the settings page");
+        });
+        this.socket.on('log-out-facebook', function(data){
 
-        this.socket.on('render-twitter', function(data){
-          console.log("twitter render");
-          
-          _this.twitterView.getTwitterFeed();
+
+          $('.fb-feed').html('<div id="facebook-list"><div id="fb_feed"></div></div>');
 
 
         });
+
+        this.socket.on('log-out-twitter', function(data){
+ 
+          $('.tw-feed').html('<ul class="list-group" id="twitter-list"></ul>');
+
+        });
+
+
+
+
+
 
 
         this.views = [];
         this.$body = $("body");
         this.$header = $("header");
 
-        this.mainView = new MainView({socket: this.socket, mobile: this.isMobile });
-        this.mainView.on('renderSelection',this.onRenderSelection,this);
-        this.views.push(this.mainView);
 
-        this.settingsView = new SettingsView();
+        this.settingsView = new SettingsView({socket: this.remoteSocket});
         this.settingsView.on('refresh',this.refresh,this);
         this.settingsView.$el.hide();
         this.$body.prepend(this.settingsView.render().$el);
         this.views.push(this.settingsView);
+
+
+        this.mainView = new MainView({socket: this.socket, mobile: this.isMobile });
+        this.mainView.on('renderSelection',this.onRenderSelection,this);
+        this.views.push(this.mainView);
+
+
+
+
 
         this.$body.prepend(this.mainView.render(this.state).$el);
 
@@ -104,7 +125,23 @@ define(
           this.twitterView = new TwitterView({socket: this.socket});
           this.twitterView.$el.show();
           this.$twitter.append(this.twitterView.render().$el);
+
+          this.$facebook = $('.fb-feed');
+          this.facebookView = new FacebookView({socket: this.socket});
+          this.facebookView.$el.show();
+          this.$facebook.append(this.facebookView.render().$el);
+
+
         }
+
+
+        this.socket.on('ss-log-in-facebook', function(data){
+
+           window.location = "/auth/facebook";
+
+
+        });
+
 
 
         $('#searchBar').bind('input', function(e) {
@@ -169,6 +206,9 @@ define(
         
         }
         if(chosenSelection == "settings"){
+            this.socket.emit('get-twitter-status'); //Check if logged in or not
+            this.socket.emit('get-facebook-status'); //Check if logged in or not
+
           if(!this.isMobile){
             screenSelector = $('#settings');
             this.mainView.mouseovercard(screenSelector);
@@ -187,6 +227,13 @@ define(
         if(chosenSelection == "facebook"){
           if(!this.isMobile){
             screenSelector = $('#facebook');
+
+            $('.tw-feed').html('<ul class="list-group" id="twitter-list"></ul>');
+
+
+
+            this.socket.emit('on-click-facebook');
+
             this.mainView.mouseovercard(screenSelector);
           } else {
 
@@ -195,8 +242,9 @@ define(
         if(chosenSelection == "twitter"){
           if(!this.isMobile){
 
+            $('.fb-feed').html('<div id="facebook-list"><div id="fb_feed"></div></div>');
 
-            console.log("WWEOO");
+
             this.socket.emit('on-click-twitter');
 
             screenSelector = $('#twitter');

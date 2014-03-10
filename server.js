@@ -23,6 +23,7 @@ var express = require('express'),
 var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
 var Twit = require('twit');
+var FB = require("fb");
 
 // search_spotify.search({ type: 'track', query: 'selfie' }, function(err, data) {
 //     if ( err ) {
@@ -58,6 +59,7 @@ var Twit = require('twit');
 var io = require('socket.io').listen(server);
 var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
 var ss;
+var ms;
 
 var passport = require('passport')
     , TwitterStrategy = require('passport-twitter').Strategy
@@ -112,6 +114,7 @@ passport.use(new FacebookStrategy({
 
     socket.on("remote", function(data) {
         socket.type = "remote";
+        ms = socket;
         console.log("Remote ready...");
     });
 
@@ -147,17 +150,114 @@ passport.use(new FacebookStrategy({
         ss.emit('youtube-toggle-control', data);
     });
 
+    socket.on("log-in-facebook", function(data) {
+        console.log("log in fb");
+        ss.emit('ss-log-in-facebook', data);
+    });
+
+
+
+    socket.on("get-facebook-status",function(data){
+
+        db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
+
+            var token = user.fb_token;
+            var secret = user.fb_refresh;
+
+            if(typeof ms != "undefined"){
+
+                if(token === null){
+
+                     ms.emit('sent-facebook-status',"logged_out");
+
+                }
+                else{
+                     ms.emit('sent-facebook-status',"logged_in");
+
+                 }
+            }
+
+        });
+
+
+    });
+
+
+    socket.on("log-out-facebook",function(data){
+
+        db.run("UPDATE profiles SET fb_token = ?, fb_refresh =? WHERE id = ?", [ null, null, "1" ], function(err){
+            if(err) {
+                console.log("Failed to load TW oauth token in the database");
+            } 
+        });
+        ss.emit('log-out-facebook');
+
+
+        if(typeof ms != "undefined"){
+
+            ms.emit('sent-facebook-status-status',"logged_out");
+
+        }
+
+
+    });
+
+
+
+
+
+
+    socket.on("log-out-twitter",function(data){
+
+        db.run("UPDATE profiles SET tw_token = ?, tw_secret =? WHERE id = ?", [ null, null, "1" ], function(err){
+            if(err) {
+                console.log("Failed to load TW oauth token in the database");
+            } 
+        });
+
+        ss.emit('log-out-twitter');
+
+        if(typeof ms != "undefined"){
+
+            ms.emit('sent-twitter-status',"logged_out");
+
+
+        }
+
+
+    });
+
+    socket.on("get-twitter-status",function(data){
+
+        db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
+
+            console.log("tw-token");
+            console.log(user.tw_token);
+
+            var token = user.tw_token;
+            var secret = user.tw_secret;
+
+            if(typeof ms != "undefined"){
+
+                if(token === null){
+
+                     ms.emit('sent-twitter-status',"logged_out");
+
+                }
+                else{
+                     ms.emit('sent-twitter-status',"logged_in");
+
+                 }
+            }
+
+        });
+
+
+    });
+
 
 
     socket.on("on-click-twitter", function(data) {
-
-        console.log("clicked!");
-
-
-        // we need to check if they have a token and token secret
-        //if they do have those,  we create an object out of it. We should do this on server start
-        //When the user clicks on the twitter button, and there is no object, we redirect them to login
-        //if there is an object, we send them data. 
 
 
         db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
@@ -190,6 +290,38 @@ passport.use(new FacebookStrategy({
 
 
         });
+
+    });
+
+
+        socket.on("on-click-facebook", function(data) {
+
+
+            db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
+
+
+                var token = user.fb_token;
+                var secret = user.fb_refresh;
+
+                if(token === null){
+                     ss.emit('facebook-login');
+
+                }
+                else{
+
+                    FB.setAccessToken(token);
+
+                    FB.api('/me/home', function(r) { 
+
+                        ss.emit('sent-facebook-feed',r);
+
+
+                    })
+
+                 }
+
+
+            });
 
 
     });
@@ -329,10 +461,10 @@ app.get('/auth/twitter/callback',
   passport.authenticate('twitter', { successRedirect: '/',
                                      failureRedirect: '/' }));
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook',{scope: 'read_stream'}));
 
 app.get('/auth/facebook/callback', 
-  passport.authenticate('facebook', { successRedirect: '/',
+  passport.authenticate('facebook',{successRedirect: '/',
                                      failureRedirect: '/' }));
 
 

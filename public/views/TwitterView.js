@@ -20,7 +20,6 @@ define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone','socke
           });
 
 
-
       },
 
       events: {
@@ -50,7 +49,9 @@ define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone','socke
             current_time = Date.parse(current_time);
             console.log(current_time);
 
-            var list = document.getElementById('twitter-list');
+            // var list = document.getElementById('twitter-list');
+            var list = document.createElement('div');
+
 
 
             for(var i=0;i<10;i++){
@@ -139,7 +140,20 @@ define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone','socke
               entry.appendChild(tweetGroup);
               entry.appendChild(photo);
               list.appendChild(entry);
+
+
+
             }
+
+
+            $('#twitter-list').animate({opacity:0}, 500, function(){
+              $('#twitter-list').html(list);
+              
+              $("#twitter-list").css("height","auto"); 
+            });
+            
+            $('#twitter-list').animate({opacity:1}, 500);
+            
 
 
 
