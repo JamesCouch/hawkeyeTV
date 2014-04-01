@@ -30,7 +30,7 @@ define(
 
       initialize: function(options) {
 
-        this.remoteSocket = io.connect('http://192.168.2.2:3000');
+        this.remoteSocket = io.connect('http://172.23.71.27:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
         this.isMobile = this.checkForMobile();
         var selector;

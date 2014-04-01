@@ -19,11 +19,26 @@ define([ 'app', 'jquery','underscore', 'text!templates/main.html','text!template
           _this.render("tv");
         });
 
+        this.socket.on('bg-change', function(data){
+
+
+
+        });
+
       },
 
       events: {
         "click #selection-box"     : "onSelectionClick",
+        "change #bg-dropdown"     : "onBackgroundChange",
         "mouseover img"            : "mouseovercard"
+      },
+
+      onBackgroundChange: function() {
+
+
+        alert("EHY");
+
+
       },
 
       onSelectionClick: function (e) {
