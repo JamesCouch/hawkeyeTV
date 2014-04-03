@@ -5,9 +5,10 @@
 require([
     "app",
     "router",
-    "models/SettingsModel"
+    "models/SettingsModel",
+    "models/SpotifyModel"
 ],
-function(app, WebRouter, SettingsModel) {
+function(app, WebRouter, SettingsModel, SpotifyModel) {
 
     // Just use GET and POST to support all browsers
     Backbone.emulateHTTP = true;
@@ -22,4 +23,3 @@ function(app, WebRouter, SettingsModel) {
     // root folder to '/' by default.  Change in app.js.
     Backbone.history.start({ pushState: true, root: app.root });
 });
-

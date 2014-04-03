@@ -25,7 +25,7 @@ define([
             'click #nw-btn'           : 'toggleActive'
         },
 
-        saveSettings: function(evt){   
+        saveSettings: function(evt){
             if(evt) evt.preventDefault();
             if(this.$("#settings-form").parsley('validate')){
                 app.settings.update({
@@ -42,7 +42,7 @@ define([
                     }
                 });
                 this.closeSettings();
-                this.trigger('refresh');
+                this.trigger('refresh', "tv");
             } else {
                 // Invalid clientside validations thru parsley
                 if(DEBUG) console.log("Did not pass clientside validation");

@@ -9,8 +9,13 @@ define([
         initialize: function(){
             _.bindAll(this);
 
-            this.profile = new ProfileModel();
-            this.openProfile({id: "1"});
+            this.tracks = {
+                first: "",
+                second: "",
+                third: "",
+                fourth: "",
+                fifth: ""
+            };
         },
 
         url: function(){
@@ -26,9 +31,8 @@ define([
                 type: 'POST',
                 data:  JSON.stringify( _.omit(opts, 'method') ),
                 success: function(res){
-
+                  this.tracks = res;
                 }, error: function(res) {
-                    
                 },
             });
         },
@@ -39,9 +43,17 @@ define([
 
         play: function(opts, callback, args){
             this.post(_.extend(opts, { method: "play"}), callback);
+        },
+
+        pause: function(opts, callback, args){
+            this.post(_.extend(opts, { method: "pause"}), callback);
+        },
+
+        resume: function(opts, callback, args){
+            this.post(_.extend(opts, { method: "resume"}), callback);
         }
 
     });
-    
+
     return SpotifyModel;
 });

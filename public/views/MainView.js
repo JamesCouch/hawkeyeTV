@@ -18,7 +18,7 @@ define([ 'app', 'jquery','underscore', 'text!templates/main.html','text!template
           app.settings.openProfile({id: "1"});
           _this.render("tv");
         });
-
+        
       },
 
       events: {
@@ -40,7 +40,7 @@ define([ 'app', 'jquery','underscore', 'text!templates/main.html','text!template
           $(event).parent().addClass('selected');
         }
       },
-      
+
       render: function (state) {
         if (state == "tv"){
           this.$el.html(this.template());
@@ -55,7 +55,7 @@ define([ 'app', 'jquery','underscore', 'text!templates/main.html','text!template
 
         return this;
       },
-      
+
     });
 
     return MainView;

@@ -1,0 +1,32 @@
+
+<div class="modal fade" id="spotifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="settings-title" id="settings-title">Spotify</h4>
+            </div>
+        <div class="modal-body">
+        <div class="height:50px;">
+            <ul id="settings-errors" class="parsley-error-list"></ul>
+        </div>
+        <form id="spotify-form" class="form" data-validate="parsley">
+            <fieldset>
+                <div class="control-group">
+                    <div class="controls">
+                        <input class="input-medium" id="search-input"
+                        placeholder="Search Spotify..." name="search"
+                        value="" data-required="true" data-notblank="true">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <br>
+                <a href="#" id="search-btn" class="btn btn-primary btn-sm" data-bypass>Search</a>
+                <a href="#" id="state-btn" class="btn btn-primary btn-sm" data-bypass>Play</a>
+                <a href="#" id="close-btn" class="btn btn-primary btn-sm" data-bypass>Close</a>
+            </fieldset>
+        </form>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>

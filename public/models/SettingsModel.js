@@ -17,7 +17,7 @@ define([
             return app.API + '/auth';
         },
 
-        setProfile: function(res) { 
+        setProfile: function(res) {
             this.profile.setDetails(res.profile);
         },
 
@@ -47,6 +47,6 @@ define([
         }
 
     });
-    
+
     return SettingsModel;
 });

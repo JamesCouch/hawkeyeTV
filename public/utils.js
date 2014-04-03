@@ -6,11 +6,11 @@
 require(['app'], function(app){
 
     var utils = utils || {
-        
+
         /*
          * ERRORS and ALERT HANDLING
-         */ 
-         
+         */
+
         // Default alert when there is a validation error
         displayValidationErrors: function (messages) {
             for (var key in messages) {
@@ -32,8 +32,8 @@ require(['app'], function(app){
             controlGroup.removeClass('error');
             $('.help-block', controlGroup).html('');
         },
-        
-        
+
+
         jsonResponse: function(code){
             var jsonCodes = [];
             jsonCodes[400] = 'Unrecognized command';
@@ -104,5 +104,5 @@ require(['app'], function(app){
     };
 
     return utils;
-    
+
 });

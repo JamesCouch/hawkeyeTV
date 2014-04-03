@@ -8,7 +8,7 @@ define([ 'jquery','underscore', 'text!templates/time.html', 'backbone'], functio
       initialize: function(options) {
         _.bindAll(this);
       },
-      
+
       render: function () {
         this.$el.html(this.template());
         this.setTimeStamp();

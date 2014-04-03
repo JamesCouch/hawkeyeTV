@@ -9,11 +9,11 @@ define([
             _.bindAll(this);
 
             this.details = { 
-                id: "0", 
-                zipcode: "52242", 
+                id: "0",
+                zipcode: "52242",
                 theme: "default",
                 news: "disabled",
-            };    
+            };
         },
 
         url: function(){
@@ -25,6 +25,6 @@ define([
         }
 
     });
-    
+
     return ProfileModel;
 });

@@ -2,7 +2,7 @@
 var express = require('express'),
     http = require('http'),
     bcrypt = require("bcrypt"),
-    
+
     // Setup the audio stream decoder, system audio speaker,
     // and the passthrough stream for the audio passed from spotify
     Lame = require('lame'),
@@ -11,12 +11,12 @@ var express = require('express'),
     spkr = new Speaker(),
     Stream = require('stream'),
     stream = new Stream(),
-    
+
     // Initialize the spotify search engine and the spotify-web
     // interface that will pull track info and streams
     spotify = require('spotify-web'),
     search_spotify = require('spotify'),
-    
+
     // Load the config file with app settings
     config = require("./config"),
 
@@ -29,45 +29,16 @@ var express = require('express'),
     _ = require("underscore"),
     omx = require('omxcontrol'),
     exec = require('child_process').exec,
-    Twit = require('twit'),    
+    Twit = require('twit'),
 
     app = express(),
     server = http.createServer(app).listen( process.env.PORT || config.port );
 
-    var io = require('socket.io').listen(server);
-    var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
-    var ss;
-    var uri;
-
-    spotify.login( config.spotify_name, config.spotify_pass, function (err, spotify) {
-      if (err) throw err;
-      // first get a "Track" instance from the track URI
-      spotify.get(uri, function (err, track) {
-        if (err) throw err;
-        console.log('Playing: %s - %s', track.artist[0].name, track.name);
-
-        // play() returns a readable stream of MP3 audio data
-        stream = track.play();
-        stream
-          .pipe(lame)
-          .pipe(spkr)
-          .on('finish', function () {
-            spotify.disconnect();
-          });
-        setTimeout(function (){
-            stream.unpipe(lame.unpipe(spkr.end()));
-            console.log("**************** AFTER UNPIPE ******************");
-            stream.pause();
-        }, 5000);
-        setTimeout(function (){
-            console.log("**************** REPIPE ******************");
-            spkr = new Speaker();
-            stream.pipe(lame).pipe(spkr).on('finish', function () {
-                spotify.disconnect();
-            });
-      }, 9000);
-      });
-    });
+var io = require('socket.io').listen(server);
+var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
+var ss;
+var uri;
+var playback = false;
 
 var passport = require('passport')
     , TwitterStrategy = require('passport-twitter').Strategy
@@ -83,7 +54,7 @@ var passport = require('passport')
         db.run("UPDATE profiles SET tw_token = ?, tw_secret =? WHERE id = ?", [ token, tokenSecret, "1" ], function(err){
             if(err) {
                 console.log("Failed to load TW oauth token in the database");
-            } 
+            }
         });
         done(null);
     }
@@ -99,7 +70,7 @@ passport.use(new FacebookStrategy({
         db.run("UPDATE profiles SET fb_token = ?, fb_refresh =? WHERE id = ?", [ accessToken, refreshToken, "1" ], function(err){
             if(err) {
                 console.log("Failed to load FB oauth token in the database");
-            } 
+            }
         });
         done(null);
     }
@@ -108,7 +79,7 @@ passport.use(new FacebookStrategy({
  //Socket.io Server
  io.set('log level', 1);
  io.sockets.on('connection', function (socket) {
-    
+
     socket.on("screen", function(data) {
         socket.type = "screen";
         ss = socket;
@@ -170,7 +141,7 @@ passport.use(new FacebookStrategy({
         // we need to check if they have a token and token secret
         //if they do have those,  we create an object out of it. We should do this on server start
         //When the user clicks on the twitter button, and there is no object, we redirect them to login
-        //if there is an object, we send them data. 
+        //if there is an object, we send them data.
 
         db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
             if(user.tw_token === null){
@@ -219,7 +190,7 @@ app.use( express.methodOverride() );
 app.use( express.bodyParser() );            // Needed to parse POST data sent as JSON payload
 
 // Cookie config
-// 
+//
 app.use( express.cookieParser( config.cookieSecret ) );           // populates req.signedCookies
  app.use( express.cookieSession( config.sessionSecret ) );         // populates req.session, needed for CSRF
 
@@ -240,10 +211,10 @@ app.get("/", function(req, res){
 db.serialize(function(){
     db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, profile){
         if(profile){
-            console.log("DB has first record");  
-        } else {  
-            db.run("INSERT INTO profiles (zipcode, news, theme) VALUES (?,?,?)", 
-                [ "52242", "disabled", "default"], function(err){ 
+            console.log("DB has first record");
+        } else {
+            db.run("INSERT INTO profiles (zipcode, news, theme) VALUES (?,?,?)",
+                [ "52242", "disabled", "default"], function(err){
                 if(err){
                     console.log(err);
                 }
@@ -255,25 +226,25 @@ db.serialize(function(){
 app.post("/api/auth/open", function(req, res){
     db.get("SELECT * FROM profiles WHERE id = ?", [ req.body.id ], function(err, profile){
     if(profile){
-        res.json({ profile: profile });   
-    } else {  
-        res.json({ error: "Default profile" });   
+        res.json({ profile: profile });
+    } else {
+        res.json({ error: "Default profile" });
     }
     });
 });
 
 app.post("/api/auth/update", function(req, res){
     db.serialize(function(){
-        db.run("UPDATE profiles SET zipcode = ?, news = ?, theme = ? WHERE id = ?", 
+        db.run("UPDATE profiles SET zipcode = ?, news = ?, theme = ? WHERE id = ?",
             [ req.body.zipcode, req.body.news, req.body.theme, req.body.id ], function(err){
             if(err) {
                 console.log("Updating the user failed");
             } else {
                 db.get("SELECT * FROM profiles WHERE id = ?", [ req.body.id ], function(err, profile){
                     if(profile){
-                        res.json({ profile: profile });   
-                    } else {  
-                        res.json({ error: "Default profile" });   
+                        res.json({ profile: profile });
+                    } else {
+                        res.json({ error: "Default profile" });
                     }
                 });
             }
@@ -282,47 +253,61 @@ app.post("/api/auth/update", function(req, res){
 });
 
 app.post("/api/auth/search", function(req, res){
-    search_spotify.search({ type: 'track', query: res.body.query }, function(err, data) {
+    search_spotify.search({ type: 'track', query: req.body.query }, function(err, data) {
         if ( err ) {
             console.log('Error occurred: ' + err);
             return;
         } else {
-            res.json({ first: data.tracks[0], second: data.tracks[1], thrid: data.tracks[2],
+            res.json({ first: data.tracks[0], second: data.tracks[1], third: data.tracks[2],
             fourth: data.tracks[3], fifth: data.tracks[4] });
         }
     });
 });
 
-app.post("/api/auth/play", function(){
+app.post("/api/auth/play", function(req, res){
     spotify.login(config.spotify_name, config.spotify_pass, function (err, spotify) {
       if (err) throw err;
       // first get a "Track" instance from the track URI
-      spotify.get(uri, function (err, track) {
+      spotify.get(req.body.uri, function (err, track) {
         if (err) throw err;
-        track.play()
-          .pipe(new lame.Decoder())
-          .pipe(new Speaker())
-          .on('finish', function () {
-            spotify.disconnect();
-          });
+        playback = true;
+        stream = track.play();
+        spkr = new Speaker();
+        stream
+          .pipe(lame)
+          .pipe(spkr);
       });
     });
 });
 
+app.post("/api/auth/pause", function(req, res){
+  console.log("Pause");
+    stream.unpipe(lame.unpipe(spkr.end()));
+    stream.pause();
+});
+
+app.post("/api/auth/resume", function(req, res){
+  console.log("Resume");
+    spkr = new Speaker();
+    stream
+      .pipe(lame)
+      .pipe(spkr);
+});
+
 app.get('/auth/twitter', passport.authenticate('twitter'));
 
-app.get('/auth/twitter/callback', 
+app.get('/auth/twitter/callback',
   passport.authenticate('twitter', { successRedirect: '/',
                                      failureRedirect: '/' }));
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback', 
+app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/',
                                      failureRedirect: '/' }));
 
 
-// Close the db connection on process exit 
+// Close the db connection on process exit
 // (should already happen, but to be safe)
 process.on("exit", function(){
     db.close();
