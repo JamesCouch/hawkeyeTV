@@ -41,74 +41,56 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
       },
 
       events: {
-            "click .videoBlock"            : "onClickVideo",
-             "click .playPauseButton"       : "toggleVideo"
+             "click .videoBlock"            : "onClickVideo",
+             "click .playPauseButton"      : "toggleVideo",
+             "click #youtube-goHome"                : "goHome",
+             "click #playOrPause"                : "toggleVideo",
+             "click #youtube-newsearch"    : "newYoutubeSearch"
+      },
+
+
+      goHome: function(){
+
+        this.trigger('goHome',this);
+
+      },
+
+
+      newYoutubeSearch: function(){
+
+        this.selection = "youtube"
+
+        this.trigger('renderSelection',this.selection);
+
+
       },
 
       playVideo: function(id) {
 
-      //         var width = $(window).width();
-      //         var height = $(window).height();
 
-      //         this.videoState = true;
-
-      //         var _this = this;
-
-      //         this.player = {
-      //             loadPlayer: function() {
-      //                 new YT.Player('player', {
-      //                     videoId: id,
-      //                     width: width,
-      //                     height: height,
-      //                     playerVars: {
-      //                         playsinline: 1,
-      //                         autoplay: 0,
-      //                         controls: 0,
-      //                         rel: 0,
-      //                         showInfo: 0
-      //                     },
-      //                     events: {
-      //                       'onReady': onPlayerReady
-      //                       // 'onStateChange': onPlayerStateChange
-      //                     }
-      //                 });
-      //             }
-      //         };
-
-      //         this.player.loadPlayer();
-
-
-      //   // 4. The API will call this function when the video player is ready.
-      //         function onPlayerReady(event) {
-      //           var obj = event.target;
-      //           event.target.playVideo();
-      //            console.log(event.target);
-      //            return event.object;
-      //         }
-
-      //         // 5. The API calls this function when the player's state changes.
-      //         //    The function indicates that when playing a video (state=1),
-      //         //    the player should play for six seconds and then stop.
-      //         // var done = false;
-      //         // function onPlayerStateChange(event) {
-      //         //   if (event.data == YT.PlayerState.PLAYING && !done) {
-      //         //     setTimeout(stopVideo, 6000);
-      //         //     done = true;
-      //         //   }
-      //         // }
-      //         // function stopVideo() {
-      //         //   player.stopVideo();
-      //         // }
 
       },
 
 
-      toggleVideo: function() {
+      toggleVideo: function(data) {
 
 
-          this.socket.emit('toggle-youtube',{action: this.videoState});
+          // this.socket.emit('toggle-youtube',{action: this.videoState});
 
-          this.videoState = !this.videoState;
+          // this.videoState = !this.videoState;
+
+          var selection = $('#playOrPause').html();
+
+          if (selection == "Pause"){
+              $('#playOrPause').html("Play")
+
+          }
+          else if(selection == "Play"){
+             $('#playOrPause').html("Pause")
+
+          }
+
+
 
 
       },
@@ -122,11 +104,14 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
 
           this.selection = $(event.target).attr('id');
 
-          this.socket.emit('play-youtube',{id: this.selection});
+          // this.socket.emit('play-youtube',{id: this.selection});
 
-          this.$el.html(this.templateRemote());
+          // this.$el.html(this.templateRemote());
 
-          $('.playPauseButton').attr('src','assets/img/pausebutton.png');
+          // $('.playPauseButton').attr('src','assets/img/pausebutton.png');
+
+           $('#youtube-control-modal').modal('show');
+
 
         }
 
@@ -165,10 +150,11 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
               id:id,
               title:title,
               thumbnail:thumbnail,
-              duration:duration,
-              vidNumber: this.currentVid++};
+              duration:duration};
 
+              console.log(jsonObj)
 
+              $('#videoTpl').hide();
              var template = $('#videoTpl').html(),
                html = Mustache.to_html(template, jsonObj);
              $('ul.video').append(html); 
