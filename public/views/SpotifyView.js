@@ -29,7 +29,8 @@ define([
         events: {
             'click #search-btn'       : 'searchSpotify',
             'click #close-btn'        : 'closeSpotify',
-            'click #state-btn'         : 'stateChange',
+            'click #state-btn'        : 'stateChange',
+            'click #track1-btn'       : 'playTrack',
         },
 
         searchSpotify: function(evt){
@@ -58,11 +59,9 @@ define([
                 type: 'POST',
                 data:  JSON.stringify( _.omit(opts, 'method') ),
                 success: function(res){
-                  this.tracks = res;
-                  _this.play({
-                    uri: this.tracks.first.href,
-                  });
-                  console.log(this.tracks.first.href);
+                  _this.tracks = res;
+                  console.log("success");
+                  _this.displayTracks();
                 }, error: function(res) {
                 },
             });
@@ -78,6 +77,19 @@ define([
             this.resume({ playback: "resume", });
             this.$(evt.currentTarget).html('Pause');
           }
+        },
+
+        displayTracks: function(){
+          this.$('#tracks').show();
+        },
+
+        playTrack: function(){
+          console.log(this.tracks.first.href);
+          this.play({
+            uri: this.tracks.first.href,
+          });
+          this.closeSpotify();
+          this.trigger('refresh', "mobile");
         },
 
         search: function(opts, callback, args){

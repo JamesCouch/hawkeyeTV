@@ -123,7 +123,6 @@ define(
         } else {
           console.log("mobile refrsh");
           this.mainView.render(this.state).$el;
-          this.settingsView.render().$el
         }
       },
 

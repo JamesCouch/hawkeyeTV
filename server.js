@@ -9,8 +9,6 @@ var express = require('express'),
     lame = new Lame.Decoder(),
     Speaker = require('speaker'),
     spkr = new Speaker(),
-    Stream = require('stream'),
-    stream = new Stream(),
 
     // Initialize the spotify search engine and the spotify-web
     // interface that will pull track info and streams
@@ -38,6 +36,7 @@ var io = require('socket.io').listen(server);
 var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
 var ss;
 var uri;
+var stream;
 var playback = false;
 
 var passport = require('passport')
@@ -265,6 +264,13 @@ app.post("/api/auth/search", function(req, res){
 });
 
 app.post("/api/auth/play", function(req, res){
+  if (playback == true){
+    stream.unpipe(lame);
+    lame.unpipe(spkr);
+    spkr.end();
+    console.log("Fixing playback");
+    playback = false;
+  }
     spotify.login(config.spotify_name, config.spotify_pass, function (err, spotify) {
       if (err) throw err;
       // first get a "Track" instance from the track URI
