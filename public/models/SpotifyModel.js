@@ -28,7 +28,7 @@ define([
                 success: function(res){
 
                 }, error: function(res) {
-                    
+
                 },
             });
         },
@@ -42,6 +42,6 @@ define([
         }
 
     });
-    
+
     return SpotifyModel;
 });

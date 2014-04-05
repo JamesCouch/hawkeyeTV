@@ -10,7 +10,7 @@ define(
     'backbone',
     'socket',
     'bootstrap',
-    
+
     'views/MainView',
     'views/YoutubeView',
     'views/GoogleView',
@@ -18,10 +18,10 @@ define(
     'views/SettingsView',
     'views/SearchBarView',
     'views/TwitterView',
+    'views/SpotifyView',
     'views/FacebookView',
     'views/RssView',
-
-], function(app, $, _, Backbone, Socket, bootstrap, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView,TwitterView,FacebookView,RssView){
+], function(app, $, _, Backbone, Socket, bootstrap, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView,TwitterView, SpotifyView, FacebookView, RssView){
 
     var WebRouter = Backbone.Router.extend({
 
@@ -36,7 +36,7 @@ define(
         this.isMobile = this.checkForMobile();
         var selector;
         var _this = this;
-        
+
         if(this.isMobile){
           this.socket = this.remoteSocket;
           this.state = "mobile";
@@ -81,7 +81,7 @@ define(
          });
 
          this.socket.on('log-out-twitter', function(data){
-        
+
            $('.tw-feed').html('<ul class="list-group" id="twitter-list"></ul>');
 
          });
@@ -89,7 +89,7 @@ define(
 
         this.socket.on('render-twitter', function(data){
           console.log("twitter render");
-          
+
           _this.twitterView.getTwitterFeed();
         });
 
@@ -109,14 +109,17 @@ define(
         this.$body.prepend(this.settingsView.render().$el);
         this.views.push(this.settingsView);
 
+        this.spotifyView = new SpotifyView({ socket: this.remoteSocket, mobile: this.isMobile });
+        this.spotifyView.$el.hide();
+        this.$body.prepend(this.spotifyView.render().$el);
+        this.views.push(this.spotifyView);
+
         this.rssView = new RssView({socket: this.socket, mobile: this.isMobile});
         this.rssView.on('renderSelection',this.onRenderSelection,this);
         this.rssView.on('goHome',this.onGoBack,this);
         this.rssView.$el.hide();
         this.$body.prepend(this.rssView.render(this.isMobile).$el);
         this.views.push(this.rssView);
-
-
 
         this.$body.prepend(this.mainView.render(this.state).$el);
 
@@ -180,7 +183,7 @@ define(
             this.$body.prepend(this.searchBarView.render().$el);
             this.views.push(this.searchBarView);
         }
-          
+
           //attempt to render the views as needed to increase speed
         if(chosenSelection == "youtube"){
 
@@ -215,7 +218,7 @@ define(
             screenSelector = $('#chrome');
             this.mainView.mouseovercard(screenSelector);
           }
-        
+
         }
         if(chosenSelection == "settings"){
           this.socket.emit('get-twitter-status'); //Check if logged in or not
@@ -226,7 +229,7 @@ define(
             screenSelector = $('#settings');
             this.mainView.mouseovercard(screenSelector);
           } else {
-            this.showSettingsModal();
+            this.showModal(chosenSelection);
           }
         }
         if(chosenSelection == "music"){
@@ -234,7 +237,7 @@ define(
             screenSelector = $('#music');
             this.mainView.mouseovercard(screenSelector);
           } else {
-
+            this.showModal(chosenSelection);
           }
         }
         if(chosenSelection == "facebook"){
@@ -286,10 +289,15 @@ define(
         }
       },
 
-      showSettingsModal: function() {
+      showModal: function(modal) {
         if(this.isMobile){
-          this.settingsView.$el.show();
-          $('#settingsModal').modal('show');
+          if(modal == "settings") {
+            this.settingsView.$el.show();
+            $('#settingsModal').modal('show');
+          } else if ( modal == "music") {
+            this.spotifyView.$el.show();
+            $('#spotifyModal').modal('show');
+          }
         }
       },
 
@@ -305,7 +313,6 @@ define(
       },
 
       submitSearchBar: function(data) {
-
         if(this.isMobile){
           var data = $('#searchBar').val();
           $('#myModal').modal('hide');

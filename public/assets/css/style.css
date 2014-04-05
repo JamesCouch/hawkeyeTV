@@ -1,6 +1,6 @@
-body { 
+body {
 
- background-image:url('../img/bg.jpg');
+ background-image:url('../img/default.jpg');
  background-repeat: no-repeat;
  background-attachment: fixed;
  background-position: center;
@@ -112,8 +112,8 @@ ul.video {
 @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-device-width: 480px){
   /* some css here */
 
-	body { 
-		background-image:url('../img/bg.jpg');
+	body {
+		background-image:url('../img/default.jpg');
  		background-repeat: no-repeat;
  		background-attachment: fixed;
  		background-position: center;
@@ -183,7 +183,7 @@ ul li{
 
 .tweet-name{
 	display: inline-block;
-} 
+}
 
 .tweet-alias, .tweet-time, .tweet-retweet, .tweet-favorite {
 	display: inline-block;
@@ -251,7 +251,7 @@ ul li{
 
 .fb_group1 {
 
-	float: left;	
+	float: left;
 	text-align: right;
 	padding: 7px 0 0 0;
 

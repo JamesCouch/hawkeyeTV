@@ -27,7 +27,7 @@ define([ 'jquery','underscore', 'text!templates/twitter.html', 'backbone','socke
             "click #logout-link"            : "onLogoutClick",
             "click #remove-account-link"    : "onRemoveAccountClick"
       },
-      
+
       render: function () {
         console.log("render twitter");
         this.$el.html(this.template());
