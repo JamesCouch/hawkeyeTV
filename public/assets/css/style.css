@@ -66,7 +66,7 @@ p{
 
 #selection-box {
 	height:150px;
-	width:150px;
+	width:100%;
 }
 
 #chrome,#settings,#twitter,#facebook, #music, #youtube, #news, #home {
@@ -84,7 +84,7 @@ p{
 }
 
 .block {
-	margin-right: 15px;
+	margin-right: 28px;
 	float: left; width: 200px;
 }
 
