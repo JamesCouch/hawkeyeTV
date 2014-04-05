@@ -15,8 +15,9 @@ define([ 'app', 'jquery','underscore', 'text!templates/main.html','text!template
         var _this = this;
 
         this.socket.on('refresh-control', function(data){
+          window.location ="/";
           app.settings.openProfile({id: "1"});
-          _this.render("tv");
+          // _this.render("tv");
         });
 
       },

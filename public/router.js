@@ -103,7 +103,7 @@ define(
         this.mainView.on('renderSelection',this.onRenderSelection,this);
         this.views.push(this.mainView);
 
-        this.settingsView = new SettingsView();
+        this.settingsView = new SettingsView({socket: this.socket});
         this.settingsView.on('refresh',this.refresh,this);
         this.settingsView.$el.hide();
         this.$body.prepend(this.settingsView.render().$el);

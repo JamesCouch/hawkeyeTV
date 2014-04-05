@@ -14,14 +14,57 @@ define([
 
       template: _.template(SettingsTpl),
 
-        initialize: function () {
+        initialize: function (options) {
             _.bindAll(this);
+
+            this.socket = options.socket;
+
+            this.socket.on('sent-twitter-status',function(data){
+
+                if(data == "logged_in"){
+                    $('.tw').text("Log Out");
+                    $('.tw').attr('id','tw-logout');
+
+                }
+                else if(data == "logged_out"){
+                    $('.tw').text("Log in");
+                    $('.tw').attr('id','tw-login');
+
+                }
+
+            });
+
+            this.socket.on('sent-facebook-status',function(data){
+
+
+                if(data == "logged_in"){
+                    $('.fb').text("Log out");
+                    $('.fb').attr('id',"fb-logout");
+
+
+                }
+                else if(data == "logged_out"){
+                    $('.fb').text("Log in");
+                    $('.fb').attr('id',"fb-login");
+
+                }
+
+
+            });
+
+
+
         },
 
         events: {
             'click #save-btn'         : 'saveSettings',
             'click #close-btn'        : 'closeSettings',
             'click #th-btn'           : 'toggleActive',
+            'click #th-btn'           : 'toggleActive',
+            'click #tw-logout'        : 'logoutTwitter',
+            'click #tw-login'         : 'loginTwitter',
+            'click #fb-login'         : 'loginFacebook',
+            'click #fb-logout'        : 'logoutFacebook',
             'click #nw-btn'           : 'toggleActive'
         },
 
@@ -63,6 +106,57 @@ define([
         closeSettings: function() {
             this.$("#settingsModal").modal('hide');
         },
+
+
+
+        logoutTwitter: function(evt){
+                    $('.tw').text("Log in");
+                    this.socket.emit("log-out-twitter");
+                    window.location ="/"; //Redirect to root path, can change this later
+
+
+        },
+
+        loginTwitter: function(){
+
+            window.location ="/auth/twitter";
+
+
+        },
+
+
+        logoutFacebook: function(evt){
+            $('.fb').text("Log in");
+            this.socket.emit("log-out-facebook");
+            window.location ="/"; //Redirect to root path, can change this later
+
+
+        },
+
+        loginFacebook: function(){
+
+
+            // window.location ="/auth/twitter";
+
+
+
+
+        var conf = confirm("Due to security restrictions, you cannot log into facebook through your phone, click ok to log into facebook through your TV.");
+          
+        // if(conf == true){
+        //     alert("yay");
+        //   }
+        //   else {
+        //     alert("boo");
+        //   }
+
+
+        this.socket.emit('log-in-facebook');
+
+
+
+        },
+
 
         render: function () {
           this.$el.html(this.template());
