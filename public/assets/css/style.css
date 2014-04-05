@@ -66,7 +66,7 @@ p{
 
 #selection-box {
 	height:150px;
-	width:100%;
+	width: 150px;
 }
 
 #chrome,#settings,#twitter,#facebook, #music, #youtube, #news, #home {
@@ -111,6 +111,11 @@ ul.video {
 
 @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-device-width: 480px){
   /* some css here */
+
+  #selection-box {
+  	height:150px;
+  	width:100%;
+  }
 
 	body {
 		background-image:url('../img/default.jpg');
