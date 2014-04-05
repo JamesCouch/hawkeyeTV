@@ -71,6 +71,10 @@ define(
           console.log("login!");
           alert("Please log in with the settings page");
         });
+        this.socket.on('facebook-login', function(data){
+          console.log("login!");
+          alert("Please log in with the settings page");
+        });
 
         this.socket.on('log-out-facebook', function(data){
 
