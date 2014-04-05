@@ -32,6 +32,13 @@ var express = require('express'),
     app = express(),
     server = http.createServer(app).listen( process.env.PORT || config.port );
 
+    // Initialize sqlite and create our db if it doesnt exist
+var sqlite3 = require("sqlite3").verbose();
+var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
+var Twit = require('twit');
+var feed = require("feed-read");
+var FB = require("fb");
+
 var io = require('socket.io').listen(server);
 var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
 var ss, stream;
@@ -120,6 +127,45 @@ passport.use(new FacebookStrategy({
         ss.emit('youtube-toggle-control', data);
     });
 
+    socket.on("get-rss-feed", function(data) {
+        console.log("RSS FEED:",data);
+
+        feed(data, function(err, articles) {
+          if (err) throw err;
+          ss.emit('rss-control',articles);
+          // Each article has the following properties:
+          //
+          //   * "title"     - The article title (String).
+          //   * "author"    - The author's name (String).
+          //   * "link"      - The original article link (String).
+          //   * "content"   - The HTML content of the article (String).
+          //   * "published" - The date that the article was published (Date).
+          //   * "feed"      - {name, source, link}
+          //
+        });
+    });
+
+    socket.on("log-in-facebook", function(data) {
+            console.log("log in fb");
+            ss.emit('ss-log-in-facebook', data);
+    });
+
+    socket.on("on-click-facebook", function(data) {
+      db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
+        var token = user.fb_token;
+        var secret = user.fb_refresh;
+
+        if(token === null){
+          ss.emit('facebook-login');
+        } else{
+            FB.setAccessToken(token);
+            FB.api('/me/home', function(r) {
+              ss.emit('sent-facebook-feed',r);
+            })
+          }
+      });
+    });
+
     socket.on("play-youtube", function(data) {
         console.log(data.id);
         var id = data.id,
@@ -204,6 +250,7 @@ passport.use(new FacebookStrategy({
         }
       }
     });
+
     socket.on("on-click-twitter", function(data) {
 
         // we need to check if they have a token and token secret

@@ -1,6 +1,6 @@
-body { 
+body {
 
- background-image:url('../img/bg.jpg');
+ background-image:url('../img/default.jpg');
  background-repeat: no-repeat;
  background-attachment: fixed;
  background-position: center;
@@ -112,8 +112,8 @@ ul.video {
 @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-device-width: 480px){
   /* some css here */
 
-	body { 
-		background-image:url('../img/bg.jpg');
+	body {
+		background-image:url('../img/default.jpg');
  		background-repeat: no-repeat;
  		background-attachment: fixed;
  		background-position: center;
@@ -174,9 +174,16 @@ ul li{
 	top: 200px;
 }
 
+#facebook-list {
+	width: 600px;
+	position: fixed;
+	right: 20px;
+	top: 200px;
+}
+
 .tweet-name{
 	display: inline-block;
-} 
+}
 
 .tweet-alias, .tweet-time, .tweet-retweet, .tweet-favorite {
 	display: inline-block;
@@ -203,4 +210,101 @@ ul li{
 
 .tweet-group {
 	padding-bottom: 5px;
+}
+
+
+.tile {
+	background-color: #ecf0f1;
+	border: 1px solid #d7e0e2;
+	border-radius: 4px;
+	margin-bottom: 20px;
+	padding: 10px;
+	width: 85%;
+}
+
+
+#rss-results{
+	margin-top: 100px;
+}
+
+#rss-image {
+	margin: 10px;
+}
+
+
+#rss-list {
+	width: 600px;
+	position: fixed;
+	right: 20px;
+	top: 200px;
+
+
+}
+
+
+
+#fb_list_item {
+
+    display: block;
+    overflow: hidden;
+}
+
+.fb_group1 {
+
+	float: left;
+	text-align: right;
+	padding: 7px 0 0 0;
+
+
+}
+
+.fb_group2 {
+
+	text-align: left;
+	padding: 0 0 0 10px;
+
+}
+
+
+.fb-icon-likes {
+	background-image: url('/assets/img/fb_sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0 -40px;
+	display: inline-block;
+	height: 13px;
+	width: 15px;
+
+
+}
+.fb-icon-shares {
+	background-image: url('/assets/img/fb_sprite.png');
+	background-repeat: no-repeat;
+	background-position: -152px -5px;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+
+
+
+
+}
+.fb-icon-comments {
+
+	background-image: url('/assets/img/fb_sprite.png');
+	background-repeat: no-repeat;
+	background-position: -135px -5px;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+
+
+}
+
+.fb_span {
+	margin: 5px;
+	float: right;
+}
+
+#fb_footer {
+	overflow: auto;
 }
