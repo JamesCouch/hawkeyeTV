@@ -88,7 +88,7 @@ p{
 	float: left; width: 200px;
 }
 
-.selected{
+#selection-box.selected{
 	border-color: #000000;
 	border-style: solid;
 	border-width: 5px;
