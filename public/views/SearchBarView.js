@@ -37,6 +37,10 @@ define([ 'jquery','underscore', 'text!templates/searchBar.html', 'backbone'], fu
           $('.modal-title').text("Google Search");
 
         }
+        if(header == "news"){
+          $('.modal-title').text("Rss feed search");
+
+        }
       }
       
     });

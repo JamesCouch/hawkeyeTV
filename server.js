@@ -23,6 +23,8 @@ var express = require('express'),
 var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database(__dirname+'/db/hawkeyetv.db');
 var Twit = require('twit');
+var feed = require("feed-read");
+var FB = require("fb");
 
 // search_spotify.search({ type: 'track', query: 'selfie' }, function(err, data) {
 //     if ( err ) {
@@ -145,6 +147,92 @@ passport.use(new FacebookStrategy({
 
     socket.on("toggle-youtube", function(data) {
         ss.emit('youtube-toggle-control', data);
+    });
+
+    socket.on("get-rss-feed", function(data) {
+        console.log("RSS FEED:",data);
+
+        feed(data, function(err, articles) {
+          if (err) throw err;
+
+          ss.emit('rss-control',articles);
+          // Each article has the following properties:
+          // 
+          //   * "title"     - The article title (String).
+          //   * "author"    - The author's name (String).
+          //   * "link"      - The original article link (String).
+          //   * "content"   - The HTML content of the article (String).
+          //   * "published" - The date that the article was published (Date).
+          //   * "feed"      - {name, source, link}
+          // 
+        });
+
+
+
+    });
+
+
+    socket.on("log-in-facebook", function(data) {
+            console.log("log in fb");
+            ss.emit('ss-log-in-facebook', data);
+    });
+
+    // socket.on("get-facebook-status",function(data){
+
+    //         db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
+
+    //             var token = user.fb_token;
+    //             var secret = user.fb_refresh;
+
+    //             if(typeof ms != "undefined"){
+
+    //                 if(token === null){
+
+    //                      ms.emit('sent-facebook-status',"logged_out");
+
+    //                 }
+    //                 else{
+    //                      ms.emit('sent-facebook-status',"logged_in");
+
+    //                  }
+    //             }
+
+    //         });
+
+
+    //     });
+
+
+        socket.on("on-click-facebook", function(data) {
+
+
+            db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
+
+
+                var token = user.fb_token;
+                var secret = user.fb_refresh;
+
+                if(token === null){
+                     ss.emit('facebook-login');
+
+                }
+                else{
+
+                    FB.setAccessToken(token);
+
+                    FB.api('/me/home', function(r) { 
+
+                        ss.emit('sent-facebook-feed',r);
+
+
+                    })
+
+                 }
+
+
+            });
+
+
     });
 
 

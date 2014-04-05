@@ -17,6 +17,8 @@ require.config({
         'Mustache'            : 'assets/lib/mustache',
         'touchswipe'          : 'assets/lib/jquery.touchSwipe',
         'yt'                  : 'assets/lib/yt',
+        'jsapi'               : 'assets/lib/jsapi',
+        'feed'                : 'assets/lib/feed-read/index',
         'scrollTo'            : 'assets/lib/jquery.scrollTo'
     },
 

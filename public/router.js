@@ -18,8 +18,10 @@ define(
     'views/SettingsView',
     'views/SearchBarView',
     'views/TwitterView',
+    'views/FacebookView',
+    'views/RssView',
 
-], function(app, $, _, Backbone, Socket, bootstrap, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView,TwitterView){
+], function(app, $, _, Backbone, Socket, bootstrap, MainView, YoutubeView, GoogleView, HeaderView, SettingsView, SearchBarView,TwitterView,FacebookView,RssView){
 
     var WebRouter = Backbone.Router.extend({
 
@@ -29,7 +31,7 @@ define(
 
       initialize: function(options) {
 
-        this.remoteSocket = io.connect('http://172.23.71.27:3000');
+        this.remoteSocket = io.connect('http://172.23.75.55:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
         this.isMobile = this.checkForMobile();
         var selector;
@@ -74,13 +76,21 @@ define(
           alert("Please log in with the settings page");
         });
 
-        this.socket.on('render-twitter', function(data){
-          console.log("twitter render");
-          
-          _this.twitterView.getTwitterFeed();
+        this.socket.on('log-out-facebook', function(data){
 
 
-        });
+           $('.fb-feed').html('<div id="facebook-list"><div id="fb_feed"></div></div>');
+
+
+         });
+
+         this.socket.on('log-out-twitter', function(data){
+        
+           $('.tw-feed').html('<ul class="list-group" id="twitter-list"></ul>');
+
+         });
+
+
 
 
         this.views = [];
@@ -97,6 +107,15 @@ define(
         this.$body.prepend(this.settingsView.render().$el);
         this.views.push(this.settingsView);
 
+        this.rssView = new RssView({socket: this.socket, mobile: this.isMobile});
+        this.rssView.on('renderSelection',this.onRenderSelection,this);
+        this.rssView.on('goHome',this.onGoBack,this);
+        this.rssView.$el.hide();
+        this.$body.prepend(this.rssView.render(this.isMobile).$el);
+        this.views.push(this.rssView);
+
+
+
         this.$body.prepend(this.mainView.render(this.state).$el);
 
         if(!this.isMobile){
@@ -104,12 +123,38 @@ define(
           this.twitterView = new TwitterView({socket: this.socket});
           this.twitterView.$el.show();
           this.$twitter.append(this.twitterView.render().$el);
+
+          this.$rss = $('.rss-feed');
+          this.$rss.append(this.rssView.render(this.isMobile).$el);
+
+          this.$facebook = $('.fb-feed');
+          this.facebookView = new FacebookView({socket: this.socket});
+          this.facebookView.$el.show();
+          this.$facebook.append(this.facebookView.render().$el);
         }
+
+        this.socket.on('ss-log-in-facebook', function(data){
+
+           window.location = "/auth/facebook";
+
+
+        });
 
 
         $('#searchBar').bind('input', function(e) {
             var searchBarData = $('#searchBar').val();
             _this.sendSearchBoxData(searchBarData);
+        });
+
+
+        this.socket.on('rss-control', function(data){
+
+
+          _this.rssView.$el.show();
+
+          _this.rssView.renderFeed(data);
+
+
         });
       },
 
@@ -171,6 +216,10 @@ define(
         
         }
         if(chosenSelection == "settings"){
+          this.socket.emit('get-twitter-status'); //Check if logged in or not
+          this.socket.emit('get-facebook-status'); //Check if logged in or not
+
+
           if(!this.isMobile){
             screenSelector = $('#settings');
             this.mainView.mouseovercard(screenSelector);
@@ -188,6 +237,9 @@ define(
         }
         if(chosenSelection == "facebook"){
           if(!this.isMobile){
+            this.showOnlyFeed("facebook");
+
+            this.socket.emit('on-click-facebook');
             screenSelector = $('#facebook');
             this.mainView.mouseovercard(screenSelector);
           } else {
@@ -197,9 +249,8 @@ define(
         if(chosenSelection == "twitter"){
           if(!this.isMobile){
 
-
-            console.log("WWEOO");
             this.socket.emit('on-click-twitter');
+            this.showOnlyFeed("twitter");
 
             screenSelector = $('#twitter');
             this.mainView.mouseovercard(screenSelector);
@@ -211,9 +262,15 @@ define(
         }
         if(chosenSelection == "news"){
           if(!this.isMobile){
+            this.showOnlyFeed("news");
             screenSelector = $('#news');
             this.mainView.mouseovercard(screenSelector);
           } else {
+
+
+            this.currentSearchBarView = "news";
+            this.showSearchBar(chosenSelection);
+
 
           }
         }
@@ -276,6 +333,27 @@ define(
         }
       },
 
+      showOnlyFeed: function(feed){
+
+        this.twitterView.$el.hide();
+        this.rssView.$el.hide();
+        this.facebookView.$el.hide();
+
+
+        if(feed == "twitter"){
+          this.twitterView.$el.show();
+        }
+        else if(feed == "facebook"){
+          this.facebookView.$el.show();
+        }
+        else if(feed == "news"){
+          this.rssView.$el.show();
+        }
+
+
+
+      },
+
       checkForMobile: function() {
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
          return true;
@@ -290,6 +368,9 @@ define(
         }
         else if(view == "google"){
           return this.googleView;
+        }
+        else if(view == "news"){
+          return this.rssView;
         }
       }
     });
