@@ -25,7 +25,7 @@ define([
             'click #nw-btn'           : 'toggleActive'
         },
 
-        saveSettings: function(evt){   
+        saveSettings: function(evt){
             if(evt) evt.preventDefault();
             if(this.$("#settings-form").parsley('validate')){
                 app.settings.update({
