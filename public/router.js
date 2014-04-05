@@ -10,7 +10,7 @@ define(
     'backbone',
     'socket',
     'bootstrap',
-    
+
     'views/MainView',
     'views/YoutubeView',
     'views/GoogleView',
@@ -31,12 +31,12 @@ define(
 
       initialize: function(options) {
 
-        this.remoteSocket = io.connect('http://172.23.75.55:3000');
+        this.remoteSocket = io.connect('http://172.23.111.218:3000');
         this.screenSocket = io.connect('http://127.0.0.1:3000');
         this.isMobile = this.checkForMobile();
         var selector;
         var _this = this;
-        
+
         if(this.isMobile){
           this.socket = this.remoteSocket;
           this.state = "mobile";
@@ -81,7 +81,7 @@ define(
          });
 
          this.socket.on('log-out-twitter', function(data){
-        
+
            $('.tw-feed').html('<ul class="list-group" id="twitter-list"></ul>');
 
          });
@@ -89,7 +89,7 @@ define(
 
         this.socket.on('render-twitter', function(data){
           console.log("twitter render");
-          
+
           _this.twitterView.getTwitterFeed();
         });
 
@@ -180,7 +180,7 @@ define(
             this.$body.prepend(this.searchBarView.render().$el);
             this.views.push(this.searchBarView);
         }
-          
+
           //attempt to render the views as needed to increase speed
         if(chosenSelection == "youtube"){
 
@@ -215,7 +215,7 @@ define(
             screenSelector = $('#chrome');
             this.mainView.mouseovercard(screenSelector);
           }
-        
+
         }
         if(chosenSelection == "settings"){
           this.socket.emit('get-twitter-status'); //Check if logged in or not
