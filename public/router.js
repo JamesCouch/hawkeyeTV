@@ -48,9 +48,6 @@ define(
           this.socket.on('connect', function(data){
             _this.socket.emit('screen');
           });
-
-
-
         }
 
         //Socket listeners for the screen
@@ -69,7 +66,6 @@ define(
         //handles recieving youtube player commands
         this.socket.on('youtube-control', function(data){
         });
-
 
         this.socket.on('twitter-login', function(data){
           console.log("login!");
@@ -90,6 +86,12 @@ define(
 
          });
 
+
+        this.socket.on('render-twitter', function(data){
+          console.log("twitter render");
+          
+          _this.twitterView.getTwitterFeed();
+        });
 
 
 
