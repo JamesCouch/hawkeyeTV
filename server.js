@@ -134,7 +134,6 @@ passport.use(new FacebookStrategy({
                 if (error !== null) {
                     console.log('exec error: ' + error);
                 } if (stdout != null) {
-                  stopSpotify();
                   omx.start(stdout.trim());
                 }
             });
