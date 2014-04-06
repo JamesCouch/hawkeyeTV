@@ -25,7 +25,6 @@ var express = require('express'),
 
     // Other libs
     _ = require("underscore"),
-    omx = require('omxcontrol'),
     exec = require('child_process').exec,
     Twit = require('twit'),
 
@@ -134,7 +133,11 @@ passport.use(new FacebookStrategy({
                 if (error !== null) {
                     console.log('exec error: ' + error);
                 } if (stdout != null) {
-                  omx.quit();
+                  if (omx != null) {
+                    console.log("OMX - not NULL");
+                      omx.quit();
+                      omx = null;
+                  }
                   omx = require('omxcontrol');
                   omx.start(stdout.trim());
                   ms.emit('youtube-ctl-btn');
@@ -143,11 +146,16 @@ passport.use(new FacebookStrategy({
     });
 
     socket.on("youtube-playback", function(data) {
+      if (omx != null) {
         omx.pause();
+      }
     });
 
     socket.on("youtube-stop", function(data) {
+      if (omx != null) {
         omx.quit();
+        omx = null;
+      }
     });
 
     socket.on("get-rss-feed", function(data) {

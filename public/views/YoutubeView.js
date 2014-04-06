@@ -20,7 +20,7 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
         });
 
         this.socket.on('youtube-ctl-btn', function(data){
-            _this.$('#playOrPause').removeClass('hide');
+            _this.$('#playOrPause').html("Pause");
         });
 
         this.socket.on('youtube-toggle-control', function(data){
@@ -58,7 +58,6 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
       },
 
       closeModal: function() {
-        this.$('#playOrPause').addClass('hide');
         this.socket.emit('youtube-stop');
       },
 
