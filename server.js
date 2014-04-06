@@ -235,7 +235,7 @@ passport.use(new FacebookStrategy({
         var secret = user.fb_refresh;
 
         if(token === null){
-          ss.emit('facebook-login');
+          ms.emit('facebook-login');
         } else{
             FB.setAccessToken(token);
             FB.api('/me/home', function(r) {
@@ -324,7 +324,7 @@ passport.use(new FacebookStrategy({
 
         db.get("SELECT * FROM profiles WHERE id = ?", [ "1" ], function(err, user){
             if(user.tw_token === null){
-                 ss.emit('twitter-login');
+                 ms.emit('twitter-login');
             }
             else{
                 var T = new Twit({
