@@ -25,7 +25,6 @@ var express = require('express'),
 
     // Other libs
     _ = require("underscore"),
-    omx = require('omxcontrol'),
     exec = require('child_process').exec,
     Twit = require('twit'),
 
@@ -129,12 +128,15 @@ passport.use(new FacebookStrategy({
         var id = data.id,
             url = "http://www.youtube.com/watch?v="+id;
 
-        exec('youtube ' + url,
+        exec('youtube-dl -i -g --cookies /dev/shm/youtube_cookie.txt' + url,
             function (error, stdout, stderr) {
                 console.log('stdout: ' + stdout);
                 console.log('stderr: ' + stderr);
                 if (error !== null) {
                     console.log('exec error: ' + error);
+                } else if (stdout != null) {
+                  omx = require('omxcontrol');
+                  omx.start(stdout);
                 }
             });
     });

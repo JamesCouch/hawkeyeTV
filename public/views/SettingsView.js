@@ -142,7 +142,7 @@ define([
 
 
         var conf = confirm("Due to security restrictions, you cannot log into facebook through your phone, click ok to log into facebook through your TV.");
-          
+
         // if(conf == true){
         //     alert("yay");
         //   }
