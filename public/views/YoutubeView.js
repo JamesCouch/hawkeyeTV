@@ -43,7 +43,7 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
              "click .playPauseButton"      : "toggleVideo",
              "click #youtube-goHome"       : "goHome",
              "click #playOrPause"          : "toggleVideo",
-             "click closeModal"            : "closeModal",
+             "click #closeModal"           : "closeModal",
              "click #youtube-newsearch"    : "newYoutubeSearch"
       },
 
