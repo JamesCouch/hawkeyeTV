@@ -134,7 +134,10 @@ passport.use(new FacebookStrategy({
                 if (error !== null) {
                     console.log('exec error: ' + error);
                 } if (stdout != null) {
+                  omx.quit();
+                  omx = require('omxcontrol');
                   omx.start(stdout.trim());
+                  ms.emit('youtube-ctl-btn');
                 }
             });
     });
@@ -145,7 +148,6 @@ passport.use(new FacebookStrategy({
 
     socket.on("youtube-stop", function(data) {
         omx.quit();
-        omx = require('omxcontrol');
     });
 
     socket.on("get-rss-feed", function(data) {

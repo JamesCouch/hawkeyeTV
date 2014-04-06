@@ -19,6 +19,10 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
            _this.$el.html(_this.templatePlay());
         });
 
+        this.socket.on('youtube-ctl-btn', function(data){
+            _this.$('#playOrPause').removeClass('hide');
+        });
+
         this.socket.on('youtube-toggle-control', function(data){
 
           if(data.action == false){
@@ -39,6 +43,7 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
              "click .playPauseButton"      : "toggleVideo",
              "click #youtube-goHome"       : "goHome",
              "click #playOrPause"          : "toggleVideo",
+             "click closeModal"            : "closeModal",
              "click #youtube-newsearch"    : "newYoutubeSearch"
       },
 
@@ -50,6 +55,11 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
       newYoutubeSearch: function(){
         this.selection = "youtube"
         this.trigger('renderSelection',this.selection);
+      },
+
+      closeModal: function() {
+        this.$('#playOrPause').addClass('hide');
+        this.socket.emit('youtube-stop');
       },
 
       toggleVideo: function(data) {
