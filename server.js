@@ -143,7 +143,7 @@ passport.use(new FacebookStrategy({
         omx.pause();
     });
 
-    socket.on("youtube-playback", function(data) {
+    socket.on("youtube-stop", function(data) {
         omx.quit();
         omx = require('omxcontrol');
     });
