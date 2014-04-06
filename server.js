@@ -40,9 +40,8 @@ var FB = require("fb");
 
 var io = require('socket.io').listen(server);
 var views = ['chrome','youtube','settings', 'music', 'facebook', 'twitter', 'news', 'home'];
-var ss, stream;
+var ss, stream, omx, ms;
 var playback = false;
-var ms;
 
 var passport = require('passport')
     , TwitterStrategy = require('passport-twitter').Strategy
