@@ -131,14 +131,22 @@ passport.use(new FacebookStrategy({
 
         exec('youtube-dl -i -g --cookies /dev/shm/youtube_cookie.txt' + url,
             function (error, stdout, stderr) {
-                console.log('stdout: ' + stdout);
-                console.log('stderr: ' + stderr);
                 if (error !== null) {
                     console.log('exec error: ' + error);
-                } else if (stdout != null) {
-                  omx.start(stdout);
+                } if (stdout != null) {
+                  stopSpotify();
+                  omx.start(stdout.trim());
                 }
             });
+    });
+
+    socket.on("youtube-playback", function(data) {
+        omx.pause();
+    });
+
+    socket.on("youtube-playback", function(data) {
+        omx.quit();
+        omx = require('omxcontrol');
     });
 
     socket.on("get-rss-feed", function(data) {

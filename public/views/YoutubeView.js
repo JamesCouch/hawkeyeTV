@@ -16,13 +16,7 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
         var _this = this;
 
         this.socket.on('youtube-control', function(data){
-
-          console.log("hey");
-
            _this.$el.html(_this.templatePlay());
-
-           //_this.playVideo(data.id);
-
         });
 
         this.socket.on('youtube-toggle-control', function(data){
@@ -41,90 +35,45 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
       },
 
       events: {
-             "click .videoBlock"            : "onClickVideo",
+             "click .videoBlock"           : "onClickVideo",
              "click .playPauseButton"      : "toggleVideo",
-             "click #youtube-goHome"                : "goHome",
-             "click #playOrPause"                : "toggleVideo",
+             "click #youtube-goHome"       : "goHome",
+             "click #playOrPause"          : "toggleVideo",
              "click #youtube-newsearch"    : "newYoutubeSearch"
       },
 
 
       goHome: function(){
-
         this.trigger('goHome',this);
-
       },
-
 
       newYoutubeSearch: function(){
-
         this.selection = "youtube"
-
         this.trigger('renderSelection',this.selection);
-
-
       },
-
-      playVideo: function(id) {
-
-
-
-      },
-
 
       toggleVideo: function(data) {
-
-
-          // this.socket.emit('toggle-youtube',{action: this.videoState});
-
-          // this.videoState = !this.videoState;
-
           var selection = $('#playOrPause').html();
-
           if (selection == "Pause"){
-              $('#playOrPause').html("Play")
-
+            this.socket.emit('youtube-playback', { id: this.selection });
+            $('#playOrPause').html("Play");
           }
           else if(selection == "Play"){
-             $('#playOrPause').html("Pause")
-
+            this.socket.emit('youtube-playback', { id: this.selection });
+            $('#playOrPause').html("Pause");
           }
-
-
-
-
       },
 
-
-
       onClickVideo: function(e) {
-
-
         if(this.isMobile){
-
           this.selection = $(event.target).attr('id');
-
           this.socket.emit('play-youtube',{id: this.selection});
-
-          // this.$el.html(this.templateRemote());
-
-          // $('.playPauseButton').attr('src','assets/img/pausebutton.png');
-
-           $('#youtube-control-modal').modal('show');
-
-
+          $('#youtube-control-modal').modal('show');
         }
-
-
       },
 
       newSearch: function(data) {
-
-
-        console.log("new search: ", data);
-
         $('.searchInput').text("Your youtube search is: " + data);
-
         var max_videos = 12;
         var url = "http://gdata.youtube.com/feeds/api/videos?vq=" + escape(data) + "&max-results=" + max_videos + "&alt=json-in-script&callback=?";
 
@@ -144,30 +93,19 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
               seconds = totalSec % 60;
 
             var duration = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds);
-
-
             jsonObj = {
               id:id,
               title:title,
               thumbnail:thumbnail,
               duration:duration};
 
-              console.log(jsonObj)
-
               $('#videoTpl').hide();
              var template = $('#videoTpl').html(),
                html = Mustache.to_html(template, jsonObj);
              $('ul.video').append(html);
-
-
           });
         });
-
-
-
       },
-
-
 
       render: function () {
         this.$el.html(this.template());
