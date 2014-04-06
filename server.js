@@ -25,6 +25,7 @@ var express = require('express'),
 
     // Other libs
     _ = require("underscore"),
+    omx = require('omxcontrol'),
     exec = require('child_process').exec,
     Twit = require('twit'),
 
@@ -135,7 +136,6 @@ passport.use(new FacebookStrategy({
                 if (error !== null) {
                     console.log('exec error: ' + error);
                 } else if (stdout != null) {
-                  omx = require('omxcontrol');
                   omx.start(stdout);
                 }
             });
