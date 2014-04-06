@@ -129,7 +129,7 @@ passport.use(new FacebookStrategy({
         var id = data.id,
             url = "http://www.youtube.com/watch?v="+id;
 
-        exec('youtube-dl -i -g --cookies /dev/shm/youtube_cookie.txt' + url,
+        exec('youtube-dl -i -g --cookies /dev/shm/youtube_cookie.txt ' + url,
             function (error, stdout, stderr) {
                 if (error !== null) {
                     console.log('exec error: ' + error);
