@@ -120,13 +120,23 @@ passport.use(new FacebookStrategy({
         ss.emit('swipe-control', data);
     });
 
-    socket.on("play-youtube", function(data) {
-        console.log("Video ID: ",data.id);
-        ss.emit('youtube-control', data);
-    });
-
     socket.on("toggle-youtube", function(data) {
         ss.emit('youtube-toggle-control', data);
+    });
+
+    socket.on("play-youtube", function(data) {
+        console.log(data.id);
+        var id = data.id,
+            url = "http://www.youtube.com/watch?v="+id;
+
+        exec('youtube ' + url,
+            function (error, stdout, stderr) {
+                console.log('stdout: ' + stdout);
+                console.log('stderr: ' + stderr);
+                if (error !== null) {
+                    console.log('exec error: ' + error);
+                }
+            });
     });
 
     socket.on("get-rss-feed", function(data) {
@@ -192,7 +202,7 @@ passport.use(new FacebookStrategy({
          db.run("UPDATE profiles SET fb_token = ?, fb_refresh =? WHERE id = ?", [ null, null, "1" ], function(err){
              if(err) {
                  console.log("Failed to load TW oauth token in the database");
-             } 
+             }
          });
          ss.emit('log-out-facebook');
          if(typeof ms != "undefined"){
@@ -204,7 +214,7 @@ passport.use(new FacebookStrategy({
          db.run("UPDATE profiles SET tw_token = ?, tw_secret =? WHERE id = ?", [ null, null, "1" ], function(err){
              if(err) {
                  console.log("Failed to load TW oauth token in the database");
-             } 
+             }
          });
          ss.emit('log-out-twitter');
          if(typeof ms != "undefined"){
@@ -231,21 +241,6 @@ passport.use(new FacebookStrategy({
             })
           }
       });
-    });
-
-    socket.on("play-youtube", function(data) {
-        console.log(data.id);
-        var id = data.id,
-        url = "http://www.youtube.com/watch?v="+id;
-
-        exec('youtube ' + url,
-            function (error, stdout, stderr) {
-                console.log('stdout: ' + stdout);
-                console.log('stderr: ' + stderr);
-                if (error !== null) {
-                    console.log('exec error: ' + error);
-                }
-            });
     });
 
     socket.on("spotify-search", function(data) {

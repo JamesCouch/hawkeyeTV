@@ -21,7 +21,7 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
 
            _this.$el.html(_this.templatePlay());
 
-           // _this.playVideo(data.id);
+           //_this.playVideo(data.id);
 
         });
 
@@ -104,7 +104,7 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
 
           this.selection = $(event.target).attr('id');
 
-          // this.socket.emit('play-youtube',{id: this.selection});
+          this.socket.emit('play-youtube',{id: this.selection});
 
           // this.$el.html(this.templateRemote());
 
@@ -157,18 +157,18 @@ define([ 'jquery','underscore', 'text!templates/youtube.html','text!templates/yo
               $('#videoTpl').hide();
              var template = $('#videoTpl').html(),
                html = Mustache.to_html(template, jsonObj);
-             $('ul.video').append(html); 
+             $('ul.video').append(html);
 
 
           });
         });
 
-     
+
 
       },
 
 
-      
+
       render: function () {
         this.$el.html(this.template());
             return this;
