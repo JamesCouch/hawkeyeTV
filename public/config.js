@@ -4,7 +4,7 @@ if (typeof DEBUG === 'undefined') DEBUG = true;
 require.config({
 
     baseUrl: '/',
-
+    waitSeconds: 200,
     paths: {
         'util'                : 'assets/lib/util',
         'jquery'              : 'assets/lib/jquery',
