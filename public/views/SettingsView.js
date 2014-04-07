@@ -65,7 +65,21 @@ define([
             'click #tw-login'         : 'loginTwitter',
             'click #fb-login'         : 'loginFacebook',
             'click #fb-logout'        : 'logoutFacebook',
-            'click #nw-btn'           : 'toggleActive'
+            'click #nw-btn'           : 'toggleActive',
+            'click .bgBtn'            : 'changeBackground'
+        },
+
+        changeBackground: function(){
+
+            var btn = $('.bgBtn.active').html();
+
+            console.log("BTN: ",btn);
+
+            this.socket.emit("change-bg",btn)
+
+            
+
+
         },
 
         saveSettings: function(evt){

@@ -101,6 +101,12 @@ passport.use(new FacebookStrategy({
             ss.emit('controlling', data.action);
         }
     });
+    socket.on("change-bg", function(data) {
+  
+        ss.emit("on-change-bg",data);
+
+
+    });
 
     socket.on("refresh", function(data) {
         ss.emit('refresh-control', data);

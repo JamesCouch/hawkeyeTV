@@ -97,6 +97,32 @@ define(
           _this.twitterView.getTwitterFeed();
         });
 
+        this.socket.on('on-change-bg', function(data){
+          console.log("BG CHANGE", data);
+
+          if (data == "Default"){
+            $('body').css('background-image', "url('../assets/img/default.jpg')");
+            $('#selection-box img').css('-webkit-filter', 'invert(0%)');
+
+
+          }
+          else if(data =="Mountains"){
+
+            $('body').css('background-image', "url('../assets/img/mountains.jpg')");
+            $('#selection-box img').css('-webkit-filter', 'invert(0%)');
+
+
+          }
+          else if(data == "UI"){
+
+            $('body').css('background-image', "url('../assets/img/UI.jpg')");
+            $('#selection-box img').css('-webkit-filter', 'invert(35%)');
+
+          }
+
+        });
+
+
 
 
         this.views = [];
